@@ -1,9 +1,22 @@
-const Footer = () => {
-    return (
-        <footer>
-        <h1>Footer</h1>
-        </footer>
-    );
-}
+import React from 'react';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
+const { Footer } = Layout;
 
-export default Footer;
+
+
+const FooterHP = () => {
+
+    return (
+        <Layout>
+            <Footer
+                style={{
+                    textAlign: 'center',
+                }}
+            >
+              FOOTER
+            </Footer>
+        </Layout>
+    );
+};
+
+export default FooterHP;
