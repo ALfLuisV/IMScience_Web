@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
+import HeaderHP from '../components/Header';
 import Eventos from '../components/eventos';
 import CarrosselHP from '../components/carrosselHP';
 import Footer from '../components/footer';
@@ -10,7 +10,7 @@ const Homepage = () => {
     const navigate = useNavigate();
     return (
         <div>
-            <Header/>
+            <HeaderHP/>
             <CarrosselHP/>
             <ArtigosHP/>
             <Eventos/>
