@@ -1,0 +1,60 @@
+.mainContent {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.memberTypeTitle {
+    color: #156D86;
+}
+
+.membersArea {
+    width: 100%;
+}
+
+.membersCardArea {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.memberCard {
+    height: 17rem;
+    width: 15rem;
+    border-radius: 15px;
+    border-color: #156D86;
+    margin-right: 3rem;
+    margin-bottom: 2rem;
+    justify-items: center;
+    background-color: #fafafa;
+}
+
+.profilePic{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.picDiv{
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+}
+
+.roleName{
+    color: #156D86;
+    font-size: small;
+    margin-top: 7px;
+    text-align: center;
+    margin-bottom:7px;
+}
+
+.seeMoreButton{
+    background-color: #156D86;
+    width: 7rem;
+}
+
+.buttonDiv{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
