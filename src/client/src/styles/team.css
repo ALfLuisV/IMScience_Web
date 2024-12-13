@@ -58,3 +58,29 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.memberCategory{
+    border-bottom: 3px solid #EFEFF3;
+}
+
+.filterArea{
+    margin-right: 40px;
+    padding-left: 20px;
+}
+
+.filterDiv{
+    padding-bottom: 20px;
+    border-bottom: 3px solid #EFEFF3;
+}
+
+#filterButton{
+    margin-top: 1.5rem;
+    width: 6rem;
+}
+
+.filterInputs{
+    padding: 10px 30px 20px 10px;
+    background-color: #fafafa;
+    height: 30rem;
+    border-radius: 20px;
+}

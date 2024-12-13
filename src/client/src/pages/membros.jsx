@@ -1,12 +1,29 @@
 import HeaderHP from '../components/Header';
 import FooterHP from '../components/footer';
 import '../styles/team.css'
-import { Card, Typography, Button, Collapse  } from 'antd';
 import '../assets/user.png'
 import userImage from '../assets/user.png';
+import { Card, Typography, Button, Collapse, Input, Checkbox, Select, Space, DatePicker } from 'antd';
 
+
+const { RangePicker } = DatePicker;
+const { Search } = Input;
 const { Title } = Typography;
-const { Panel } = Collapse;
+
+
+const onChange = (checkedValues) => {
+    console.log('checked = ', checkedValues);
+};
+
+const handleChange = (value) => {
+    console.log(`selected ${value}`);
+};
+
+const onSearch = (value, _e, info) => console.log(info?.source, value);
+
+
+
+
 
 const membros = [
     {
@@ -191,6 +208,67 @@ const membros = [
     }
 ];
 
+const optionsCheckbox = [
+    {
+        label: 'Professors',
+        value: 'Professor',
+    },
+    {
+        label: 'PhD Students',
+        value: 'PhD Student',
+    },
+    {
+        label: 'MSc Students',
+        value: 'MSc Student',
+    },
+    {
+        label: 'Undergrad Students',
+        value: 'Undergrad Student',
+    },
+];
+const projects = [
+    {
+        label: 'Introduzindo teoria dos grafos no processamento de imagens',
+        value: '1'
+    },
+    {
+        label: 'Utilizando IA generativa na recuperação hormonal',
+        value: '2'
+    },
+    {
+        label: 'Análise de redes sociais utilizando grafos',
+        value: '3'
+    },
+    {
+        label: 'Otimização de rotas de entrega com algoritmos de grafos',
+        value: '4'
+    },
+    {
+        label: 'Detecção de comunidades em redes complexas',
+        value: '5'
+    },
+    {
+        label: 'Aplicação de grafos na bioinformática para análise de sequências genéticas',
+        value: '6'
+    },
+    {
+        label: 'Modelagem de redes de transporte público usando teoria dos grafos',
+        value: '7'
+    },
+    {
+        label: 'Visualização de dados complexos com grafos interativos',
+        value: '8'
+    },
+    {
+        label: 'Algoritmos de grafos para recomendação de produtos em e-commerce',
+        value: '9'
+    },
+    {
+        label: 'Análise de vulnerabilidades em redes de computadores usando grafos',
+        value: '10'
+    }
+];
+
 
 const Membros = () => {
 
@@ -206,7 +284,7 @@ const Membros = () => {
                 <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
                 <p className='roleName'>{member.role.toUpperCase()}</p>
                 <div className='buttonDiv'>
-                <Button type="primary" className='seeMoreButton'>VER MAIS</Button>
+                    <Button type="primary" className='seeMoreButton'>VER MAIS</Button>
                 </div>
             </Card>
         ))
@@ -220,19 +298,44 @@ const Membros = () => {
             <HeaderHP />
             <div className='mainContent'>
                 <div className='filterArea'>
-                    <h1>Filtros</h1>
+                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filtros</Title>
+                    <div className='filterInputs'>
+                        <div className='filterDiv'>
+                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Pesquisa por nome:</Title>
+                            <Search placeholder="Insira o nome do membro..." onSearch={onSearch} enterButton />
+                        </div>
+                        <div id='checkboxGroup' className='filterDiv'>
+                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Tipo de membro:</Title>
+                            <Checkbox.Group options={optionsCheckbox} onChange={onChange} />
+                        </div>
+                        <div id='selectDiv' className='filterDiv'>
+                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Projeto:</Title>
+                            <Select
+                                mode="multiple"
+                                allowClear
+                                style={{
+                                    width: '100%',
+                                }}
+                                placeholder="Selecione projetos..."
+                                onChange={handleChange}
+                                options={projects}
+                                showSearch
+                            />
+                        </div>
+                        <div id='datePicker'>
+                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Data de ingresso:</Title>
+                            <RangePicker />
+                        </div>
+                        <div>
+                            <Button type="primary" id='filterButton'>Filtrar</Button>
+                        </div>
+                    </div>
                 </div>
-                <div className='membersArea'>
+                <div className='membersArea' >
                     <div className='memberCategory'>
                         <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
                         <div className='membersCardArea'>
                             {cardGenerator(membros, 'Professor')}
-                        </div>
-                    </div>
-                    <div className='memberCategory'>
-                        <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Students</Title>
-                        <div className='membersCardArea'>
-                            {cardGenerator(membros, 'Student')}
                         </div>
                     </div>
                     <div className='memberCategory'>
