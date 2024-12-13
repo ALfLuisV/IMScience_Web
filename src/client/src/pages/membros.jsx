@@ -284,7 +284,7 @@ const Membros = () => {
                 <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
                 <p className='roleName'>{member.role.toUpperCase()}</p>
                 <div className='buttonDiv'>
-                    <Button type="primary" className='seeMoreButton'>VER MAIS</Button>
+                    <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
                 </div>
             </Card>
         ))
@@ -296,38 +296,40 @@ const Membros = () => {
     return (
         <div>
             <HeaderHP />
+            
+            <Title level={2}  style={{ color: '#156D86', textAlign: 'center' }}>OUR TEAM</Title>
             <div className='mainContent'>
                 <div className='filterArea'>
-                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filtros</Title>
+                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
                     <div className='filterInputs'>
                         <div className='filterDiv'>
-                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Pesquisa por nome:</Title>
-                            <Search placeholder="Insira o nome do membro..." onSearch={onSearch} enterButton />
+                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Name:</Title>
+                            <Search placeholder="type member's name..." onSearch={onSearch} enterButton />
                         </div>
                         <div id='checkboxGroup' className='filterDiv'>
-                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Tipo de membro:</Title>
+                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member type:</Title>
                             <Checkbox.Group options={optionsCheckbox} onChange={onChange} />
                         </div>
                         <div id='selectDiv' className='filterDiv'>
-                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Projeto:</Title>
+                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Project:</Title>
                             <Select
                                 mode="multiple"
                                 allowClear
                                 style={{
                                     width: '100%',
                                 }}
-                                placeholder="Selecione projetos..."
+                                placeholder="Select projects..."
                                 onChange={handleChange}
                                 options={projects}
                                 showSearch
                             />
                         </div>
                         <div id='datePicker'>
-                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Data de ingresso:</Title>
+                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Date of entry:</Title>
                             <RangePicker />
                         </div>
                         <div>
-                            <Button type="primary" id='filterButton'>Filtrar</Button>
+                            <Button type="primary" id='filterButton'>Filter</Button>
                         </div>
                     </div>
                 </div>

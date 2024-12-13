@@ -1,6 +1,6 @@
 .mainContent {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 23% 80%;
 }
 
 .memberTypeTitle {
@@ -79,7 +79,7 @@
 }
 
 .filterInputs{
-    padding: 10px 30px 20px 10px;
+    padding: 10px 50px 20px 15px;
     background-color: #fafafa;
     height: 30rem;
     border-radius: 20px;
