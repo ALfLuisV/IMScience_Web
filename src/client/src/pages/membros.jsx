@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import React, { useRef } from 'react';
-import HeaderHP from '../components/Header';
-import FooterHP from '../components/footer';
 import '../styles/team.css'
 import '../assets/user.png'
 import userImage from '../assets/user.png';
-import { Card, Typography, Button, Collapse, Input, Checkbox, Select, Space, DatePicker } from 'antd';
+import { Card, Typography, Button, Collapse, Input, Checkbox, Select, ConfigProvider, DatePicker } from 'antd';
 
 
 const { RangePicker } = DatePicker;
@@ -829,9 +827,9 @@ const Membros = () => {
 
     const clearCheckboxGroup = () => {
         setCheckedList([])
-      }
+    }
 
-    function clearFilters(){
+    function clearFilters() {
         clearCheckboxGroup()
         clearSelection()
         clearRangePicker()
@@ -869,85 +867,91 @@ const Membros = () => {
 
     return (
         <div>
-            <HeaderHP />
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: '44%', paddingRight: '15px' }}>
-                <Title level={2} style={{ color: '#156D86', textAlign: 'center' }}>OUR TEAM</Title>
+            <ConfigProvider
+                theme={{
+                    token: {
+                        colorPrimary: '#156D86',
+                    },
+                }}
+            >
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: '44%', paddingRight: '15px' }}>
+                    <Title level={2} style={{ color: '#156D86', textAlign: 'center' }}>OUR TEAM</Title>
 
-                {nameSearch != '' &&
-                    <Title level={5} style={{ color: '#156D86', textAlign: 'center' }}>Displaying results for "{nameSearch}"</Title>
-                }
-            </div>
-            <div className='mainContent'>
-                <div className='filterArea'>
-                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
-                    <div className='filterInputs'>
-                        <div className='filterDiv'>
-                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Name:</Title>
-                            <Search placeholder="type member's name..."
-                                onSearch={onSearch}
-                                enterButton
-                                allowClear
-                                onClear={(e) => { setMembersArray(memberRecoveryArray) }} />
+                    {nameSearch != '' &&
+                        <Title level={5} style={{ color: '#156D86', textAlign: 'center' }}>Displaying results for "{nameSearch}"</Title>
+                    }
+                </div>
+                <div className='mainContent'>
+                    <div className='filterArea'>
+                        <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
+                        <div className='filterInputs'>
+                            <div className='filterDiv'>
+                                <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Name:</Title>
+                                <Search placeholder="type member's name..."
+                                    onSearch={onSearch}
+                                    enterButton
+                                    allowClear
+                                    onClear={(e) => { setMembersArray(memberRecoveryArray) }} />
+                            </div>
+                            <div id='checkboxGroup' className='filterDiv'>
+                                <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member type:</Title>
+                                <Checkbox.Group options={optionsCheckbox} onChange={onChange} ref={checkRef} value={checkedList} />
+                            </div>
+                            <div id='selectDiv' className='filterDiv'>
+                                <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Project:</Title>
+                                <Select
+                                    mode="multiple"
+                                    allowClear
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                    placeholder="Select projects..."
+                                    onChange={handleChange}
+                                    options={projects}
+                                    showSearch
+                                    ref={selectRef}
+                                    value={selectList}
+                                />
+                            </div>
+                            <div id='datePicker'>
+                                <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Date of entry:</Title>
+                                <RangePicker onChange={dateHandle} ref={rangePickerRef} value={dateList} />
+                            </div>
+                            <div>
+                                <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ width: '100px' }}>Clear Filters</Button>
+                                <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{ marginLeft: '10px' }}>Filter</Button>
+                            </div>
                         </div>
-                        <div id='checkboxGroup' className='filterDiv'>
-                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member type:</Title>
-                            <Checkbox.Group options={optionsCheckbox} onChange={onChange} ref={checkRef} value={checkedList}/>
+                    </div>
+                    <div className='membersArea' >
+                        <div className='memberCategory'>
+                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
+                            <div className='membersCardArea'>
+                                {cardGenerator(membersArray, 'Professor')}
+                            </div>
                         </div>
-                        <div id='selectDiv' className='filterDiv'>
-                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Project:</Title>
-                            <Select
-                                mode="multiple"
-                                allowClear
-                                style={{
-                                    width: '100%',
-                                }}
-                                placeholder="Select projects..."
-                                onChange={handleChange}
-                                options={projects}
-                                showSearch
-                                ref={selectRef}
-                                value={selectList}
-                            />
+                        <div className='memberCategory'>
+                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>PhD Students</Title>
+                            <div className='membersCardArea'>
+                                {cardGenerator(membersArray, 'PhD Student')}
+                            </div>
                         </div>
-                        <div id='datePicker'>
-                            <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Date of entry:</Title>
-                            <RangePicker onChange={dateHandle} ref={rangePickerRef} value={dateList}/>
+                        <div className='memberCategory'>
+                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>MSc Students</Title>
+                            <div className='membersCardArea'>
+                                {cardGenerator(membersArray, 'MSc Student')}
+                            </div>
                         </div>
-                        <div>
-                            <Button type="primary" id='filterButton' onClick={(e) => { clearFilters() }} style={{width: '100px'}}>Clear Filters</Button>
-                            <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{marginLeft: '10px'}}>Filter</Button>
+                        <div className='memberCategory'>
+                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Undergrad Students</Title>
+                            <div className='membersCardArea'>
+                                {cardGenerator(membersArray, 'Undergrad Student')}
+                            </div>
                         </div>
+                        {/* {cardGenerator(membros, 'PhD Student')} */}
                     </div>
                 </div>
-                <div className='membersArea' >
-                    <div className='memberCategory'>
-                        <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
-                        <div className='membersCardArea'>
-                            {cardGenerator(membersArray, 'Professor')}
-                        </div>
-                    </div>
-                    <div className='memberCategory'>
-                        <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>PhD Students</Title>
-                        <div className='membersCardArea'>
-                            {cardGenerator(membersArray, 'PhD Student')}
-                        </div>
-                    </div>
-                    <div className='memberCategory'>
-                        <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>MSc Students</Title>
-                        <div className='membersCardArea'>
-                            {cardGenerator(membersArray, 'MSc Student')}
-                        </div>
-                    </div>
-                    <div className='memberCategory'>
-                        <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Undergrad Students</Title>
-                        <div className='membersCardArea'>
-                            {cardGenerator(membersArray, 'Undergrad Student')}
-                        </div>
-                    </div>
-                    {/* {cardGenerator(membros, 'PhD Student')} */}
-                </div>
-            </div>
-            <FooterHP />
+            </ConfigProvider>
         </div>
     )
 

@@ -8,11 +8,9 @@ import ArtigosHP from '../components/artigosHP';
 const Homepage = () => {
     return (
         <div>
-            <HeaderHP/>
             <CarrosselHP/>
             <ArtigosHP/>
             <Eventos/>
-            <FooterHP/>
         </div>
     )
 
