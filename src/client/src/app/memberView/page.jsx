@@ -636,7 +636,7 @@ export default function members() {
 
         if (array.length != 0) {
             const cards = array.map((project, i) => (
-                <Card key={i} className="mr-5 w-[20rem] mb-5">
+                <Card key={i} className="ml-3 w-[18rem] mb-5">
                     <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{project.label}</Title>
                     <div className='buttonDiv'>
                         <Paragraph className="text-justify">
@@ -664,7 +664,7 @@ export default function members() {
         console.log(member)
     }, [member])
     return (
-        (member.length != 0 &&
+        (member.length != 0 ?
             <div>
                 <div className="flex justify-center mt-10">
                     <div id="picDiv" className="mr-5">
@@ -702,13 +702,15 @@ export default function members() {
                         </div>
                     </div>
                 </div>
-                <div id="projects" className="w-[70%] m-auto">
+                <div id="projects" className="w-[62%] m-auto">
                     <Title level={4} style={{ color: '#156D86' }}>Publications:</Title>
                     <div id="projectsContainer" className="flex flex-wrap mb-10">
                         {cardGenerator(member.projects)}
                     </div>
                 </div>
             </div>
-        )
+        : <div>
+            <Title level={1}> Houve um problema na exibição do recurso</Title>
+        </div>)
     );
 }
