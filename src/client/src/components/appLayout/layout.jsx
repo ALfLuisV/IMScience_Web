@@ -22,7 +22,7 @@ return(
       </Content>
 
 
-      <Footer style={{padding: '0px'}}>
+      <Footer style={{padding: '0px', height: '15rem'}}>
         <FooterPH/>
       </Footer>
     </Layout>

@@ -89,3 +89,21 @@
 body{
     margin: 0 !important;
 }
+
+/* ............................... footer........ */
+
+.infoDiv{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.contactDiv{
+    display: flex;
+}
+
+.infoComponent{
+    width: 300px;
+    margin-left: 20px;
+    text-align: initial;
+}

@@ -872,7 +872,7 @@ export default function members() {
                     }}
                 >
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: '44%', paddingRight: '15px' }}>
-                        <Title level={2} style={{ color: '#156D86', textAlign: 'center' }}>OUR TEAM</Title>
+                        <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '20px' }}>OUR TEAM</Title>
     
                         {nameSearch != '' &&
                             <Title level={5} style={{ color: '#156D86', textAlign: 'center' }}>Displaying results for "{nameSearch}"</Title>
