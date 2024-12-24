@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import React, { useRef } from 'react';
-import userImage from '@/assets/user.png';
+import userImage from '../../../public/user.png'
 import { Card, Typography, Button, Collapse, Input, Checkbox, Select, ConfigProvider, DatePicker } from 'antd';
 
+
+// import userImage from './user.png'
 
 const { RangePicker } = DatePicker;
 const { Search } = Input;
@@ -839,7 +841,7 @@ export default function members() {
                 const cards = arrayFiltrado.map((member, i) => (
                     <Card key={i} className='memberCard'>
                         <div className='picDiv'>
-                            <img src={member.profilePic} alt={`${member.nome} profile`} className='profilePic' />
+                            <img src='/user.png' alt={`${member.nome} profile`} className='profilePic' />
                         </div>
                         <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
                         <p className='roleName'>{member.role.toUpperCase()}</p>
