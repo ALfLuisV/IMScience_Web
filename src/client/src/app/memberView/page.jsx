@@ -636,7 +636,7 @@ export default function members() {
 
         if (array.length != 0) {
             const cards = array.map((project, i) => (
-                <Card key={i} className="ml-3 w-[18rem] mb-5">
+                <Card key={i} className="mr-3 w-[20rem] mb-5">
                     <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{project.label}</Title>
                     <div className='buttonDiv'>
                         <Paragraph className="text-justify">
@@ -666,7 +666,7 @@ export default function members() {
     return (
         (member.length != 0 ?
             <div>
-                <div className="flex justify-center mt-10">
+                <div className="flex mt-10 ml-8">
                     <div id="picDiv" className="mr-5">
                         <img src='/user.png' alt={`${member.nome} profile`} className='w-[100px] h-[100px]' />
                     </div>
@@ -702,8 +702,8 @@ export default function members() {
                         </div>
                     </div>
                 </div>
-                <div id="projects" className="w-[62%] m-auto">
-                    <Title level={4} style={{ color: '#156D86' }}>Publications:</Title>
+                <div id="projects" className="ml-8 mt-3">
+                    <Title level={3} style={{ color: '#156D86' }}>Publications:</Title>
                     <div id="projectsContainer" className="flex flex-wrap mb-10">
                         {cardGenerator(member.projects)}
                     </div>
