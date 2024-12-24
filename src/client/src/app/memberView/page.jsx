@@ -1,23 +1,16 @@
 "use client"
 import { useEffect, useState } from "react";
-import '@ant-design/v5-patch-for-react-19';
-// import React, { useRef } from 'react';
-import userImage from '../../../public/user.png'
-import { Card, Typography, Button, Collapse, Input, Checkbox, Select, ConfigProvider, DatePicker } from 'antd';
-import { useRouter, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import userImage from '../../../public/user.png';
+import { Card, Typography, Button, Collapse, Input, Checkbox, Select, ConfigProvider } from 'antd';
+import { IconBrandInstagram, IconBrandLinkedin, IconMail  } from '@tabler/icons-react';
 
-// import userImage from './user.png'
-
-const { RangePicker } = DatePicker;
-const { Search } = Input;
-const { Title, Text } = Typography;
-
-
+const { Title, Paragraph } = Typography;
 
 
 export default function members() {
-
-    const router = useRouter()
+    const [member, setMember] = useState([])
+    const searchParams = useSearchParams()
 
     const membros = [
         {
@@ -109,7 +102,7 @@ export default function members() {
             role: "Professor",
             description: "Pedro Costa é professor e pesquisador dedicado à modelagem matemática em sistemas complexos. Ele aplica seus conhecimentos para resolver problemas na engenharia e no meio ambiente. Pedro orienta estudantes em projetos inovadores e promove workshops para disseminar conhecimento. Seus interesses acadêmicos incluem otimização e análise preditiva. Fora da universidade, ele gosta de participar de eventos sobre tecnologia e sustentabilidade.",
             profilePic: userImage,
-            id: '5', 
+            id: '5',
             entryDate: "23/09/2021",
             projects: [
                 {
@@ -589,6 +582,14 @@ export default function members() {
                 {
                     label: "Análise de redes sociais utilizando grafos",
                     value: "3"
+                },
+                {
+                    label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
+                    value: "6"
+                },
+                {
+                    label: "Visualização de dados complexos com grafos interativos",
+                    value: "8"
                 }
             ]
         },
@@ -621,366 +622,93 @@ export default function members() {
             ]
         }
     ];
-    
-    const optionsCheckbox = [
-        {
-            label: 'Professors',
-            value: 'Professor',
-        },
-        {
-            label: 'PhD Students',
-            value: 'PhD Student',
-        },
-        {
-            label: 'MSc Students',
-            value: 'MSc Student',
-        },
-        {
-            label: 'Undergrad Students',
-            value: 'Undergrad Student',
-        },
-    ];
-    
-    const projects = [
-        {
-            label: 'Introduzindo teoria dos grafos no processamento de imagens',
-            value: '1'
-        },
-        {
-            label: 'Utilizando IA generativa na recuperação hormonal',
-            value: '2'
-        },
-        {
-            label: 'Análise de redes sociais utilizando grafos',
-            value: '3'
-        },
-        {
-            label: 'Otimização de rotas de entrega com algoritmos de grafos',
-            value: '4'
-        },
-        {
-            label: 'Detecção de comunidades em redes complexas',
-            value: '5'
-        },
-        {
-            label: 'Aplicação de grafos na bioinformática para análise de sequências genéticas',
-            value: '6'
-        },
-        {
-            label: 'Modelagem de redes de transporte público usando teoria dos grafos',
-            value: '7'
-        },
-        {
-            label: 'Visualização de dados complexos com grafos interativos',
-            value: '8'
-        },
-        {
-            label: 'Algoritmos de grafos para recomendação de produtos em e-commerce',
-            value: '9'
-        },
-        {
-            label: 'Análise de vulnerabilidades em redes de computadores usando grafos',
-            value: '10'
-        }
-    ];
-    
 
-    
-        const [checkedList, setCheckedList] = useState([])
-        const [selectList, setSelectList] = useState([])
-        const [dateList, setDateList] = useState([])
-    
-    
-        const [membersArray, setMembersArray] = useState([])
-        const [memberRecoveryArray, setMemberRecoveryArray] = useState([])
-        const [nameSearch, setNameSearch] = useState('')
-        const [filter, setFilter] = useState({
-            memberType: [],
-            projects: [],
-            dateOfEntry: [],
-        });
-    
-        const onChange = (checkedValues) => {
-            setCheckedList(checkedValues)
-            let filtred = {
-                memberType: [],
-                projects: [],
-                dateOfEntry: [],
-            }
-    
-            if (filter.projects.length != 0) {
-                for (const e of filter.projects) {
-                    filtred.projects.push(e)
-                }
-            }
-    
-            if (filter.dateOfEntry[0] != null) {
-                for (const e of filter.dateOfEntry) {
-                    filtred.dateOfEntry.push(e)
-                }
-            }
-    
-    
-            filtred.memberType.push(...checkedValues)
-            setFilter(filtred)
-        };
-    
-        const dateHandle = (value) => {
-            setDateList(value)
-            let filtred = {
-                memberType: [],
-                projects: [],
-                dateOfEntry: [],
-            }
-    
-            if (filter.projects.length != 0) {
-                for (const e of filter.projects) {
-                    filtred.projects.push(e)
-                }
-            }
-    
-            if (filter.memberType.length != 0) {
-                for (const e of filter.memberType) {
-                    filtred.memberType.push(e)
-                }
-            }
-    
-    
-            if (value != null) {
-                filtred.dateOfEntry.push(value[0].$d)
-                filtred.dateOfEntry.push(value[1].$d)
-            }
-    
-    
-            setFilter(filtred)
-        }
-    
-        const handleChange = (value) => {
-            setSelectList([...value])
-    
-            let filtred = {
-                memberType: [],
-                projects: [],
-                dateOfEntry: [],
-            }
-    
-    
-            if (filter.memberType.length != 0) {
-                for (const e of filter.memberType) {
-                    filtred.memberType.push(e)
-                }
-            }
-    
-            if (filter.dateOfEntry[0] != null) {
-                for (const e of filter.dateOfEntry) {
-                    filtred.dateOfEntry.push(e)
-                }
-            }
-    
-            filtred.projects = [...new Set([...value])]
-            setFilter(filtred)
-        };
-    
-    
-        const onSearch = (value, _e, info) => {
-            setNameSearch(value)
-            let membersFiltredByName = membersArray.filter(pessoa => pessoa.nome.includes(value))
-            setMembersArray(membersFiltredByName)
-        }
 
-        function gerarRota(id){
-             router.push(`/memberView?memberID=${id}`)
-          };
-    
-        function filterValues() {
-    
-            let filtredArray = memberRecoveryArray.filter((membro => {
-                let findbyType = false
-                let findbyProject = false
-                let findbyDate = false
-    
-                if (filter.memberType.length != 0) {
-                    for (const t of filter.memberType) {
-                        if (t == membro.role) {
-                            findbyType = true
-                        }
-                    }
-                }
-    
-                if (filter.projects.length != 0) {
-                    for (const p of membro.projects) {
-                        for (const p1 of filter.projects) {
-                            if (p1 == p.value) {
-                                findbyProject = true
-                            }
-                        }
-                    }
-                }
-    
-                if (filter.dateOfEntry.length != 0) {
-                    let data = membro.entryDate.split('/')
-    
-    
-                    let entryData = new Date(
-                        parseInt(data[2]),
-                        parseInt(data[1]) - 1,
-                        parseInt(data[0])
-                    );
-    
-                    let auxData1 = entryData.getTime()
-                    let auxData2 = filter.dateOfEntry[0].getTime()
-                    let auxData3 = filter.dateOfEntry[1].getTime()
-    
-                    if ((auxData1 >= auxData2) && (auxData1 <= auxData3)) {
-                        findbyDate = true
-                    }
-                }
-    
-    
-    
-                return (filter.memberType.length == 0 || findbyType) &&
-                    (filter.projects.length == 0 || findbyProject) &&
-                    (filter.dateOfEntry.length == 0 || findbyDate)
-            }))
-    
-            setMembersArray(filtredArray)
+    function getMembroById(id) {
+        for (const e of membros) {
+            if (id == e.id) return e
         }
-    
-        const clearRangePicker = () => {
-            setDateList([])
-        };
-    
-        const clearSelection = () => {
-            setSelectList([])
-        };
-    
-        const clearCheckboxGroup = () => {
-            setCheckedList([])
+    }
+
+    function cardGenerator(array) {
+
+        // const arrayFiltrado = array.filter(member => member.role === type);
+
+        if (array.length != 0) {
+            const cards = array.map((project, i) => (
+                <Card key={i} className="mr-5 w-[20rem] mb-5">
+                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{project.label}</Title>
+                    <div className='buttonDiv'>
+                        <Paragraph className="text-justify">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        </Paragraph>
+                    </div>
+                </Card>
+            ))
+
+            return cards
         }
-    
-        function clearFilters() {
-            clearCheckboxGroup()
-            clearSelection()
-            clearRangePicker()
-            setMembersArray(memberRecoveryArray)
-        }
-    
-        function cardGenerator(array, type) {
-    
-            const arrayFiltrado = array.filter(member => member.role === type);
-    
-            if (arrayFiltrado.length != 0) {
-                const cards = arrayFiltrado.map((member, i) => (
-                    <Card key={i} className='memberCard'>
-                        <div className='picDiv'>
-                            <img src='/user.png' alt={`${member.nome} profile`} className='profilePic' />
-                        </div>
-                        <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
-                        <p className='roleName'>{member.role.toUpperCase()}</p>
-                        <div className='buttonDiv'>
-                            <Button type="primary" className='seeMoreButton'onClick={(e)=>{gerarRota(member.id)}}>SEE MORE</Button>
-                        </div>
-                    </Card>
-                ))
-    
-                return cards
-            }
-            return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados membros nesta posição</Text>
-        }
-    
-        useEffect(() => {
-            setMemberRecoveryArray(membros)
-            setMembersArray(membros)
-        }, []);
-    
-    
-        return (
+        return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados publicações relacionadas a este membro</Text>
+    }
+
+
+    useEffect(() => {
+        const search = searchParams.get('memberID')
+        setMember(getMembroById(search))
+    }, [])
+
+    useEffect(() => {
+        console.log(member)
+    }, [member])
+    return (
+        (member.length != 0 &&
             <div>
-                <ConfigProvider
-                    theme={{
-                        token: {
-                            colorPrimary: '#156D86',
-                        },
-                    }}
-                >
-                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: '44%', paddingRight: '15px' }}>
-                        <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '20px' }}>OUR TEAM</Title>
-    
-                        {nameSearch != '' &&
-                            <Title level={5} style={{ color: '#156D86', textAlign: 'center' }}>Displaying results for "{nameSearch}"</Title>
-                        }
+                <div className="flex justify-center mt-10">
+                    <div id="picDiv" className="mr-5">
+                        <img src='/user.png' alt={`${member.nome} profile`} className='w-[100px] h-[100px]' />
                     </div>
-                    <div className='mainContent'>
-                        <div className='filterArea'>
-                            <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
-                            <div className='filterInputs'>
-                                <div className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Name:</Title>
-                                    <Search placeholder="type member's name..."
-                                        onSearch={onSearch}
-                                        enterButton
-                                        allowClear
-                                        onClear={(e) => { setMembersArray(memberRecoveryArray) }} />
+                    <div id="infoDiv" className="w-[50%]">
+                        <div id="name">
+                            <Title level={2} style={{ color: '#156D86', marginBottom: '0px' }}>{member.nome}</Title>
+                        </div>
+                        <div id="position">
+                            <Title level={5} style={{ color: '#156D86' }}>{member.role.toUpperCase()}</Title>
+                        </div>
+                        <div id="description">
+                            <Paragraph className=" text-xl text-justify">
+                                {member.description}
+                            </Paragraph>
+                        </div>
+                        <div className="flex">
+                            <div id="social" className="w-[20%]">
+                                <Title level={5} style={{ color: '#156D86' }}>How to find:</Title>
+                                <div className="flex">
+                                    <img src='/google-scholar.svg' alt={`${member.nome} scholarGoogle`} className='w-[25px] h-[25px] mr-[5px]' />
+                                    <img src='/dblp-svgrepo-com.svg' alt={`${member.nome} dblp`} className='w-[25px] h-[25px] mr-[5px]' />
+                                    <img src='/ResearchGate_icon_SVG.svg' alt={`${member.nome} researchGate`} className='w-[25px] h-[25px] mr-[5px]' />
                                 </div>
-                                <div id='checkboxGroup' className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member type:</Title>
-                                    <Checkbox.Group options={optionsCheckbox} onChange={onChange} value={checkedList} />
-                                </div>
-                                <div id='selectDiv' className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Project:</Title>
-                                    <Select
-                                        mode="multiple"
-                                        allowClear
-                                        style={{
-                                            width: '100%',
-                                        }}
-                                        placeholder="Select projects..."
-                                        onChange={handleChange}
-                                        options={projects}
-                                        showSearch
-                                        value={selectList}
-                                    />
-                                </div>
-                                <div id='datePicker'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Date of entry:</Title>
-                                    <RangePicker onChange={dateHandle} value={dateList} />
-                                </div>
-                                <div>
-                                    <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ width: '100px' }}>Clear Filters</Button>
-                                    <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{ marginLeft: '10px' }}>Filter</Button>
+                            </div>
+                            <div id="contact">
+                                <Title level={5} style={{ color: '#156D86', marginBottom: '2px' }}>Social Medias:</Title>
+                                <div className="flex">
+                                    <IconBrandLinkedin stroke={1.5} style={{ color: '#156D86', width: '30px', height: '30px', marginTop: '2px' }} />
+                                    <IconBrandInstagram stroke={1.5} style={{ color: '#156D86', width: '34px', height: '34px' }} />
+                                    <IconMail stroke={1.5} style={{ color: '#156D86', width: '34px', height: '34px' }} />
                                 </div>
                             </div>
                         </div>
-                        <div className='membersArea' >
-                            <div className='memberCategory'>
-                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
-                                <div className='membersCardArea'>
-                                    {cardGenerator(membersArray, 'Professor')}
-                                </div>
-                            </div>
-                            <div className='memberCategory'>
-                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>PhD Students</Title>
-                                <div className='membersCardArea'>
-                                    {cardGenerator(membersArray, 'PhD Student')}
-                                </div>
-                            </div>
-                            <div className='memberCategory'>
-                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>MSc Students</Title>
-                                <div className='membersCardArea'>
-                                    {cardGenerator(membersArray, 'MSc Student')}
-                                </div>
-                            </div>
-                            <div className='memberCategory'>
-                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Undergrad Students</Title>
-                                <div className='membersCardArea'>
-                                    {cardGenerator(membersArray, 'Undergrad Student')}
-                                </div>
-                            </div>
-                            {/* {cardGenerator(membros, 'PhD Student')} */}
-                        </div>
                     </div>
-                </ConfigProvider>
+                </div>
+                <div id="projects" className="w-[70%] m-auto">
+                    <Title level={4} style={{ color: '#156D86' }}>Publications:</Title>
+                    <div id="projectsContainer" className="flex flex-wrap mb-10">
+                        {cardGenerator(member.projects)}
+                    </div>
+                </div>
             </div>
-    
+        )
     );
-  }
+}

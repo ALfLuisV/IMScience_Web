@@ -18,6 +18,7 @@
     "react-router-dom": "^7.1.0"
   },
   "devDependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.2",
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
     "eslint-config-next": "15.1.2",
