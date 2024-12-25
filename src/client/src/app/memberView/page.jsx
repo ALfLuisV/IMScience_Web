@@ -2,8 +2,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import userImage from '../../../public/user.png';
-import { Card, Typography, Button, Collapse, Input, Checkbox, Select, ConfigProvider } from 'antd';
-import { IconBrandInstagram, IconBrandLinkedin, IconMail  } from '@tabler/icons-react';
+import { Card, Typography } from 'antd';
+import { IconBrandInstagram, IconBrandLinkedin, IconMail } from '@tabler/icons-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 const { Title, Paragraph } = Typography;
 
@@ -11,6 +13,7 @@ const { Title, Paragraph } = Typography;
 export default function members() {
     const [member, setMember] = useState([])
     const searchParams = useSearchParams()
+    const [graphicData, setGraphicData] = useState([])
 
     const membros = [
         {
@@ -23,7 +26,9 @@ export default function members() {
             projects: [
                 {
                     label: "Detecção de comunidades em redes complexas",
-                    value: "5"
+                    value: "5",
+                    ano: "2020"
+
                 }
             ]
         },
@@ -37,19 +42,23 @@ export default function members() {
             projects: [
                 {
                     label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
-                    value: "9"
+                    value: "9",
+                    ano: "2021"
                 },
                 {
                     label: "Detecção de comunidades em redes complexas",
-                    value: "5"
+                    value: "5",
+                    ano: "2020"
                 },
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 },
                 {
                     label: "Análise de vulnerabilidades em redes de computadores usando grafos",
-                    value: "10"
+                    value: "10",
+                    ano: "2019"
                 }
             ]
         },
@@ -63,15 +72,18 @@ export default function members() {
             projects: [
                 {
                     label: "Otimização de rotas de entrega com algoritmos de grafos",
-                    value: "4"
+                    value: "4",
+                    ano: "2023"
                 },
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 },
                 {
                     label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
-                    value: "9"
+                    value: "9",
+                    ano: "2021"
                 }
             ]
         },
@@ -85,15 +97,18 @@ export default function members() {
             projects: [
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 },
                 {
                     label: "Análise de vulnerabilidades em redes de computadores usando grafos",
-                    value: "10"
+                    value: "10",
+                    ano: "2019"
                 },
                 {
                     label: "Análise de redes sociais utilizando grafos",
-                    value: "3"
+                    value: "3",
+                    ano: "2021"
                 }
             ]
         },
@@ -107,11 +122,13 @@ export default function members() {
             projects: [
                 {
                     label: "Análise de redes sociais utilizando grafos",
-                    value: "3"
+                    value: "3",
+                    ano: "2021"
                 },
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 }
             ]
         },
@@ -125,11 +142,13 @@ export default function members() {
             projects: [
                 {
                     label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
-                    value: "6"
+                    value: "6",
+                    ano: "2022"
                 },
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 }
             ]
         },
@@ -143,15 +162,18 @@ export default function members() {
             projects: [
                 {
                     label: "Análise de vulnerabilidades em redes de computadores usando grafos",
-                    value: "10"
+                    value: "10",
+                    ano: "2019"
                 },
                 {
                     label: "Otimização de rotas de entrega com algoritmos de grafos",
-                    value: "4"
+                    value: "4",
+                    ano: "2023"
                 },
                 {
                     label: "Modelagem de redes de transporte público usando teoria dos grafos",
-                    value: "7"
+                    value: "7",
+                    ano: "2021"
                 }
             ]
         },
@@ -165,11 +187,13 @@ export default function members() {
             projects: [
                 {
                     label: "Detecção de comunidades em redes complexas",
-                    value: "5"
+                    value: "5",
+                    ano: "2020"
                 },
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 }
             ]
         },
@@ -183,7 +207,8 @@ export default function members() {
             projects: [
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 }
             ]
         },
@@ -197,11 +222,13 @@ export default function members() {
             projects: [
                 {
                     label: "Otimização de rotas de entrega com algoritmos de grafos",
-                    value: "4"
+                    value: "4",
+                    ano: "2023"
                 },
                 {
                     label: "Análise de redes sociais utilizando grafos",
-                    value: "3"
+                    value: "3",
+                    ano: "2021"
                 }
             ]
         },
@@ -215,19 +242,23 @@ export default function members() {
             projects: [
                 {
                     label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
-                    value: "9"
+                    value: "9",
+                    ano: "2021"
                 },
                 {
                     label: "Modelagem de redes de transporte público usando teoria dos grafos",
-                    value: "7"
+                    value: "7",
+                    ano: "2021"
                 },
                 {
                     label: "Otimização de rotas de entrega com algoritmos de grafos",
-                    value: "4"
+                    value: "4",
+                    ano: "2023"
                 },
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 }
             ]
         },
@@ -241,19 +272,23 @@ export default function members() {
             projects: [
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 },
                 {
                     label: "Otimização de rotas de entrega com algoritmos de grafos",
-                    value: "4"
+                    value: "4",
+                    ano: "2023"
                 },
                 {
                     label: "Análise de vulnerabilidades em redes de computadores usando grafos",
-                    value: "10"
+                    value: "10",
+                    ano: "2019"
                 },
                 {
                     label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
-                    value: "9"
+                    value: "9",
+                    ano: "2021"
                 }
             ]
         },
@@ -267,15 +302,18 @@ export default function members() {
             projects: [
                 {
                     label: "Modelagem de redes de transporte público usando teoria dos grafos",
-                    value: "7"
+                    value: "7",
+                    ano: "2021"
                 },
                 {
                     label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
-                    value: "6"
+                    value: "6",
+                    ano: "2022"
                 },
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 }
             ]
         },
@@ -289,15 +327,18 @@ export default function members() {
             projects: [
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 },
                 {
                     label: "Detecção de comunidades em redes complexas",
-                    value: "5"
+                    value: "5",
+                    ano: "2020"
                 },
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 }
             ]
         },
@@ -311,15 +352,18 @@ export default function members() {
             projects: [
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 },
                 {
                     label: "Análise de redes sociais utilizando grafos",
-                    value: "3"
+                    value: "3",
+                    ano: "2021"
                 },
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 }
             ]
         },
@@ -333,11 +377,13 @@ export default function members() {
             projects: [
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 },
                 {
                     label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
-                    value: "9"
+                    value: "9",
+                    ano: "2021"
                 }
             ]
         },
@@ -351,15 +397,18 @@ export default function members() {
             projects: [
                 {
                     label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
-                    value: "9"
+                    value: "9",
+                    ano: "2021"
                 },
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 },
                 {
                     label: "Modelagem de redes de transporte público usando teoria dos grafos",
-                    value: "7"
+                    value: "7",
+                    ano: "2021"
                 }
             ]
         },
@@ -373,11 +422,13 @@ export default function members() {
             projects: [
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 },
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 }
             ]
         },
@@ -391,15 +442,18 @@ export default function members() {
             projects: [
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 },
                 {
                     label: "Otimização de rotas de entrega com algoritmos de grafos",
-                    value: "4"
+                    value: "4",
+                    ano: "2023"
                 },
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 }
             ]
         },
@@ -413,7 +467,8 @@ export default function members() {
             projects: [
                 {
                     label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
-                    value: "6"
+                    value: "6",
+                    ano: "2022"
                 }
             ]
         },
@@ -427,11 +482,13 @@ export default function members() {
             projects: [
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 },
                 {
                     label: "Análise de vulnerabilidades em redes de computadores usando grafos",
-                    value: "10"
+                    value: "10",
+                    ano: "2019"
                 }
             ]
         },
@@ -445,7 +502,8 @@ export default function members() {
             projects: [
                 {
                     label: "Análise de redes sociais utilizando grafos",
-                    value: "3"
+                    value: "3",
+                    ano: "2021"
                 }
             ]
         },
@@ -459,19 +517,23 @@ export default function members() {
             projects: [
                 {
                     label: "Detecção de comunidades em redes complexas",
-                    value: "5"
+                    value: "5",
+                    ano: "2020"
                 },
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 },
                 {
                     label: "Modelagem de redes de transporte público usando teoria dos grafos",
-                    value: "7"
+                    value: "7",
+                    ano: "2021"
                 },
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 }
             ]
         },
@@ -485,19 +547,23 @@ export default function members() {
             projects: [
                 {
                     label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
-                    value: "9"
+                    value: "9",
+                    ano: "2021"
                 },
                 {
                     label: "Análise de redes sociais utilizando grafos",
-                    value: "3"
+                    value: "3",
+                    ano: "2021"
                 },
                 {
                     label: "Otimização de rotas de entrega com algoritmos de grafos",
-                    value: "4"
+                    value: "4",
+                    ano: "2023"
                 },
                 {
                     label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
-                    value: "6"
+                    value: "6",
+                    ano: "2022"
                 }
             ]
         },
@@ -511,15 +577,18 @@ export default function members() {
             projects: [
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 },
                 {
                     label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
-                    value: "6"
+                    value: "6",
+                    ano: "2022"
                 },
                 {
                     label: "Introduzindo teoria dos grafos no processamento de imagens",
-                    value: "1"
+                    value: "1",
+                    ano: "2022"
                 }
             ]
         },
@@ -533,11 +602,13 @@ export default function members() {
             projects: [
                 {
                     label: "Utilizando IA generativa na recuperação hormonal",
-                    value: "2"
+                    value: "2",
+                    ano: "2019"
                 },
                 {
                     label: "Análise de vulnerabilidades em redes de computadores usando grafos",
-                    value: "10"
+                    value: "10",
+                    ano: "2019"
                 }
             ]
         },
@@ -551,15 +622,18 @@ export default function members() {
             projects: [
                 {
                     label: "Detecção de comunidades em redes complexas",
-                    value: "5"
+                    value: "5",
+                    ano: "2020"
                 },
                 {
                     label: "Modelagem de redes de transporte público usando teoria dos grafos",
-                    value: "7"
+                    value: "7",
+                    ano: "2021"
                 },
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 }
             ]
         },
@@ -573,23 +647,28 @@ export default function members() {
             projects: [
                 {
                     label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
-                    value: "9"
+                    value: "9",
+                    ano: "2021"
                 },
                 {
                     label: "Detecção de comunidades em redes complexas",
-                    value: "5"
+                    value: "5",
+                    ano: "2020"
                 },
                 {
                     label: "Análise de redes sociais utilizando grafos",
-                    value: "3"
+                    value: "3",
+                    ano: "2021"
                 },
                 {
                     label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
-                    value: "6"
+                    value: "6",
+                    ano: "2022"
                 },
                 {
                     label: "Visualização de dados complexos com grafos interativos",
-                    value: "8"
+                    value: "8",
+                    ano: "2023"
                 }
             ]
         },
@@ -603,7 +682,8 @@ export default function members() {
             projects: [
                 {
                     label: "Detecção de comunidades em redes complexas",
-                    value: "5"
+                    value: "5",
+                    ano: "2020"
                 }
             ]
         },
@@ -617,7 +697,8 @@ export default function members() {
             projects: [
                 {
                     label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
-                    value: "6"
+                    value: "6",
+                    ano: "2022"
                 }
             ]
         }
@@ -630,10 +711,39 @@ export default function members() {
         }
     }
 
+    function createGraphicArray() {
+        let aux = []
+        let data = new Date()
+        let dataAno = data.getFullYear()
+        let anoInicial = dataAno - 10
+
+        while (anoInicial <= dataAno) {
+            let item = {
+                ano: anoInicial.toString(),
+                pubs: 0,
+            }
+            aux.push(item)
+            anoInicial += 1
+        }
+
+        setGraphicData(aux)
+    }
+
+    function fetGraphicValues() {
+        let arrayAux = [...graphicData]
+
+        for (const e of member.projects) {
+            for (const a of arrayAux) {
+                if (a.ano == e.ano) {
+                    a.pubs += 1;
+                }
+            }
+        }
+        setGraphicData(arrayAux)
+    }
+
+
     function cardGenerator(array) {
-
-        // const arrayFiltrado = array.filter(member => member.role === type);
-
         if (array.length != 0) {
             const cards = array.map((project, i) => (
                 <Card key={i} className="mr-3 w-[20rem] mb-5">
@@ -648,20 +758,21 @@ export default function members() {
                     </div>
                 </Card>
             ))
-
             return cards
         }
         return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados publicações relacionadas a este membro</Text>
     }
 
 
+
     useEffect(() => {
         const search = searchParams.get('memberID')
         setMember(getMembroById(search))
+        createGraphicArray()
     }, [])
 
     useEffect(() => {
-        console.log(member)
+        if (member.length != 0 && graphicData.length != 0) fetGraphicValues()
     }, [member])
     return (
         (member.length != 0 ?
@@ -677,7 +788,7 @@ export default function members() {
                         <div id="position">
                             <Title level={5} style={{ color: '#156D86' }}>{member.role.toUpperCase()}</Title>
                         </div>
-                        <div id="description">
+                        <div id="description" >
                             <Paragraph className=" text-xl text-justify">
                                 {member.description}
                             </Paragraph>
@@ -701,6 +812,38 @@ export default function members() {
                             </div>
                         </div>
                     </div>
+                    <div style={{ marginLeft: '7rem' }}>
+                        <Title level={3} style={{ color: '#156D86', marginTop: '6px' }}>Contributions:</Title>
+                        <div style={{
+                            backgroundColor: '#fafafa', 
+                            width: '450px', 
+                            height: '250px', 
+                            padding: '25px 25px 25px 25px',
+                            borderRadius: '30px'
+                            }}>
+                            <LineChart
+                                width={400}
+                                height={200}
+                                data={graphicData}
+                            >
+                                <Tooltip
+                                    content={({ payload, label }) => {
+                                        if (payload && payload.length) {
+                                            const { ano, pubs } = payload[0].payload; // Captura 'ano' e 'pubs' dos dados
+                                            return (
+                                                <div style={{ backgroundColor: '#fff', border: '1px solid #ccc', padding: '5px' }}>
+                                                    <p><strong>Year:</strong> {ano}</p>
+                                                    <p><strong>Publications:</strong> {pubs}</p>
+                                                </div>
+                                            );
+                                        }
+                                        return null;
+                                    }}
+                                />
+                                <Line type="monotone" dataKey="pubs" stroke="#156D86" />
+                            </LineChart>
+                        </div>
+                    </div>
                 </div>
                 <div id="projects" className="ml-8 mt-3">
                     <Title level={3} style={{ color: '#156D86' }}>Publications:</Title>
@@ -709,8 +852,8 @@ export default function members() {
                     </div>
                 </div>
             </div>
-        : <div>
-            <Title level={1}> Houve um problema na exibição do recurso</Title>
-        </div>)
+            : <div>
+                <Title level={1}> Houve um problema na exibição do recurso</Title>
+            </div>)
     );
 }
