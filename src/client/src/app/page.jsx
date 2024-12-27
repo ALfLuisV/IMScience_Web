@@ -1,12 +1,12 @@
-import Image from "next/image";
+import Carrossel from '../components/carrossel/carrossel';
+import EventList from "../components/event/events";
+
 
 export default function Home() {
   return (
     <>
-    <div>
-      amigo
-      
-    </div>
+    <Carrossel/>
+    <EventList/>
     </>
   );
 }
