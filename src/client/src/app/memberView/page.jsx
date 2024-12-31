@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import userImage from '../../../public/user.png';
 import { Card, Typography } from 'antd';
 import { IconBrandInstagram, IconBrandLinkedin, IconMail } from '@tabler/icons-react';
@@ -11,6 +11,9 @@ const { Title, Paragraph } = Typography;
 
 
 export default function members() {
+
+    const router = useRouter()
+
     const [member, setMember] = useState([])
     const searchParams = useSearchParams()
     const [graphicData, setGraphicData] = useState([])
@@ -747,7 +750,9 @@ export default function members() {
         if (array.length != 0) {
             const cards = array.map((project, i) => (
                 <Card key={i} className="mr-3 w-[20rem] mb-5">
-                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{project.label}</Title>
+                    <a href={`/articleView?articleID=${project.value}`}>
+                        <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{project.label}</Title>
+                    </a>
                     <div className='buttonDiv'>
                         <Paragraph className="text-justify">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -762,7 +767,6 @@ export default function members() {
         }
         return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados publicações relacionadas a este membro</Text>
     }
-
 
 
     useEffect(() => {
@@ -815,12 +819,12 @@ export default function members() {
                     <div style={{ marginLeft: '7rem' }}>
                         <Title level={3} style={{ color: '#156D86', marginTop: '6px' }}>Contributions:</Title>
                         <div style={{
-                            backgroundColor: '#fafafa', 
-                            width: '450px', 
-                            height: '250px', 
+                            backgroundColor: '#fafafa',
+                            width: '450px',
+                            height: '250px',
                             padding: '25px 25px 25px 25px',
                             borderRadius: '30px'
-                            }}>
+                        }}>
                             <LineChart
                                 width={400}
                                 height={200}
@@ -845,7 +849,7 @@ export default function members() {
                         </div>
                     </div>
                 </div>
-                <div id="projects" className="ml-8 mt-3">
+                <div id="projects" className="ml-8 mt-8">
                     <Title level={3} style={{ color: '#156D86' }}>Publications:</Title>
                     <div id="projectsContainer" className="flex flex-wrap mb-10">
                         {cardGenerator(member.projects)}
