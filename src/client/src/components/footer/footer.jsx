@@ -15,14 +15,15 @@ export default function FooterHP() {
             <Footer
                 style={{
                     textAlign: 'center',
-                    backgroundColor: '#000000',
                     height: '15rem',
+                    backgroundColor: '#000000',
                     paddingLeft: '0px',
                     paddingRight: '0px',
                     paddingTop: '20px',
                     paddingBottom: '5px'
                 }}
-            >
+                // className='footerrrr'
+                >
                 <div className='footerContent'>
                     <div className='infoDiv'>
                         <div className=''>
@@ -54,8 +55,8 @@ export default function FooterHP() {
                     <div className='mt-[10px]'>
                         <Title level={4} style={{ color: '#fafafa' }}>Apoio:</Title>
                         <div className='flex justify-center'>
-                            <img src='/logo-puc-minasss.png' alt="Imscience Logo" style={{ width: '50px', height: '50px', marginRight: '15px', marginLeft: '15px'}} />
-                            <img src='/logo-horizontal-capes.png' alt="Imscience Logo" style={{ width: '130px', height: '40px', marginRight: '15px'}} />
+                            <img src='/logo-puc-minasss.png' alt="Imscience Logo" style={{ width: '50px', height: '50px', marginRight: '15px', marginLeft: '15px' }} />
+                            <img src='/logo-horizontal-capes.png' alt="Imscience Logo" style={{ width: '130px', height: '40px', marginRight: '15px' }} />
                             <img src='/cnpq-logo.png' alt="Imscience Logo" style={{ width: '130px', height: '50px', marginRight: '15px' }} />
                             <img src='/fapemig-logo.png' alt="Imscience Logo" style={{ width: '60px', height: '40px', marginRight: '15px' }} />
                         </div>
