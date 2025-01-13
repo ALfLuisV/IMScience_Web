@@ -14,7 +14,7 @@ export default function HeaderHP() {
   const routes = {
     '1': '/',
     '2': '/members',
-    '3': '/research',
+    '3': '/events',
     '4': '/projects',
     '5': '/codes',
     '6': '/venues',
@@ -22,6 +22,7 @@ export default function HeaderHP() {
     '8': '/opportunities',
     '9': '/tech-talks',
     '10': '/aboutus',
+    '11': '/research',
   };
 
   const handleMenuClick = (e) => {
@@ -32,7 +33,7 @@ export default function HeaderHP() {
   const items = [
     { key: '1', label: 'Home' },
     { key: '2', label: 'Team' },
-    { key: '3', label: 'Research' },
+    { key: '3', label: 'Events' },
     { key: '4', label: 'Projects' },
     { key: '5', label: 'Codes' },
     { key: '6', label: 'Venues' },
@@ -40,6 +41,7 @@ export default function HeaderHP() {
     { key: '8', label: 'Opportunities' },
     { key: '9', label: 'Tech Talks' },
     { key: '10', label: 'About Us' },
+    { key: '11', label: 'Research' },
   ];
 
   const pathname = usePathname();
