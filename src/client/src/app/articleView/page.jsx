@@ -21,7 +21,7 @@ export default function articleView() {
 
     const [project, setProject] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [copyButtonText, setCopyButtonText] = useState('Copy citation')
+    const [copyButtonText, setCopyButtonText] = useState('Copy')
     const [enableCopyButton, setEnableCopyButton] = useState(false)
 
 
@@ -541,7 +541,7 @@ export default function articleView() {
     const showModal = () => {
         setIsModalOpen(true);
         setEnableCopyButton(false)
-        setCopyButtonText('Copy citation')
+        setCopyButtonText('Copy')
     };
 
     const handleOk = () => {
@@ -726,7 +726,7 @@ export default function articleView() {
                             disabled={enableCopyButton}
                             >
                                 {copyButtonText}
-                                {copyButtonText == 'Copy citation' && <IconCopy style={{ width: '22px', height: "26px" }} />}
+                                {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}
                             </Button>,
                         ]}
                     >
