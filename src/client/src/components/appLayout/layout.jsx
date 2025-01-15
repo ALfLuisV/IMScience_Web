@@ -16,7 +16,7 @@ const LayoutApp = ({ children }) => {
 
           
 
-            <Content style={{ padding: '20px', marginTop: '64px' }}>
+            <Content>
                 {children}
             </Content>
 

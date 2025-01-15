@@ -2,30 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
-import { Card, Typography, Button, Modal } from 'antd';
+import { Card, Typography, Button, Modal, Carousel, ConfigProvider } from 'antd';
 import { IconFileText, IconQuote, IconCopy } from '@tabler/icons-react';
 import '@ant-design/v5-patch-for-react-19';
 import userImage from '../../../public/user.png'
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import ModalCitation from '@/components/citationBox/citation'
 
+import img1 from '../../../public/grafoInterativo.jpg'
+import img2 from '../../../public/imgGrafo.jpg'
+import img3 from '../../../public/post-redes.png'
+import img4 from '../../../public/redesGrafos.png'
+import img5 from '../../../public/redesSociaisGrafos.png'
 
 const { Title, Paragraph, Text } = Typography;
 
 
-export default function articleView() {
-    const searchParams = useSearchParams()
-    const router = useRouter()
-
-
-
-    const [project, setProject] = useState(null)
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [copyButtonText, setCopyButtonText] = useState('Copy')
-    const [enableCopyButton, setEnableCopyButton] = useState(false)
-
-
-
+export default function projects() {
+    const [articles, setArticles] = useState(null)
 
     const projects = [
         {
@@ -34,9 +29,10 @@ export default function articleView() {
             conferencia: "Conferência Internacional de Processamento de Imagens",
             dataConferencia: "2023-11-15",
             local: "São Paulo, Brasil",
+            img: '/imgGrafo.jpg',
             link: "https://www.google.com",
             keywords: ["grafos", "processamento de imagens", "teoria dos grafos"],
-            abstract: "Este trabalho explora como a teoria dos grafos pode ser aplicada no processamento de imagens, abordando conceitos fundamentais e aplicações práticas. A teoria dos grafos oferece uma estrutura matemática poderosa para representar e analisar relações entre objetos, o que é particularmente útil em problemas de processamento de imagens. Neste estudo, discutimos como grafos podem ser utilizados para segmentação de imagens, detecção de bordas e reconhecimento de padrões. Além disso, apresentamos algoritmos eficientes baseados em grafos que melhoram a precisão e a velocidade do processamento de imagens. Exemplos práticos são fornecidos para ilustrar a eficácia dessas técnicas em diferentes cenários, como análise médica e reconhecimento facial. Concluímos com uma discussão sobre as futuras direções de pesquisa e as possíveis inovações que a teoria dos grafos pode trazer para o campo do processamento de imagens. A aplicação de grafos não só facilita a compreensão das estruturas internas das imagens, mas também abre novas possibilidades para o desenvolvimento de tecnologias avançadas em áreas como visão computacional e inteligência artificial. A pesquisa destaca a importância de integrar métodos de grafos em sistemas de processamento de imagens para alcançar resultados mais robustos e eficientes. Além disso, exploramos como a teoria dos grafos pode ser combinada com outras técnicas de processamento de imagens para criar soluções híbridas que aproveitam o melhor de ambos os mundos. Finalmente, discutimos os desafios e limitações atuais da aplicação de grafos no processamento de imagens e sugerimos possíveis abordagens para superá-los.",
+            abstract: "Este trabalho aborda a aplicação da teoria dos grafos no processamento de imagens, destacando segmentação, detecção, reconhecimento e soluções híbridas com avanços em visão computacional.",
             doi: '10.1109/ISSREW55968.2022.00071',
             authors: [
                 {
@@ -156,6 +152,7 @@ export default function articleView() {
             conferencia: "Workshop de Análise de Redes Sociais",
             dataConferencia: "2024-02-10",
             local: "Nova York, EUA",
+            img: '/redesSociaisGrafos.png',
             link: "https://www.google.com",
             keywords: ["redes sociais", "análise de dados", "teoria dos grafos"],
             abstract: "Discussão sobre a aplicação de grafos para analisar interações e padrões em redes sociais.",
@@ -254,9 +251,10 @@ export default function articleView() {
             conferencia: "Encontro de Ciência de Redes",
             dataConferencia: "2024-03-05",
             local: "Tóquio, Japão",
+            img: '/redesGrafos.png',
             link: "https://www.google.com",
             keywords: ["comunidades", "redes complexas", "teoria dos grafos"],
-            abstract: "Este trabalho explora como a teoria dos grafos pode ser aplicada no processamento de imagens, abordando conceitos fundamentais e aplicações práticas. A teoria dos grafos oferece uma estrutura matemática poderosa para representar e analisar relações entre objetos, o que é particularmente útil em problemas de processamento de imagens. Neste estudo, discutimos como grafos podem ser utilizados para segmentação de imagens, detecção de bordas e reconhecimento de padrões. Além disso, apresentamos algoritmos eficientes baseados em grafos que melhoram a precisão e a velocidade do processamento de imagens. Exemplos práticos são fornecidos para ilustrar a eficácia dessas técnicas em diferentes cenários, como análise médica e reconhecimento facial. Concluímos com uma discussão sobre as futuras direções de pesquisa e as possíveis inovações que a teoria dos grafos pode trazer para o campo do processamento de imagens. A aplicação de grafos não só facilita a compreensão das estruturas internas das imagens, mas também abre novas possibilidades para o desenvolvimento de tecnologias avançadas em áreas como visão computacional e inteligência artificial. A pesquisa destaca a importância de integrar métodos de grafos em sistemas de processamento de imagens para alcançar resultados mais robustos e eficientes. Além disso, exploramos como a teoria dos grafos pode ser combinada com outras técnicas de processamento de imagens para criar soluções híbridas que aproveitam o melhor de ambos os mundos. Finalmente, discutimos os desafios e limitações atuais da aplicação de grafos no processamento de imagens e sugerimos possíveis abordagens para superá-los.",
+            abstract: "Teoria dos grafos aplicada ao processamento de imagens melhora segmentação, detecção, reconhecimento e eficiência em visão computacional e inteligência artificial.",
             doi: '10.1109/ISSREW55968.2022.00071',
             authors: [
                 {
@@ -374,6 +372,7 @@ export default function articleView() {
             conferencia: "Conferência de Visualização de Dados",
             dataConferencia: "2024-04-18",
             local: "San Francisco, EUA",
+            img: '/grafoInterativo.jpg',
             link: "https://www.google.com",
             keywords: ["visualização de dados", "grafos interativos", "dados complexos"],
             abstract: "Uso de grafos interativos para representar e compreender grandes conjuntos de dados complexos.",
@@ -496,6 +495,7 @@ export default function articleView() {
             conferencia: "Conferência de Segurança Cibernética",
             dataConferencia: "2024-05-20",
             local: "Sydney, Austrália",
+            img: '/post-redes.png',
             link: "https://www.google.com",
             keywords: ["segurança cibernética", "redes de computadores", "grafos"],
             abstract: "Aplicação de teoria dos grafos para identificar e mitigar vulnerabilidades em redes de computadores.",
@@ -537,207 +537,113 @@ export default function articleView() {
         }
     ]
 
-
-    const showModal = () => {
-        setIsModalOpen(true);
-        setEnableCopyButton(false)
-        setCopyButtonText('Copy')
-    };
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
-
-
-    function getProjectByID(id) {
-        let project = projects.filter((e) => {
-            return e.value === id;
-        });
-        return project.length > 0 ? project[0] : null;
+    function keywordsGenerator(array) {
+        return array.join(" • ")
     }
 
 
-    function dateFormat(dataPub) {
+    function sortByDate(a, b) {
+        let dataA = a.dataConferencia.split('-') //verificar se a data da conferencia, é a data de lançamento do artigo
+        let dataB = b.dataConferencia.split('-')
 
-        // alert(dataPub)
-        let dataItens = dataPub.split('-')
-        let entryData = new Date(
-            parseInt(dataItens[0]),
-            parseInt(dataItens[1]) - 1,
-            parseInt(dataItens[2])
+
+        let entryDataA = new Date(
+            parseInt(dataA[0]), //ano
+            parseInt(dataA[1]) - 1, //mês
+            parseInt(dataA[2]) //dia
         );
 
-        return entryData.toDateString()
+        let entryDataB = new Date(
+            parseInt(dataB[0]), //ano
+            parseInt(dataB[1]) - 1, //mês
+            parseInt(dataB[2]) //dia
+        );
+
+        return entryDataB - entryDataA;
     }
 
 
-    function citationGenerator() {
-        let textAuthors = []
-        let citation = ''
-        for (const e of project.authors) {
-            textAuthors.push(e.nome.split(' '))
-        }
-
-        console.log(textAuthors)
-
-        for (const z of textAuthors) {
-            z.reverse()
-            citation = citation + z[0].toUpperCase() + ', '
-            z.reverse()
-            citation = citation + z[0] + '; '
-        }
-
-        citation = citation.slice(0, -2) + '. '
-
-        let ano = project.dataConferencia.split('-')
-        let local = project.local.split(' ')
-        citation += project.label + '. In: ' + project.conferencia.toUpperCase() + ', ' + ano[0] + ', ' + local[0] + '  DOI:' + project.doi + '.'
-
-
-        return citation
+    function arraySort() {
+        setArticles(projects.sort(sortByDate))
     }
 
-    function copyText(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            setCopyButtonText('Coppied!')
-            setEnableCopyButton(true)
-        })
-    }
+    function carouselCardGenerator() {
+        if (articles != null) {
+            let cards = []
 
-
-
-    function keywordsFormater(keywords) {
-        let finalString = ''
-        for (const e of keywords) {
-            finalString += e + ', '
-        }
-        return finalString.slice(0, -2);
-    }
-
-    function gerarRota(id) {
-        router.push(`/memberView?memberID=${id}`)
-    };
-
-    function cardGenerator(array) {
-
-
-        if (array.length != 0) {
-            const cards = array.map((member, i) => (
-                <Card key={i} className='memberCard'>
-                    <div className='picDiv'>
-                        <img src='/user.png' alt={`${member.nome} profile`} className='profilePic' />
-                    </div>
-                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
-                    <p className='roleName'>{member.role.toUpperCase()}</p>
-                    <div className='buttonDiv'>
-                        <Button type="primary" className='seeMoreButton' onClick={(e) => { gerarRota(member.id) }}>SEE MORE</Button>
-                    </div>
-                </Card>
-            ))
+            for (let step = 0; step < 5; step++) {
+                cards.push(
+                    <div key={step} className="h-[32rem] bg-cover bg-center">
+                        <div
+                            className="h-[32rem]"
+                            style={{
+                                zIndex: '15',
+                                backgroundSize: "100% 100%",
+                                backgroundPosition: "0px 0px",
+                                backgroundImage: "radial-gradient(200% 200% at 129% 22%, #073AFF00 29%, #156d86 54%)",
+                                paddingTop: '220px'
+                            }}
+                        >
+                            <div className="w-[30%] ml-14">
+                                <Paragraph style={{ marginBottom: '4px', color: 'white', fontWeight: "400" }}>{keywordsGenerator(articles[step].keywords)}</Paragraph>
+                                <Title level={2} className="z-40" style={{ color: 'white', marginTop: '4px', marginBottom: '10px' }}>{articles[step].label}</Title>
+                                <Paragraph style={{ color: 'white' }} className="text-md">{articles[step].abstract}</Paragraph>
+                                <Link href={`/articleView?articleID=${articles[step].value}`} passHref>
+                                    <Button style={{color: '#156d86'}}>Veja o Artigo <IconFileText stroke={1.25} style={{ width: '22px', height: "26px", color: '#156d86' }} /></Button>
+                                </Link>
+                            </div>
+                            <img
+                                id='backgroundImage'
+                                src={articles[step].img}
+                                alt="backgroundImage"
+                                className="h-[32rem]"
+                                style={{
+                                    position: "absolute",
+                                    top: "0",
+                                    left: "0",
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    zIndex: "-1",
+                                }}
+                            />
+                        </div>
+                    </div >
+                )
+            }
 
             return cards
         }
-        return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados membros nesta posição</Text>
     }
 
-
-
-
-    useEffect(() => {
-        if (project != null) {
-            citationGenerator()
-        }
-    }, [project])
+    // useEffect(() => {
+    //     articles != null ? console.log(articles) : console.log("array articles vazio")
+    // }, [articles])
 
     useEffect(() => {
-        const search = searchParams.get('articleID')
-        if (search) {
-            setProject(getProjectByID(search))
-        }
+        projects.length != 0 ? arraySort() : console.log("array inicial vazio")
     }, [])
     return (
         <>
-            {project != null ?
+            <ConfigProvider
+                theme={{
+                    components: {
+                        Carousel: {
+                            arrowSize: 32,
+                            dotWidth: 48,
+                            dotHeight: 8
+                        },
+                    },
+                }}
+            >
                 <div>
-                    <div className="pl-8 divide-[#e0e0e0] divide-y-2">
-                        <div id="infoDivv" className="mb-8">
-                            <div id="topDiv" className="flex mb-[20px] flex-wrap items-center justify-between pr-5">
-                                <Title level={1} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>{project.label}</Title>
-                                <div>
-                                    <Button style={{ backgroundColor: '#D9D9D9', marginRight: '5px' }} onClick={showModal}>Cite article <IconQuote style={{ width: '22px', height: "26px" }} /></Button>
-                                    <Button className="bg-customBlueGreen text-white">Go to Article <IconFileText style={{ width: '22px', height: "26px" }} /></Button>
-                                </div>
-
-                                <div id="doi" className="mt-1">
-                                    <Text className="text-md text-customBlueGreen">DOI: {project.doi}</Text>
-                                </div>
-                            </div>
-                            <div id="infoDiv" >
-                                <div id="conferenceLocal" className="mb-3">
-                                    <Text className="text-xl"><strong className="text-customBlueGreen">Published In:</strong> {project.conferencia}</Text>
-                                </div>
-                                <div id="conferenceDate" className="mb-3">
-                                    <Text className="text-xl"><strong className="text-customBlueGreen">Date of Conference:</strong> {dateFormat(project.dataConferencia)}</Text>
-                                    <Text className="text-xl ml-10"><strong className="text-customBlueGreen">Conference Local:</strong> {project.local}</Text>
-                                </div>
-                                <div id="keywords" className="mb-3">
-                                    <Text className="text-xl"><strong className="text-customBlueGreen">Keywords:</strong> {keywordsFormater(project.keywords)}</Text>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="abstract" className="pt-5">
-                            <Title level={3} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>Abstract:</Title>
-                            <div id="abstractt">
-                                <Paragraph className="w-[65%] text-balance text-lg mt-1  pb-4">
-                                    {project.abstract}
-                                </Paragraph>
-                            </div>
-                        </div>
-                        <div id="demo" className="pt-5">
-                            <Title level={3} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>Demo:</Title>
-                            <div id="demoo">
-                                <Paragraph className="w-[65%] text-balance text-lg mt-1">
-                                    Demo não disponível
-                                </Paragraph>
-                            </div>
-                        </div>
-
+                    <div id="carousel">
+                        <Carousel effect="fade" autoplay arrows speed={900}>
+                            {carouselCardGenerator()}
+                        </Carousel>
                     </div>
-                    <div id="participants" className="pt-5 bg-customBlueGreen">
-                        <Title level={3} className='w-[70%] pl-8' style={{ color: '#fafafa', marginBottom: "0px" }}>Authors:</Title>
-                        <div id="authors" className=" flex pl-8 pt-8">
-                            {cardGenerator(project.authors)}
-                        </div>
-                    </div>
-                    <Modal open={isModalOpen}
-                        onOk={handleOk}
-                        onCancel={handleCancel}
-                        footer={[
-                            <Button key="back" onClick={handleCancel}>
-                                Cancel
-                            </Button>,
-                            <Button key='copy' className="bg-customBlueGreen text-white" 
-                            onClick={(e) => {copyText(citationGenerator())}}
-                            disabled={enableCopyButton}
-                            >
-                                {copyButtonText}
-                                {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}
-                            </Button>,
-                        ]}
-                    >
-                        <ModalCitation text={citationGenerator()} />
-                    </Modal>
                 </div>
-                :
-                <div>
-                    <Title level={2} className='memberTypeTitle' style={{ marginTop: '10px', marginBottom: '5px' }}>Artigo não encontrado</Title>
-                </div>
-            }
+            </ConfigProvider>
         </>
     )
 }

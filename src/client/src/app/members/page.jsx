@@ -822,9 +822,9 @@ export default function members() {
     
     
                     let entryData = new Date(
-                        parseInt(data[2]),
-                        parseInt(data[1]) - 1,
-                        parseInt(data[0])
+                        parseInt(data[2]), //ano
+                        parseInt(data[1]) - 1, //mês
+                        parseInt(data[0]) //dia
                     );
     
                     let auxData1 = entryData.getTime()

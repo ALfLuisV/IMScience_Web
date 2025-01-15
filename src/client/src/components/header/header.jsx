@@ -68,8 +68,7 @@ export default function HeaderHP() {
             selectedKeys={[selectedKey]}
             items={items}
             className="custom-menu"
-            onClick={handleMenuClick}
-          />
+            onClick={handleMenuClick}/>
         </AntdHeader>
       </Layout>
     </ConfigProvider>
