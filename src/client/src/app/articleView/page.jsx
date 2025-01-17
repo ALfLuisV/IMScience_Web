@@ -710,7 +710,7 @@ export default function articleView() {
                     </div>
                     <div id="participants" className="pt-5 bg-customBlueGreen">
                         <Title level={3} className='w-[70%] pl-8' style={{ color: '#fafafa', marginBottom: "0px" }}>Authors:</Title>
-                        <div id="authors" className=" flex pl-8 pt-8">
+                        <div id="authors" className=" flex pl-8 pt-8 flex-wrap">
                             {cardGenerator(project.authors)}
                         </div>
                     </div>

@@ -1,27 +1,30 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from 'next/navigation';
-import { Card, Typography, Button, Modal, Carousel, ConfigProvider } from 'antd';
-import { IconFileText, IconQuote, IconCopy } from '@tabler/icons-react';
+import { Card, Typography, Button, Divider, Carousel, ConfigProvider, Input, Select, Modal, Slider } from 'antd';
+import { IconFileText, IconQuote, IconExternalLink, IconCopy } from '@tabler/icons-react';
 import '@ant-design/v5-patch-for-react-19';
 import userImage from '../../../public/user.png'
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import style from './style/projects.module.css'
 import ModalCitation from '@/components/citationBox/citation'
 
-import img1 from '../../../public/grafoInterativo.jpg'
-import img2 from '../../../public/imgGrafo.jpg'
-import img3 from '../../../public/post-redes.png'
-import img4 from '../../../public/redesGrafos.png'
-import img5 from '../../../public/redesSociaisGrafos.png'
-
 const { Title, Paragraph, Text } = Typography;
+const { Search } = Input;
 
 
 export default function projects() {
-    const [articles, setArticles] = useState(null)
-
+    const [recentArticles, setRecentArticles] = useState(null)
+    const [allArticles, setAllArticles] = useState(null)
+    const [projectBackup, setPorjectBackup] = useState(null)
+    const [slideSearch, setSlideSearch] = useState(null)
+    const [selectList, setSelectList] = useState([])
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [copyButtonText, setCopyButtonText] = useState('Copy')
+    const [enableCopyButton, setEnableCopyButton] = useState(false)
+    const [citationText, setCitationText] = useState('')
+    //este array é a base para todo o processamento dos dados, a partir dele serão gerados todos os 
+    // cards e etc, os dados puxados do bd, devem possuir este formato
     const projects = [
         {
             label: "Introduzindo teoria dos grafos no processamento de imagens",
@@ -91,6 +94,7 @@ export default function projects() {
             conferencia: "Simpósio de Inteligência Artificial em Saúde",
             dataConferencia: "2023-09-20",
             local: "Lisboa, Portugal",
+            img: '/grafoInterativo.jpg',
             link: "https://www.google.com",
             keywords: ["IA generativa", "recuperação hormonal", "saúde"],
             abstract: "Investigação sobre o uso de IA generativa para otimizar protocolos de recuperação hormonal em terapias personalizadas.",
@@ -198,6 +202,7 @@ export default function projects() {
             conferencia: "Conferência de Logística e Transporte",
             dataConferencia: "2023-08-25",
             local: "Berlim, Alemanha",
+            img: '/grafoInterativo.jpg',
             link: "https://www.google.com",
             keywords: ["rotas de entrega", "algoritmos de grafos", "logística"],
             abstract: "Este estudo aborda o uso de algoritmos baseados em grafos para otimizar rotas de entrega, reduzindo custos e melhorando a eficiência.",
@@ -297,6 +302,7 @@ export default function projects() {
             conferencia: "Congresso de Bioinformática",
             dataConferencia: "2023-10-12",
             local: "Londres, Reino Unido",
+            img: '/grafoInterativo.jpg',
             link: "https://www.google.com",
             keywords: ["bioinformática", "grafos", "sequências genéticas"],
             abstract: "Exploração do uso de teoria dos grafos na análise de sequências genéticas para avanços em bioinformática.",
@@ -327,6 +333,7 @@ export default function projects() {
             conferencia: "Fórum de Mobilidade Urbana",
             dataConferencia: "2023-07-30",
             local: "Paris, França",
+            img: '/grafoInterativo.jpg',
             link: "https://www.google.com",
             keywords: ["redes de transporte", "mobilidade urbana", "grafos"],
             abstract: "Modelagem e análise de redes de transporte público utilizando técnicas baseadas em grafos para melhorar a eficiência.",
@@ -432,8 +439,9 @@ export default function projects() {
             label: "Algoritmos de grafos para recomendação de produtos em e-commerce",
             value: "9",
             conferencia: "Simpósio de Tecnologia para E-commerce",
-            dataConferencia: "2023-06-15",
+            dataConferencia: "2020-06-15",
             local: "Hong Kong, China",
+            img: '/grafoInterativo.jpg',
             link: "https://www.google.com",
             keywords: ["e-commerce", "recomendação de produtos", "algoritmos de grafos"],
             abstract: "Desenvolvimento de algoritmos de grafos para melhorar sistemas de recomendação em plataformas de e-commerce.",
@@ -537,10 +545,183 @@ export default function projects() {
         }
     ]
 
+    const membros = [
+        {
+            label: "Marcelo Souza",
+            value: "1"
+        },
+        {
+            label: "Ana Ribeiro",
+            value: "2"
+        },
+        {
+            label: "João Almeida",
+            value: "3"
+        },
+        {
+            label: "Carla Ferreira",
+            value: "4"
+        },
+        {
+            label: "Pedro Costa",
+            value: "5"
+        },
+        {
+            label: "Maria Silva",
+            value: "6"
+        },
+        {
+            label: "Lucas Lima",
+            value: "7"
+        },
+        {
+            label: "Juliana Mendes",
+            value: "8"
+        },
+        {
+            label: "Rafael Santos",
+            value: "9"
+        },
+        {
+            label: "Beatriz Souza",
+            value: "10"
+        },
+        {
+            label: "Fernando Rocha",
+            value: "11"
+        },
+        {
+            label: "Lara Nunes",
+            value: "12"
+        },
+        {
+            label: "Ricardo Lopes",
+            value: "13"
+        },
+        {
+            label: "Paula Castro",
+            value: "14"
+        },
+        {
+            label: "Tiago Oliveira",
+            value: "15"
+        },
+        {
+            label: "Isabela Martins",
+            value: "16"
+        },
+        {
+            label: "Victor Teixeira",
+            value: "17"
+        },
+        {
+            label: "Camila Farias",
+            value: "18"
+        },
+        {
+            label: "André Moreira",
+            value: "19"
+        },
+        {
+            label: "Helena Alves",
+            value: "20"
+        },
+        {
+            label: "Gabriel Pinto",
+            value: "21"
+        },
+        {
+            label: "Sofia Gomes",
+            value: "22"
+        },
+        {
+            label: "Rodrigo Dias",
+            value: "23"
+        },
+        {
+            label: "Elaine Vieira",
+            value: "24"
+        },
+        {
+            label: "Daniel Barros",
+            value: "25"
+        },
+        {
+            label: "Luiza Melo",
+            value: "26"
+        },
+        {
+            label: "Eduardo Xavier",
+            value: "27"
+        },
+        {
+            label: "Alice Fonseca",
+            value: "28"
+        },
+        {
+            label: "Matheus Antunes",
+            value: "29"
+        },
+        {
+            label: "Renata Carvalho",
+            value: "30"
+        }
+    ]
+
+
     function keywordsGenerator(array) {
         return array.join(" • ")
     }
 
+
+    const showModal = () => {
+        setIsModalOpen(true);
+        setEnableCopyButton(false)
+        setCopyButtonText('Copy')
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    function citationGenerator(project) {
+        console.log(project)
+        let textAuthors = []
+        let citation = ''
+        for (const e of project.authors) {
+            textAuthors.push(e.nome.split(' '))
+        }
+
+        console.log(textAuthors)
+
+        for (const z of textAuthors) {
+            z.reverse()
+            citation = citation + z[0].toUpperCase() + ', '
+            z.reverse()
+            citation = citation + z[0] + '; '
+        }
+
+        citation = citation.slice(0, -2) + '. '
+
+        let ano = project.dataConferencia.split('-')
+        let local = project.local.split(' ')
+        citation += project.label + '. In: ' + project.conferencia.toUpperCase() + ', ' + ano[0] + ', ' + local[0] + '  DOI:' + project.doi + '.'
+
+        console.log(citation)
+        setCitationText(citation)
+        showModal()
+    }
+
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            setCopyButtonText('Coppied!')
+            setEnableCopyButton(true)
+        })
+    }
 
     function sortByDate(a, b) {
         let dataA = a.dataConferencia.split('-') //verificar se a data da conferencia, é a data de lançamento do artigo
@@ -562,13 +743,123 @@ export default function projects() {
         return entryDataB - entryDataA;
     }
 
+    const onSearch = (value, _e, info) => {
+        setNameSearch(value)
+
+        let arrayAux = creatInitialArray()
+
+
+        let projectsFiltredByName = projects.filter(projeto => projeto.label.includes(value))
+
+        arrayJoiner(arrayAux, projectsFiltredByName)
+    }
+
+    const onSearchAbstract = (value, _e, info) => {
+        setAbstractSearch(value)
+
+        let arrayAux = creatInitialArray()
+
+
+        let projectsFiltredByName = projects.filter(projeto => projeto.abstract.includes(value)) //o abstract deve ser incluido nos objetos do array
+        //atualmente, so possui uma breve descrição, que é a que esta inclusa nos cards
+
+        arrayJoiner(arrayAux, projectsFiltredByName)
+    }
+
+    const onSearchSlider = (value) => {
+        setSlideSearch(value)
+    };
+
+    const handleChange = (value) => {
+        setSelectList(value)
+    }
+
+
+    function handleFilters() {
+        let array = creatInitialArray()
+
+        let filtredArray = projects.filter((projeto) => {
+            let findByYear = false
+            let findBymember = false
+
+            if (slideSearch != null) {
+                let ano = projeto.dataConferencia.split('-')
+                if (parseInt(ano) >= slideSearch[0] && parseInt(ano) <= slideSearch[1]) {
+                    findByYear = true
+                }
+            }
+
+            if (selectList.length != 0) {
+                    for (const j of projeto.authors) {
+                        if (selectList.includes(j.id)) {
+                            findBymember = true
+                        }
+                    }
+            }
+
+            return (slideSearch == null || findByYear) &&
+                    (selectList.length == 0 || findBymember)
+
+        })
+
+        arrayJoiner(array, filtredArray)
+    }
+
+    function clearFilters(){
+        setSlideSearch(null)
+        let arrayAux = []
+        setSelectList(arrayAux)
+        setAllArticles(projectBackup)
+    }
+
+
+    function creatInitialArray() {
+        let arrayAux = []
+
+        for (const e of projectBackup) {
+            let line = { ano: e.ano, projetos: [] }
+            arrayAux.push(line)
+        }
+
+        return arrayAux
+    }
+
+    function arrayJoiner(yearArray, projects) {
+
+        let arrayAux = []
+
+        for (const e of yearArray) {
+            for (const j of projects) {
+                let ano = j.dataConferencia.split('-')
+                if (ano[0] == e.ano) {
+                    e.projetos.push(j)
+                }
+            }
+        }
+
+        for (const k of yearArray) {
+            arrayAux.push(k)
+        }
+
+        setAllArticles(arrayAux)
+
+    }
+
+
 
     function arraySort() {
-        setArticles(projects.sort(sortByDate))
+        let arrayAux = []
+        projects.sort(sortByDate)
+
+        for (let e = 0; e < 5; e++) {
+            arrayAux.push(projects[e])
+        }
+
+        setRecentArticles(arrayAux)
     }
 
     function carouselCardGenerator() {
-        if (articles != null) {
+        if (recentArticles != null) {
             let cards = []
 
             for (let step = 0; step < 5; step++) {
@@ -585,16 +876,16 @@ export default function projects() {
                             }}
                         >
                             <div className="w-[30%] ml-14">
-                                <Paragraph style={{ marginBottom: '4px', color: 'white', fontWeight: "400" }}>{keywordsGenerator(articles[step].keywords)}</Paragraph>
-                                <Title level={2} className="z-40" style={{ color: 'white', marginTop: '4px', marginBottom: '10px' }}>{articles[step].label}</Title>
-                                <Paragraph style={{ color: 'white' }} className="text-md">{articles[step].abstract}</Paragraph>
-                                <Link href={`/articleView?articleID=${articles[step].value}`} passHref>
-                                    <Button style={{color: '#156d86'}}>Veja o Artigo <IconFileText stroke={1.25} style={{ width: '22px', height: "26px", color: '#156d86' }} /></Button>
+                                <Paragraph style={{ marginBottom: '4px', color: 'white', fontWeight: "400" }}>{keywordsGenerator(recentArticles[step].keywords)}</Paragraph>
+                                <Title level={2} className="z-40" style={{ color: 'white', marginTop: '4px', marginBottom: '10px' }}>{recentArticles[step].label}</Title>
+                                <Paragraph style={{ color: 'white' }} className="text-md">{recentArticles[step].abstract}</Paragraph>
+                                <Link href={`/articleView?articleID=${recentArticles[step].value}`} passHref>
+                                    <Button style={{ color: '#156d86' }}>Veja o Artigo <IconFileText stroke={1.25} style={{ width: '22px', height: "26px", color: '#156d86' }} /></Button>
                                 </Link>
                             </div>
                             <img
                                 id='backgroundImage'
-                                src={articles[step].img}
+                                src={recentArticles[step].img}
                                 alt="backgroundImage"
                                 className="h-[32rem]"
                                 style={{
@@ -616,12 +907,103 @@ export default function projects() {
         }
     }
 
-    // useEffect(() => {
-    //     articles != null ? console.log(articles) : console.log("array articles vazio")
-    // }, [articles])
+    function createProjectCards(array) {
+        if (array.length != 0) {
+            let cards = array.map((e, i) => (
+                <Card key={i} className="w-[30%] mr-8 mb-7"
+                    cover={
+                        <img src={e.img} alt="project image"
+                            style={{
+                                width: '350px',
+                                height: '140px'
+                            }}
+                        />}
+                    hoverable
+                    actions={[
+                        <IconQuote className='text-[#e6e6e6] ml-[40%]' key="quote" onClick={(j)=>{citationGenerator(e)}}/>,
+                        <Link href={`/articleView?articleID=${e.value}`} passHref>
+                            <IconFileText className='text-[#e6e6e6] ml-[40%]' key="access" />
+                        </Link>,
+                        <a href={e.link} target="_blank" rel="noopener noreferrer">
+                            <IconExternalLink className='text-[#e6e6e6] ml-[40%]' key="goTo" />
+                        </a>
+                    ]}
+                >
+                    <div id="project info">
+                        <div className="h-[72px]">
+                            <Title level={5} className="border-b mb-3 border-[#e6e6e6] pb-2">{e.label}</Title>
+                        </div>
+                        <div className="h-[100px]">
+                            <Paragraph className="mt-5">{e.abstract}</Paragraph>
+                        </div>
+                    </div>
+                </Card>
+            ))
+
+
+            return cards
+
+        } else {
+            return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados projetos</Text>
+
+        }
+    }
+
+
+    function generateProjectGroups() {
+        if (allArticles != null) {
+            const groups = allArticles.map((project, i) => (
+                <div key={i}>
+                    <div id="topDiv">
+                        <Divider orientation="left" plain>
+                            <Text className={style.customFont}>{project.ano}</Text>
+                        </Divider>
+                        <div id="projects" className="flex flex-wrap">
+                            {createProjectCards(project.projetos)}
+                        </div>
+                    </div>
+                </div>
+            ))
+
+            return groups
+        } else {
+            return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados projetos</Text>
+
+        }
+    }
+
+    function createProjectsArray() {
+        let arrayAux = []
+
+        for (const e of projects) {
+            let anoLançamento = e.dataConferencia.split('-')
+            let line = { ano: anoLançamento[0], projetos: [] }
+            if (!arrayAux.some(item => item.ano === line.ano)) arrayAux.push(line)
+        }
+
+
+        for (const e of arrayAux) {
+            for (const j of projects) {
+                let data = j.dataConferencia.split("-")
+
+                if (data[0] == e.ano) {
+                    e.projetos.push(j)
+                }
+            }
+        }
+
+        setAllArticles(arrayAux)
+        setPorjectBackup(arrayAux)
+    }
+
 
     useEffect(() => {
-        projects.length != 0 ? arraySort() : console.log("array inicial vazio")
+        if (projects.length != 0) {
+            arraySort()
+            createProjectsArray()
+        } else {
+            console.log("array inicial vazio")
+        }
     }, [])
     return (
         <>
@@ -633,15 +1015,98 @@ export default function projects() {
                             dotWidth: 48,
                             dotHeight: 8
                         },
+                        Card: {
+                            actionsBg: '#156D86'
+                        },
+                    },
+                    token: {
+                        colorPrimary: '#156D86',
                     },
                 }}
             >
                 <div>
                     <div id="carousel">
-                        <Carousel effect="fade" autoplay arrows speed={900}>
+                        <Carousel effect="fade" autoplay arrows speed={900} autoplaySpeed={4000}>
                             {carouselCardGenerator()}
                         </Carousel>
                     </div>
+                    <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '30px' }}>ARTICLES</Title>
+                    <div id={style.mainContent}>
+                        <div className='filterArea'>
+                            <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
+                            <div className='filterInputs'>
+                                <div className='filterDiv'>
+                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Title:</Title>
+                                    <Search placeholder="type articles's Title..."
+                                        onSearch={onSearch}
+                                        enterButton
+                                        allowClear
+                                        onClear={(e) => { setAllArticles(projectBackup) }} />
+
+                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Abstract:</Title>
+                                    <Search placeholder="type articles's abstract..."
+                                        onSearch={onSearchAbstract}
+                                        enterButton
+                                        allowClear
+                                        onClear={(e) => { setAllArticles(projectBackup) }} />
+                                </div>
+                                <div id='slider' className='filterDiv'>
+                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Year:</Title>
+                                    <Slider
+                                        range
+                                        min={2000}
+                                        max={new Date().getFullYear()}
+                                        onChange={onSearchSlider}
+                                        value={slideSearch}
+                                    />
+                                </div>
+                                <div id='selectDiv' className='filterDiv'>
+                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member:</Title>
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{
+                                            width: '100%',
+                                        }}
+                                        placeholder="Select members..."
+                                        onChange={handleChange}
+                                        options={membros}
+                                        showSearch
+                                        value={selectList}
+                                        filterOption={(input, option) =>
+                                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                        }
+                                    // onClear={() => {setAllArticles(projectBackup)}}
+                                    />
+                                </div>
+                                <div>
+                                    <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ width: '100px' }}>Clear Filters</Button>
+                                    <Button type="primary" id='filterButton' onClick={(e) => { handleFilters() }} style={{ marginLeft: '10px' }}>Filter</Button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="projects">
+                            {generateProjectGroups()}
+                        </div>
+                    </div>
+                    <Modal open={isModalOpen}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                        footer={[
+                            <Button key="back" onClick={handleCancel}>
+                                Cancel
+                            </Button>,
+                            <Button key='copy' className="bg-customBlueGreen text-white" 
+                            onClick={(e) => {copyText(citationText)}}
+                            disabled={enableCopyButton}
+                            >
+                                {copyButtonText}
+                                {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}
+                            </Button>,
+                        ]}
+                    >
+                        <ModalCitation text={citationText} />
+                    </Modal>
                 </div>
             </ConfigProvider>
         </>
