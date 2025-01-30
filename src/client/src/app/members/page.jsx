@@ -699,7 +699,7 @@ export default function members() {
         projects: [],
         dateOfEntry: [],
     });
-    const [displayedCards, setDisplayedCards] = useState(
+    const [displayedCards, setDisplayedCards] = useState( //array onde os pbjetos dos membros exibidos na tela são armazenados
         [
             {
                 label: 'Professor',
@@ -809,7 +809,9 @@ export default function members() {
     const onSearch = (value, _e, info) => {
         setNameSearch(value)
         let membersFiltredByName = membersArray.filter(pessoa => pessoa.nome.includes(value))
-        setMembersArray(membersFiltredByName)
+
+
+        cardArrayConstructor(membersFiltredByName)
     }
 
     function filterValues() {
@@ -863,7 +865,7 @@ export default function members() {
                 (filter.dateOfEntry.length == 0 || findbyDate)
         }))
 
-        setMembersArray(filtredArray)
+        cardArrayConstructor(filtredArray)
     }
 
     const clearRangePicker = () => {
@@ -882,13 +884,14 @@ export default function members() {
         clearCheckboxGroup()
         clearSelection()
         clearRangePicker()
-        setMembersArray(memberRecoveryArray)
+        cardArrayConstructor(memberRecoveryArray)
     }
 
 
 
 
-    function cardArrayConstructor(array, all, role) {
+    function cardArrayConstructor(array) {
+
         let arrayAux = [
             {
                 label: 'Professor',
@@ -909,12 +912,10 @@ export default function members() {
         ]
 
 
-        if (all == null) {
-            for (const e of array) {
-                for (const j of arrayAux) {
-                    if (e.role === j.label && j.cards.length <= 3) {
-                        j.cards.push(e)
-                    }
+        for (const e of array) {
+            for (const j of arrayAux) {
+                if (e.role === j.label && j.cards.length <= 3) {
+                    j.cards.push(e)
                 }
             }
         }
@@ -926,25 +927,29 @@ export default function members() {
     function cardGenerator(array, position) {
         //função responsavel por inserir o html dos cards no array de exibição
         let arrayAux = []
+        if (array[position].cards.length != 0) {
+            for (const e of array[position].cards) {
+                arrayAux.push(
+                    <Card key={e.id} className='memberCard'>
+                        <div className='picDiv'>
+                            <img src='/user.png' alt={`${e.nome} profile`} className='profilePic' />
+                        </div>
+                        <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{e.nome}</Title>
+                        <p className='roleName'>{e.role.toUpperCase()}</p>
+                        <div className='buttonDiv'>
+                            <a href={`/memberView?memberID=${e.id}`} rel="noopener noreferrer">
+                                <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
+                            </a>
+                        </div>
+                    </Card>
+                )
+            }
 
-        for (const e of array[position].cards) {
-            arrayAux.push(
-                <Card key={e.id} className='memberCard'>
-                    <div className='picDiv'>
-                        <img src='/user.png' alt={`${e.nome} profile`} className='profilePic' />
-                    </div>
-                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{e.nome}</Title>
-                    <p className='roleName'>{e.role.toUpperCase()}</p>
-                    <div className='buttonDiv'>
-                        <a href={`/memberView?memberID=${e.id}`} rel="noopener noreferrer">
-                            <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
-                        </a>
-                    </div>
-                </Card>
-            )
+            return arrayAux
+        } else {
+            return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados membros nesta posição</Text>
         }
 
-        return arrayAux
     }
 
 
@@ -987,9 +992,9 @@ export default function members() {
                 } else {
                     for (const x of displayedCards) {
                         if (a.label == x.label) {
-                           for(const c of x.cards){
-                            a.cards.push(c)
-                           }
+                            for (const c of x.cards) {
+                                a.cards.push(c)
+                            }
                         }
                     }
                 }
@@ -1043,64 +1048,10 @@ export default function members() {
     }
 
 
-    // function cardGenerator(array, type) {
-
-    //     const arrayFiltrado = array.filter(member => member.role === type);
-
-    //     if (arrayFiltrado.length != 0) {
-
-    //         let cards = []
-
-
-    //         for (let x = 0; x <= 3; x++) {
-    //             cards.push(
-    //                 <Card key={x} className='memberCard'>
-    //                     <div className='picDiv'>
-    //                         <img src='/user.png' alt={`${arrayFiltrado[x].nome} profile`} className='profilePic' />
-    //                     </div>
-    //                     <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{arrayFiltrado[x].nome}</Title>
-    //                     <p className='roleName'>{arrayFiltrado[x].role.toUpperCase()}</p>
-    //                     <div className='buttonDiv'>
-    //                         <a href={`/memberView?memberID=${arrayFiltrado[x].id}`} rel="noopener noreferrer">
-    //                             <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
-    //                         </a>
-    //                     </div>
-    //                 </Card>
-    //             )
-    //         }
-
-    //         return cards
-
-    //     } return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados membros nesta posição</Text>
-
-
-
-
-    //     if (arrayFiltrado.length != 0) {
-    //         const cards = arrayFiltrado.map((member, i) => (
-    //             <Card key={i} className='memberCard'>
-    //                 <div className='picDiv'>
-    //                     <img src='/user.png' alt={`${member.nome} profile`} className='profilePic' />
-    //                 </div>
-    //                 <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
-    //                 <p className='roleName'>{member.role.toUpperCase()}</p>
-    //                 <div className='buttonDiv'>
-    //                     <a href={`/memberView?memberID=${member.id}`} rel="noopener noreferrer">
-    //                         <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
-    //                     </a>
-    //                 </div>
-    //             </Card>
-    //         ))
-
-    //         return cards
-    //     }
-    //     return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados membros nesta posição</Text>
-    // }
-
     useEffect(() => {
         setMemberRecoveryArray(membros)
         setMembersArray(membros)
-        cardArrayConstructor(membros, null)
+        cardArrayConstructor(membros)
     }, []);
 
 
@@ -1130,7 +1081,7 @@ export default function members() {
                                     onSearch={onSearch}
                                     enterButton
                                     allowClear
-                                    onClear={(e) => { setMembersArray(memberRecoveryArray) }} />
+                                    onClear={(e) => { cardArrayConstructor(membros) }} />
                             </div>
                             <div id='checkboxGroup' className='filterDiv'>
                                 <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member type:</Title>
@@ -1163,30 +1114,42 @@ export default function members() {
                     </div>
                     <div className='membersArea' >
                         <div className='memberCategory'>
-                            <Button onClick={(e) => { showAllCards("Professor", 0) }}>{showAll[0] ? 'Close' : "Show All"}</Button>
-                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
+                            <div className="flex justify-between w-[60%] ml-[40%] pr-16 items-center">
+                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
+                                {displayedCards[0].cards.length > 3 &&
+                                    <Button onClick={(e) => { showAllCards("Professor", 0) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '10px' }}>{showAll[0] ? 'Close' : "Show All"}</Button>}
+                            </div>
                             <div className='membersCardArea'>
                                 {cardGenerator(displayedCards, 0)}
                             </div>
                         </div>
                         <div className='memberCategory'>
-                            <Button onClick={(e) => { showAllCards("PhD Student", 1) }}>{showAll[1] ? 'Close' : "Show All"}</Button>
-                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>PhD Students</Title>
+                            <div className="flex justify-between w-[60%] ml-[40%] pr-16 items-center">
+                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>PhD Students</Title>
+                                {displayedCards[1].cards.length > 3 &&
+                                    <Button onClick={(e) => { showAllCards("PhD Student", 1) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '10px' }}>{showAll[1] ? 'Close' : "Show All"}</Button>}
+                            </div>
                             <div className='membersCardArea'>
                                 {cardGenerator(displayedCards, 1)}
                             </div>
                         </div>
                         <div className='memberCategory'>
-                            <Button onClick={(e) => { showAllCards('MSc Student', 2) }}>{showAll[2] ? 'Close' : "Show All"}</Button>
-                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>MSc Students</Title>
+                            <div className="flex justify-between w-[60%] ml-[40%] pr-16 items-center">
+                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>MSc Students</Title>
+                                {displayedCards[2].cards.length > 3 &&
+                                    <Button onClick={(e) => { showAllCards('MSc Student', 2) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '10px' }}>{showAll[2] ? 'Close' : "Show All"}</Button>}
+                            </div>
                             <div className='membersCardArea'>
                                 {cardGenerator(displayedCards, 2)}
 
                             </div>
                         </div>
                         <div className='memberCategory'>
-                            <Button onClick={(e) => { showAllCards("Undergrad Student", 3) }}>{showAll[3] ? 'Close' : "Show All"}</Button>
-                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Undergrad Students</Title>
+                            <div className="flex justify-between w-[60%] ml-[40%] pr-16 items-center">
+                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '10px' }}>Undergrad Students</Title>
+                                {displayedCards[3].cards.length > 3 &&
+                                    <Button onClick={(e) => { showAllCards("Undergrad Student", 3) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '10px', justifyContent: 'end' }}>{showAll[3] ? 'Close' : "Show All"}</Button>}
+                            </div>
                             <div className='membersCardArea'>
                                 {cardGenerator(displayedCards, 3)}
                             </div>
