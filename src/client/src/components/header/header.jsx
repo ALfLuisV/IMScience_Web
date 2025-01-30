@@ -8,7 +8,6 @@ import './style/header.css'
 export default function HeaderHP() {
 
   const { Header: AntdHeader } = Layout;
-  const router = useRouter()
 
 
   const routes = {
@@ -25,23 +24,78 @@ export default function HeaderHP() {
     '11': '/research',
   };
 
-  const handleMenuClick = (e) => {
-    const route = routes[e.key];
-    if (route) router.push(route)
-  };
+  // const handleMenuClick = (e) => {
+  //   const route = routes[e.key];
+  //   if (route) router.push(route)
+  // };
 
   const items = [
-    { key: '1', label: 'Home' },
-    { key: '2', label: 'Team' },
-    { key: '3', label: 'Events' },
-    { key: '4', label: 'Projects' },
-    { key: '5', label: 'Codes' },
-    { key: '6', label: 'Venues' },
-    { key: '7', label: 'Publications' },
-    { key: '8', label: 'Opportunities' },
-    { key: '9', label: 'Tech Talks' },
-    { key: '10', label: 'About Us' },
-    { key: '11', label: 'Research' },
+    { key: '1', 
+      label: (
+        <a href="/" rel="noopener noreferrer">
+          Home
+        </a>
+      ) },
+    { key: '2', 
+      label: (
+        <a href="/members" rel="noopener noreferrer">
+          Team
+        </a>
+      ) },
+    { key: '3', 
+      label: (
+        <a href="/events" rel="noopener noreferrer">
+          Events
+        </a>
+      ) },
+    { key: '4', 
+      label: (
+        <a href="/projects" rel="noopener noreferrer">
+          Projects
+        </a>
+      ) },
+    { key: '5', 
+      label: (
+        <a href="/codes" rel="noopener noreferrer">
+          Codes
+        </a>
+      ) },
+    { key: '6', 
+      label: (
+        <a href="/venues" rel="noopener noreferrer">
+          Venues
+        </a>
+      ) },
+    { key: '7', 
+      label: (
+      <a href="/publications" rel="noopener noreferrer">
+        Publications
+      </a>
+    ) },
+    { key: '8', 
+      label: (
+        <a href="/Opportunities" rel="noopener noreferrer">
+          Opportunities
+        </a>
+      ) },
+    { key: '9', 
+      label: (
+        <a href="/techTalks" rel="noopener noreferrer">
+          Tech Talks
+        </a>
+      )  },
+    { key: '10', 
+      label: (
+        <a href="/aboutUs" rel="noopener noreferrer">
+          About Us
+        </a>
+      )  },
+    { key: '11', 
+      label: (
+        <a href="/research" rel="noopener noreferrer">
+          Research
+        </a>
+      )  },
   ];
 
   const pathname = usePathname();
@@ -67,8 +121,7 @@ export default function HeaderHP() {
             mode="horizontal"
             selectedKeys={[selectedKey]}
             items={items}
-            className="custom-menu"
-            onClick={handleMenuClick}/>
+            className="custom-menu"/>
         </AntdHeader>
       </Layout>
     </ConfigProvider>

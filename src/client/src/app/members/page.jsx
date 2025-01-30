@@ -109,7 +109,7 @@ export default function members() {
             role: "Professor",
             description: "Pedro Costa é professor e pesquisador dedicado à modelagem matemática em sistemas complexos. Ele aplica seus conhecimentos para resolver problemas na engenharia e no meio ambiente. Pedro orienta estudantes em projetos inovadores e promove workshops para disseminar conhecimento. Seus interesses acadêmicos incluem otimização e análise preditiva. Fora da universidade, ele gosta de participar de eventos sobre tecnologia e sustentabilidade.",
             profilePic: userImage,
-            id: '5', 
+            id: '5',
             entryDate: "23/09/2021",
             projects: [
                 {
@@ -621,7 +621,7 @@ export default function members() {
             ]
         }
     ];
-    
+
     const optionsCheckbox = [
         {
             label: 'Professors',
@@ -640,7 +640,7 @@ export default function members() {
             value: 'Undergrad Student',
         },
     ];
-    
+
     const projects = [
         {
             label: 'Introduzindo teoria dos grafos no processamento de imagens',
@@ -683,304 +683,519 @@ export default function members() {
             value: '10'
         }
     ];
-    
 
-    
-        const [checkedList, setCheckedList] = useState([])
-        const [selectList, setSelectList] = useState([])
-        const [dateList, setDateList] = useState([])
-    
-    
-        const [membersArray, setMembersArray] = useState([])
-        const [memberRecoveryArray, setMemberRecoveryArray] = useState([])
-        const [nameSearch, setNameSearch] = useState('')
-        const [filter, setFilter] = useState({
+
+
+    const [checkedList, setCheckedList] = useState([])
+    const [selectList, setSelectList] = useState([])
+    const [dateList, setDateList] = useState([])
+
+
+    const [membersArray, setMembersArray] = useState([])
+    const [memberRecoveryArray, setMemberRecoveryArray] = useState([])
+    const [nameSearch, setNameSearch] = useState('')
+    const [filter, setFilter] = useState({
+        memberType: [],
+        projects: [],
+        dateOfEntry: [],
+    });
+    const [displayedCards, setDisplayedCards] = useState(
+        [
+            {
+                label: 'Professor',
+                cards: []
+            },
+            {
+                label: 'PhD Student',
+                cards: []
+            },
+            {
+                label: 'MSc Student',
+                cards: []
+            },
+            {
+                label: 'Undergrad Student',
+                cards: []
+            },
+        ]
+    )
+    const [showAll, setShowAll] = useState([false, false, false, false])
+
+
+
+
+    const onChange = (checkedValues) => {
+        setCheckedList(checkedValues)
+        let filtred = {
             memberType: [],
             projects: [],
             dateOfEntry: [],
-        });
-    
-        const onChange = (checkedValues) => {
-            setCheckedList(checkedValues)
-            let filtred = {
-                memberType: [],
-                projects: [],
-                dateOfEntry: [],
-            }
-    
-            if (filter.projects.length != 0) {
-                for (const e of filter.projects) {
-                    filtred.projects.push(e)
-                }
-            }
-    
-            if (filter.dateOfEntry[0] != null) {
-                for (const e of filter.dateOfEntry) {
-                    filtred.dateOfEntry.push(e)
-                }
-            }
-    
-    
-            filtred.memberType.push(...checkedValues)
-            setFilter(filtred)
-        };
-    
-        const dateHandle = (value) => {
-            setDateList(value)
-            let filtred = {
-                memberType: [],
-                projects: [],
-                dateOfEntry: [],
-            }
-    
-            if (filter.projects.length != 0) {
-                for (const e of filter.projects) {
-                    filtred.projects.push(e)
-                }
-            }
-    
-            if (filter.memberType.length != 0) {
-                for (const e of filter.memberType) {
-                    filtred.memberType.push(e)
-                }
-            }
-    
-    
-            if (value != null) {
-                filtred.dateOfEntry.push(value[0].$d)
-                filtred.dateOfEntry.push(value[1].$d)
-            }
-    
-    
-            setFilter(filtred)
-        }
-    
-        const handleChange = (value) => {
-            setSelectList([...value])
-    
-            let filtred = {
-                memberType: [],
-                projects: [],
-                dateOfEntry: [],
-            }
-    
-    
-            if (filter.memberType.length != 0) {
-                for (const e of filter.memberType) {
-                    filtred.memberType.push(e)
-                }
-            }
-    
-            if (filter.dateOfEntry[0] != null) {
-                for (const e of filter.dateOfEntry) {
-                    filtred.dateOfEntry.push(e)
-                }
-            }
-    
-            filtred.projects = [...new Set([...value])]
-            setFilter(filtred)
-        };
-    
-    
-        const onSearch = (value, _e, info) => {
-            setNameSearch(value)
-            let membersFiltredByName = membersArray.filter(pessoa => pessoa.nome.includes(value))
-            setMembersArray(membersFiltredByName)
         }
 
-        function gerarRota(id){
-             router.push(`/memberView?memberID=${id}`)
-          };
-    
-        function filterValues() {
-    
-            let filtredArray = memberRecoveryArray.filter((membro => {
-                let findbyType = false
-                let findbyProject = false
-                let findbyDate = false
-    
-                if (filter.memberType.length != 0) {
-                    for (const t of filter.memberType) {
-                        if (t == membro.role) {
-                            findbyType = true
+        if (filter.projects.length != 0) {
+            for (const e of filter.projects) {
+                filtred.projects.push(e)
+            }
+        }
+
+        if (filter.dateOfEntry[0] != null) {
+            for (const e of filter.dateOfEntry) {
+                filtred.dateOfEntry.push(e)
+            }
+        }
+
+
+        filtred.memberType.push(...checkedValues)
+        setFilter(filtred)
+    };
+
+    const dateHandle = (value) => {
+        setDateList(value)
+        let filtred = {
+            memberType: [],
+            projects: [],
+            dateOfEntry: [],
+        }
+
+        if (filter.projects.length != 0) {
+            for (const e of filter.projects) {
+                filtred.projects.push(e)
+            }
+        }
+
+        if (filter.memberType.length != 0) {
+            for (const e of filter.memberType) {
+                filtred.memberType.push(e)
+            }
+        }
+
+
+        if (value != null) {
+            filtred.dateOfEntry.push(value[0].$d)
+            filtred.dateOfEntry.push(value[1].$d)
+        }
+
+
+        setFilter(filtred)
+    }
+
+    const handleChange = (value) => {
+        setSelectList([...value])
+
+        let filtred = {
+            memberType: [],
+            projects: [],
+            dateOfEntry: [],
+        }
+
+
+        if (filter.memberType.length != 0) {
+            for (const e of filter.memberType) {
+                filtred.memberType.push(e)
+            }
+        }
+
+        if (filter.dateOfEntry[0] != null) {
+            for (const e of filter.dateOfEntry) {
+                filtred.dateOfEntry.push(e)
+            }
+        }
+
+        filtred.projects = [...new Set([...value])]
+        setFilter(filtred)
+    };
+
+
+    const onSearch = (value, _e, info) => {
+        setNameSearch(value)
+        let membersFiltredByName = membersArray.filter(pessoa => pessoa.nome.includes(value))
+        setMembersArray(membersFiltredByName)
+    }
+
+    function filterValues() {
+
+        let filtredArray = memberRecoveryArray.filter((membro => {
+            let findbyType = false
+            let findbyProject = false
+            let findbyDate = false
+
+            if (filter.memberType.length != 0) {
+                for (const t of filter.memberType) {
+                    if (t == membro.role) {
+                        findbyType = true
+                    }
+                }
+            }
+
+            if (filter.projects.length != 0) {
+                for (const p of membro.projects) {
+                    for (const p1 of filter.projects) {
+                        if (p1 == p.value) {
+                            findbyProject = true
                         }
                     }
                 }
-    
-                if (filter.projects.length != 0) {
-                    for (const p of membro.projects) {
-                        for (const p1 of filter.projects) {
-                            if (p1 == p.value) {
-                                findbyProject = true
+            }
+
+            if (filter.dateOfEntry.length != 0) {
+                let data = membro.entryDate.split('/')
+
+
+                let entryData = new Date(
+                    parseInt(data[2]), //ano
+                    parseInt(data[1]) - 1, //mês
+                    parseInt(data[0]) //dia
+                );
+
+                let auxData1 = entryData.getTime()
+                let auxData2 = filter.dateOfEntry[0].getTime()
+                let auxData3 = filter.dateOfEntry[1].getTime()
+
+                if ((auxData1 >= auxData2) && (auxData1 <= auxData3)) {
+                    findbyDate = true
+                }
+            }
+
+
+
+            return (filter.memberType.length == 0 || findbyType) &&
+                (filter.projects.length == 0 || findbyProject) &&
+                (filter.dateOfEntry.length == 0 || findbyDate)
+        }))
+
+        setMembersArray(filtredArray)
+    }
+
+    const clearRangePicker = () => {
+        setDateList([])
+    };
+
+    const clearSelection = () => {
+        setSelectList([])
+    };
+
+    const clearCheckboxGroup = () => {
+        setCheckedList([])
+    }
+
+    function clearFilters() {
+        clearCheckboxGroup()
+        clearSelection()
+        clearRangePicker()
+        setMembersArray(memberRecoveryArray)
+    }
+
+
+
+
+    function cardArrayConstructor(array, all, role) {
+        let arrayAux = [
+            {
+                label: 'Professor',
+                cards: []
+            },
+            {
+                label: 'PhD Student',
+                cards: []
+            },
+            {
+                label: 'MSc Student',
+                cards: []
+            },
+            {
+                label: 'Undergrad Student',
+                cards: []
+            },
+        ]
+
+
+        if (all == null) {
+            for (const e of array) {
+                for (const j of arrayAux) {
+                    if (e.role === j.label && j.cards.length <= 3) {
+                        j.cards.push(e)
+                    }
+                }
+            }
+        }
+
+        setDisplayedCards(arrayAux)
+    }
+
+
+    function cardGenerator(array, position) {
+        //função responsavel por inserir o html dos cards no array de exibição
+        let arrayAux = []
+
+        for (const e of array[position].cards) {
+            arrayAux.push(
+                <Card key={e.id} className='memberCard'>
+                    <div className='picDiv'>
+                        <img src='/user.png' alt={`${e.nome} profile`} className='profilePic' />
+                    </div>
+                    <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{e.nome}</Title>
+                    <p className='roleName'>{e.role.toUpperCase()}</p>
+                    <div className='buttonDiv'>
+                        <a href={`/memberView?memberID=${e.id}`} rel="noopener noreferrer">
+                            <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
+                        </a>
+                    </div>
+                </Card>
+            )
+        }
+
+        return arrayAux
+    }
+
+
+
+    function showAllCards(position, index) {
+        if (!showAll[index]) {
+
+            let newShowAllArray = [showAll[0], showAll[1], showAll[2], showAll[3]]
+            newShowAllArray[index] = true
+            setShowAll(newShowAllArray)
+
+
+
+            let arrayAux = [
+                {
+                    label: 'Professor',
+                    cards: []
+                },
+                {
+                    label: 'PhD Student',
+                    cards: []
+                },
+                {
+                    label: 'MSc Student',
+                    cards: []
+                },
+                {
+                    label: 'Undergrad Student',
+                    cards: []
+                },
+            ]
+
+            for (const a of arrayAux) {
+                if (a.label == position) {
+                    for (const j of membersArray) {
+                        if (a.label === j.role) {
+                            a.cards.push(j)
+                        }
+                    }
+                } else {
+                    for (const x of displayedCards) {
+                        if (a.label == x.label) {
+                           for(const c of x.cards){
+                            a.cards.push(c)
+                           }
+                        }
+                    }
+                }
+            }
+
+            setDisplayedCards(arrayAux)
+
+        } else {
+
+            let arrayAux = [
+                {
+                    label: 'Professor',
+                    cards: []
+                },
+                {
+                    label: 'PhD Student',
+                    cards: []
+                },
+                {
+                    label: 'MSc Student',
+                    cards: []
+                },
+                {
+                    label: 'Undergrad Student',
+                    cards: []
+                },
+            ]
+
+            for (const e of arrayAux) {
+                if (e.label == position) {
+                    for (const j of membersArray) {
+                        if ((e.label === j.role && e.cards.length <= 3)) {
+                            e.cards.push(j)
+                        }
+                    }
+                } else {
+                    for (const i of displayedCards) {
+                        if (e.label == i.label) {
+                            for (const w of i.cards) {
+                                e.cards.push(w)
                             }
                         }
                     }
                 }
-    
-                if (filter.dateOfEntry.length != 0) {
-                    let data = membro.entryDate.split('/')
-    
-    
-                    let entryData = new Date(
-                        parseInt(data[2]), //ano
-                        parseInt(data[1]) - 1, //mês
-                        parseInt(data[0]) //dia
-                    );
-    
-                    let auxData1 = entryData.getTime()
-                    let auxData2 = filter.dateOfEntry[0].getTime()
-                    let auxData3 = filter.dateOfEntry[1].getTime()
-    
-                    if ((auxData1 >= auxData2) && (auxData1 <= auxData3)) {
-                        findbyDate = true
-                    }
-                }
-    
-    
-    
-                return (filter.memberType.length == 0 || findbyType) &&
-                    (filter.projects.length == 0 || findbyProject) &&
-                    (filter.dateOfEntry.length == 0 || findbyDate)
-            }))
-    
-            setMembersArray(filtredArray)
-        }
-    
-        const clearRangePicker = () => {
-            setDateList([])
-        };
-    
-        const clearSelection = () => {
-            setSelectList([])
-        };
-    
-        const clearCheckboxGroup = () => {
-            setCheckedList([])
-        }
-    
-        function clearFilters() {
-            clearCheckboxGroup()
-            clearSelection()
-            clearRangePicker()
-            setMembersArray(memberRecoveryArray)
-        }
-    
-        function cardGenerator(array, type) {
-    
-            const arrayFiltrado = array.filter(member => member.role === type);
-    
-            if (arrayFiltrado.length != 0) {
-                const cards = arrayFiltrado.map((member, i) => (
-                    <Card key={i} className='memberCard'>
-                        <div className='picDiv'>
-                            <img src='/user.png' alt={`${member.nome} profile`} className='profilePic' />
-                        </div>
-                        <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
-                        <p className='roleName'>{member.role.toUpperCase()}</p>
-                        <div className='buttonDiv'>
-                            <Button type="primary" className='seeMoreButton'onClick={(e)=>{gerarRota(member.id)}}>SEE MORE</Button>
-                        </div>
-                    </Card>
-                ))
-    
-                return cards
             }
-            return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados membros nesta posição</Text>
+            let newShowAllArray = [showAll[0], showAll[1], showAll[2], showAll[3]]
+            newShowAllArray[index] = false
+            setShowAll(newShowAllArray)
+            setDisplayedCards(arrayAux)
         }
-    
-        useEffect(() => {
-            setMemberRecoveryArray(membros)
-            setMembersArray(membros)
-        }, []);
-    
-    
-        return (
-            <div>
-                <ConfigProvider
-                    theme={{
-                        token: {
-                            colorPrimary: '#156D86',
-                        },
-                    }}
-                >
-                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: '44%', paddingRight: '15px' }}>
-                        <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '20px' }}>OUR TEAM</Title>
-    
-                        {nameSearch != '' &&
-                            <Title level={5} style={{ color: '#156D86', textAlign: 'center' }}>Displaying results for "{nameSearch}"</Title>
-                        }
-                    </div>
-                    <div className='mainContent'>
-                        <div className='filterArea'>
-                            <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
-                            <div className='filterInputs'>
-                                <div className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Name:</Title>
-                                    <Search placeholder="type member's name..."
-                                        onSearch={onSearch}
-                                        enterButton
-                                        allowClear
-                                        onClear={(e) => { setMembersArray(memberRecoveryArray) }} />
-                                </div>
-                                <div id='checkboxGroup' className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member type:</Title>
-                                    <Checkbox.Group options={optionsCheckbox} onChange={onChange} value={checkedList} />
-                                </div>
-                                <div id='selectDiv' className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Project:</Title>
-                                    <Select
-                                        mode="multiple"
-                                        allowClear
-                                        style={{
-                                            width: '100%',
-                                        }}
-                                        placeholder="Select projects..."
-                                        onChange={handleChange}
-                                        options={projects}
-                                        showSearch
-                                        value={selectList}
-                                    />
-                                </div>
-                                <div id='datePicker'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Date of entry:</Title>
-                                    <RangePicker onChange={dateHandle} value={dateList} />
-                                </div>
-                                <div>
-                                    <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ width: '100px' }}>Clear Filters</Button>
-                                    <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{ marginLeft: '10px' }}>Filter</Button>
-                                </div>
+    }
+
+
+    // function cardGenerator(array, type) {
+
+    //     const arrayFiltrado = array.filter(member => member.role === type);
+
+    //     if (arrayFiltrado.length != 0) {
+
+    //         let cards = []
+
+
+    //         for (let x = 0; x <= 3; x++) {
+    //             cards.push(
+    //                 <Card key={x} className='memberCard'>
+    //                     <div className='picDiv'>
+    //                         <img src='/user.png' alt={`${arrayFiltrado[x].nome} profile`} className='profilePic' />
+    //                     </div>
+    //                     <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{arrayFiltrado[x].nome}</Title>
+    //                     <p className='roleName'>{arrayFiltrado[x].role.toUpperCase()}</p>
+    //                     <div className='buttonDiv'>
+    //                         <a href={`/memberView?memberID=${arrayFiltrado[x].id}`} rel="noopener noreferrer">
+    //                             <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
+    //                         </a>
+    //                     </div>
+    //                 </Card>
+    //             )
+    //         }
+
+    //         return cards
+
+    //     } return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados membros nesta posição</Text>
+
+
+
+
+    //     if (arrayFiltrado.length != 0) {
+    //         const cards = arrayFiltrado.map((member, i) => (
+    //             <Card key={i} className='memberCard'>
+    //                 <div className='picDiv'>
+    //                     <img src='/user.png' alt={`${member.nome} profile`} className='profilePic' />
+    //                 </div>
+    //                 <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
+    //                 <p className='roleName'>{member.role.toUpperCase()}</p>
+    //                 <div className='buttonDiv'>
+    //                     <a href={`/memberView?memberID=${member.id}`} rel="noopener noreferrer">
+    //                         <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
+    //                     </a>
+    //                 </div>
+    //             </Card>
+    //         ))
+
+    //         return cards
+    //     }
+    //     return <Text style={{ width: '100%', textAlign: 'center', marginBottom: '15px' }}>Não foram encontrados membros nesta posição</Text>
+    // }
+
+    useEffect(() => {
+        setMemberRecoveryArray(membros)
+        setMembersArray(membros)
+        cardArrayConstructor(membros, null)
+    }, []);
+
+
+    return (
+        <div>
+            <ConfigProvider
+                theme={{
+                    token: {
+                        colorPrimary: '#156D86',
+                    },
+                }}
+            >
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: '44%', paddingRight: '15px' }}>
+                    <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '20px' }}>OUR TEAM</Title>
+
+                    {nameSearch != '' &&
+                        <Title level={4} style={{ color: '#156D86', textAlign: 'center' }}>Displaying results for "{nameSearch}"</Title>
+                    }
+                </div>
+                <div className='mainContent'>
+                    <div className='filterArea'>
+                        <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
+                        <div className='filterInputs'>
+                            <div className='filterDiv'>
+                                <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Name:</Title>
+                                <Search placeholder="type member's name..."
+                                    onSearch={onSearch}
+                                    enterButton
+                                    allowClear
+                                    onClear={(e) => { setMembersArray(memberRecoveryArray) }} />
+                            </div>
+                            <div id='checkboxGroup' className='filterDiv'>
+                                <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member type:</Title>
+                                <Checkbox.Group options={optionsCheckbox} onChange={onChange} value={checkedList} />
+                            </div>
+                            <div id='selectDiv' className='filterDiv'>
+                                <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Project:</Title>
+                                <Select
+                                    mode="multiple"
+                                    allowClear
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                    placeholder="Select projects..."
+                                    onChange={handleChange}
+                                    options={projects}
+                                    showSearch
+                                    value={selectList}
+                                />
+                            </div>
+                            <div id='datePicker'>
+                                <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Date of entry:</Title>
+                                <RangePicker onChange={dateHandle} value={dateList} />
+                            </div>
+                            <div>
+                                <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ width: '100px' }}>Clear Filters</Button>
+                                <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{ marginLeft: '10px' }}>Filter</Button>
                             </div>
                         </div>
-                        <div className='membersArea' >
-                            <div className='memberCategory'>
-                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
-                                <div className='membersCardArea'>
-                                    {cardGenerator(membersArray, 'Professor')}
-                                </div>
-                            </div>
-                            <div className='memberCategory'>
-                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>PhD Students</Title>
-                                <div className='membersCardArea'>
-                                    {cardGenerator(membersArray, 'PhD Student')}
-                                </div>
-                            </div>
-                            <div className='memberCategory'>
-                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>MSc Students</Title>
-                                <div className='membersCardArea'>
-                                    {cardGenerator(membersArray, 'MSc Student')}
-                                </div>
-                            </div>
-                            <div className='memberCategory'>
-                                <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Undergrad Students</Title>
-                                <div className='membersCardArea'>
-                                    {cardGenerator(membersArray, 'Undergrad Student')}
-                                </div>
-                            </div>
-                            {/* {cardGenerator(membros, 'PhD Student')} */}
-                        </div>
                     </div>
-                </ConfigProvider>
-            </div>
-    
+                    <div className='membersArea' >
+                        <div className='memberCategory'>
+                            <Button onClick={(e) => { showAllCards("Professor", 0) }}>{showAll[0] ? 'Close' : "Show All"}</Button>
+                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
+                            <div className='membersCardArea'>
+                                {cardGenerator(displayedCards, 0)}
+                            </div>
+                        </div>
+                        <div className='memberCategory'>
+                            <Button onClick={(e) => { showAllCards("PhD Student", 1) }}>{showAll[1] ? 'Close' : "Show All"}</Button>
+                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>PhD Students</Title>
+                            <div className='membersCardArea'>
+                                {cardGenerator(displayedCards, 1)}
+                            </div>
+                        </div>
+                        <div className='memberCategory'>
+                            <Button onClick={(e) => { showAllCards('MSc Student', 2) }}>{showAll[2] ? 'Close' : "Show All"}</Button>
+                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>MSc Students</Title>
+                            <div className='membersCardArea'>
+                                {cardGenerator(displayedCards, 2)}
+
+                            </div>
+                        </div>
+                        <div className='memberCategory'>
+                            <Button onClick={(e) => { showAllCards("Undergrad Student", 3) }}>{showAll[3] ? 'Close' : "Show All"}</Button>
+                            <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Undergrad Students</Title>
+                            <div className='membersCardArea'>
+                                {cardGenerator(displayedCards, 3)}
+                            </div>
+                        </div>
+                        {/* {cardGenerator(membros, 'PhD Student')} */}
+                    </div>
+                </div>
+            </ConfigProvider>
+        </div>
+
     );
-  }
+}

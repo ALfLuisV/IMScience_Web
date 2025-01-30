@@ -6,6 +6,7 @@ import { IconFileText, IconQuote, IconExternalLink, IconCopy } from '@tabler/ico
 import '@ant-design/v5-patch-for-react-19';
 import userImage from '../../../public/user.png'
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import style from './style/projects.module.css'
 import ModalCitation from '@/components/citationBox/citation'
 
@@ -23,6 +24,9 @@ export default function projects() {
     const [copyButtonText, setCopyButtonText] = useState('Copy')
     const [enableCopyButton, setEnableCopyButton] = useState(false)
     const [citationText, setCitationText] = useState('')
+
+    const searchParams = useSearchParams()
+
     //este array é a base para todo o processamento dos dados, a partir dele serão gerados todos os 
     // cards e etc, os dados puxados do bd, devem possuir este formato
     const projects = [
@@ -670,7 +674,23 @@ export default function projects() {
 
 
     function keywordsGenerator(array) {
-        return array.join(" • ")
+
+        let keyword = []
+
+        for (let x = 0; x <= 2; x++) {
+            keyword.push(
+                <div key={x} className="flex">
+                    <a href={`/projects?keyword=${array[x].replace(/ /g, '_')}`} rel="noopener noreferrer">
+                        {array[x]}
+                    </a>
+                    {x < 2 &&
+                        <p>&nbsp;&bull;&nbsp;</p>
+                    }
+                </div>
+            )
+        }
+
+        return keyword
     }
 
 
@@ -790,22 +810,22 @@ export default function projects() {
             }
 
             if (selectList.length != 0) {
-                    for (const j of projeto.authors) {
-                        if (selectList.includes(j.id)) {
-                            findBymember = true
-                        }
+                for (const j of projeto.authors) {
+                    if (selectList.includes(j.id)) {
+                        findBymember = true
                     }
+                }
             }
 
             return (slideSearch == null || findByYear) &&
-                    (selectList.length == 0 || findBymember)
+                (selectList.length == 0 || findBymember)
 
         })
 
         arrayJoiner(array, filtredArray)
     }
 
-    function clearFilters(){
+    function clearFilters() {
         setSlideSearch(null)
         let arrayAux = []
         setSelectList(arrayAux)
@@ -848,6 +868,7 @@ export default function projects() {
 
 
     function arraySort() {
+        //função para ordenar os projetos por ordem de lançamento, e inserir os mais recentes no array do carrossel de projetos
         let arrayAux = []
         projects.sort(sortByDate)
 
@@ -876,11 +897,13 @@ export default function projects() {
                             }}
                         >
                             <div className="w-[30%] ml-14">
-                                <Paragraph style={{ marginBottom: '4px', color: 'white', fontWeight: "400" }}>{keywordsGenerator(recentArticles[step].keywords)}</Paragraph>
+                                <div className="flex" style={{ marginBottom: '4px', color: 'white', fontWeight: "400" }}>
+                                    {keywordsGenerator(recentArticles[step].keywords)}
+                                </div>
                                 <Title level={2} className="z-40" style={{ color: 'white', marginTop: '4px', marginBottom: '10px' }}>{recentArticles[step].label}</Title>
                                 <Paragraph style={{ color: 'white' }} className="text-md">{recentArticles[step].abstract}</Paragraph>
                                 <Link href={`/articleView?articleID=${recentArticles[step].value}`} passHref>
-                                    <Button style={{ color: '#156d86' }}>Veja o Artigo <IconFileText stroke={1.25} style={{ width: '22px', height: "26px", color: '#156d86' }} /></Button>
+                                    <Button style={{ color: '#156d86', fontSize: '17px' }} className="w-[200px] h-[40px] rounded-2xl">Veja o Artigo <IconFileText stroke={1.25} style={{ width: '30px', height: "34px", color: '#156d86' }} /></Button>
                                 </Link>
                             </div>
                             <img
@@ -920,7 +943,7 @@ export default function projects() {
                         />}
                     hoverable
                     actions={[
-                        <IconQuote className='text-[#e6e6e6] ml-[40%]' key="quote" onClick={(j)=>{citationGenerator(e)}}/>,
+                        <IconQuote className='text-[#e6e6e6] ml-[40%]' key="quote" onClick={(j) => { citationGenerator(e) }} />,
                         <Link href={`/articleView?articleID=${e.value}`} passHref>
                             <IconFileText className='text-[#e6e6e6] ml-[40%]' key="access" />
                         </Link>,
@@ -930,6 +953,9 @@ export default function projects() {
                     ]}
                 >
                     <div id="project info">
+                        <div style={{ fontSize: '11px', display: 'flex' }}>
+                            {keywordsGenerator(e.keywords)}
+                        </div>
                         <div className="h-[72px]">
                             <Title level={5} className="border-b mb-3 border-[#e6e6e6] pb-2">{e.label}</Title>
                         </div>
@@ -948,7 +974,6 @@ export default function projects() {
 
         }
     }
-
 
     function generateProjectGroups() {
         if (allArticles != null) {
@@ -973,27 +998,63 @@ export default function projects() {
     }
 
     function createProjectsArray() {
-        let arrayAux = []
+        if (searchParams.get('keyword') == null) {
 
-        for (const e of projects) {
-            let anoLançamento = e.dataConferencia.split('-')
-            let line = { ano: anoLançamento[0], projetos: [] }
-            if (!arrayAux.some(item => item.ano === line.ano)) arrayAux.push(line)
-        }
+            let arrayAux = []
+
+            for (const e of projects) {
+                let anoLançamento = e.dataConferencia.split('-')
+                let line = { ano: anoLançamento[0], projetos: [] }
+                if (!arrayAux.some(item => item.ano === line.ano)) arrayAux.push(line)
+            }
 
 
-        for (const e of arrayAux) {
-            for (const j of projects) {
-                let data = j.dataConferencia.split("-")
+            for (const e of arrayAux) {
+                for (const j of projects) {
+                    let data = j.dataConferencia.split("-")
 
-                if (data[0] == e.ano) {
-                    e.projetos.push(j)
+                    if (data[0] == e.ano) {
+                        e.projetos.push(j)
+                    }
                 }
             }
-        }
 
-        setAllArticles(arrayAux)
-        setPorjectBackup(arrayAux)
+            setAllArticles(arrayAux)
+            setPorjectBackup(arrayAux)
+
+        } else {
+
+            let filtredArray = projects.filter((projeto) => {
+                for (const e of projeto.keywords) {
+                    if (e == searchParams.get('keyword').replace(/_/g, ' ')) {
+                        return true
+                    }
+                }
+                return false
+            })
+
+            let arrayAux = []
+
+            for (const e of filtredArray) {
+                let anoLançamento = e.dataConferencia.split('-')
+                let line = { ano: anoLançamento[0], projetos: [] }
+                if (!arrayAux.some(item => item.ano === line.ano)) arrayAux.push(line)
+            }
+
+
+            for (const e of arrayAux) {
+                for (const j of filtredArray) {
+                    let data = j.dataConferencia.split("-")
+
+                    if (data[0] == e.ano) {
+                        e.projetos.push(j)
+                    }
+                }
+            }
+
+            setAllArticles(arrayAux)
+            setPorjectBackup(arrayAux)
+        }
     }
 
 
@@ -1030,6 +1091,14 @@ export default function projects() {
                             {carouselCardGenerator()}
                         </Carousel>
                     </div>
+                    {searchParams.get('keyword') != null &&
+                        <div className="flex justify-between pr-7">
+                            <Title level={4} style={{ color: '#156D86', marginTop: '20px', marginLeft: '20px' }}>Displaying results for "{searchParams.get('keyword').replace(/_/g, ' ')}"</Title>
+                            <Title level={4} style={{ color: '#156D86', marginTop: '20px', marginLeft: '20px' }}>
+                                <a href="/projects" style={{ color: '#156D86' }}>Show All</a>
+                            </Title>
+                        </div>
+                    }
                     <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '30px' }}>ARTICLES</Title>
                     <div id={style.mainContent}>
                         <div className='filterArea'>
@@ -1096,9 +1165,9 @@ export default function projects() {
                             <Button key="back" onClick={handleCancel}>
                                 Cancel
                             </Button>,
-                            <Button key='copy' className="bg-customBlueGreen text-white" 
-                            onClick={(e) => {copyText(citationText)}}
-                            disabled={enableCopyButton}
+                            <Button key='copy' className="bg-customBlueGreen text-white"
+                                onClick={(e) => { copyText(citationText) }}
+                                disabled={enableCopyButton}
                             >
                                 {copyButtonText}
                                 {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}

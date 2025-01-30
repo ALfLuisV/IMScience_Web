@@ -635,7 +635,9 @@ export default function articleView() {
                     <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{member.nome}</Title>
                     <p className='roleName'>{member.role.toUpperCase()}</p>
                     <div className='buttonDiv'>
-                        <Button type="primary" className='seeMoreButton' onClick={(e) => { gerarRota(member.id) }}>SEE MORE</Button>
+                        <a href={`/memberView?memberID=${member.id}`} rel="noopener noreferrer">
+                            <Button type="primary" className='seeMoreButton' onClick={(e) => { gerarRota(member.id) }}>SEE MORE</Button>
+                        </a>
                     </div>
                 </Card>
             ))
@@ -664,7 +666,7 @@ export default function articleView() {
         <>
             {project != null ?
                 <div>
-                    <div className="pl-8 divide-[#e0e0e0] divide-y-2">
+                    <div className="pl-8 mt-10 divide-[#e0e0e0] divide-y-2">
                         <div id="infoDivv" className="mb-8">
                             <div id="topDiv" className="flex mb-[20px] flex-wrap items-center justify-between pr-5">
                                 <Title level={1} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>{project.label}</Title>
@@ -721,9 +723,9 @@ export default function articleView() {
                             <Button key="back" onClick={handleCancel}>
                                 Cancel
                             </Button>,
-                            <Button key='copy' className="bg-customBlueGreen text-white" 
-                            onClick={(e) => {copyText(citationGenerator())}}
-                            disabled={enableCopyButton}
+                            <Button key='copy' className="bg-customBlueGreen text-white"
+                                onClick={(e) => { copyText(citationGenerator()) }}
+                                disabled={enableCopyButton}
                             >
                                 {copyButtonText}
                                 {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}
