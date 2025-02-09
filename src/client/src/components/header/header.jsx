@@ -44,7 +44,7 @@ export default function HeaderHP() {
       ) },
     { key: '3', 
       label: (
-        <a href="/events" rel="noopener noreferrer">
+        <a href="/eventsView" rel="noopener noreferrer">
           Events
         </a>
       ) },
