@@ -1149,9 +1149,14 @@ export default function projects() {
                                     />
                                 </div>
                                 <div>
-                                    <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ width: '100px' }}>Clear Filters</Button>
-                                    <Button type="primary" id='filterButton' onClick={(e) => { handleFilters() }} style={{ marginLeft: '10px' }}>Filter</Button>
+                                <Button type="primary" id='filterButton' onClick={(e) => { handleFilters() }}  style={{ marginTop: '10px', width: '100%' }}>Apply Filters</Button>
+                                    <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }}  style={{ marginTop: '10px', width: '100%' }}>Clear Filters</Button>
+                                   
                                 </div>
+
+                                <div>
+
+                            </div>
                             </div>
                         </div>
                         <div id="projects">

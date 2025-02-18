@@ -1113,9 +1113,12 @@ export default function members() {
                                 <RangePicker onChange={dateHandle} value={dateList} />
                             </div>
                             <div>
-                                <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ width: '100px' }}>Clear Filters</Button>
-                                <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{ marginLeft: '10px' }}>Filter</Button>
+                            <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{ marginTop: '10px', width: '100%' }}>Apply Filters</Button>
+                                <Button type="primary" danger id='filterButton' onClick={(e) => { clearFilters() }} style={{ marginTop: '10px', width: '100%' }}>Clear Filters</Button>
+                               
                             </div>
+
+                
                         </div>
                     </div>
                     <div className='membersArea' >

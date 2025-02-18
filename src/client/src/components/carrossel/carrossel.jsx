@@ -1,30 +1,196 @@
-import { Carousel } from "antd";
+"use client";
 
-const contentStyle = {
-  height: '300px',
-  color: '#fff',
-  lineHeight: '300px',
-  textAlign: 'center',
-  background: '#364d79',
-};
+import { Carousel, ConfigProvider } from 'antd';
+import '@ant-design/v5-patch-for-react-19';
 
-const Carrossel = () => {
-  return (  
-    <Carousel autoplay>
+function CarouselCardGenerator() {
+  return (
+    <ConfigProvider
+      theme={{
+        components: {
+          Carousel: {
+            arrowSize: 32,
+            dotWidth: 48,
+            dotHeight: 8,
+          },
+        },
+        token: {
+          colorPrimary: '#156D86',
+        },
+      }}
+    >
       <div>
-        <h3 style={contentStyle}>1</h3>
+        <Carousel effect="fade" autoplay arrows speed={900} autoplaySpeed={4000}>
+          <div className="h-[32rem] bg-cover bg-center">
+            <div
+              className="h-[32rem]"
+              style={{
+                zIndex: '15',
+                backgroundSize: '100% 100%',
+                backgroundPosition: '0px 0px',
+                backgroundImage:
+                  'radial-gradient(200% 200% at 129% 22%, #073AFF00 29%, #156d86 54%)',
+                paddingTop: '220px',
+              }}
+            >
+              <div className="w-[30%] ml-14">
+                {/* conteúdo */}
+              </div>
+            </div>
+            <img
+              id="backgroundImage"
+              src=""  
+              alt="backgroundImage"
+              className="h-[32rem]"
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: '-1',
+              }}
+            />
+          </div>
+
+
+          <div className="h-[32rem] bg-cover bg-center">
+            <div
+              className="h-[32rem]"
+              style={{
+                zIndex: '15',
+                backgroundSize: '100% 100%',
+                backgroundPosition: '0px 0px',
+                backgroundImage:
+                  'radial-gradient(200% 200% at 129% 22%, #073AFF00 29%, #156d86 54%)',
+                paddingTop: '220px',
+              }}
+            >
+              <div className="w-[30%] ml-14">
+                {/* conteúdo */}
+              </div>
+            </div>
+            <img
+              id="backgroundImage"
+              src=""
+              alt="backgroundImage"
+              className="h-[32rem]"
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: '-1',
+              }}
+            />
+          </div>
+
+          <div className="h-[32rem] bg-cover bg-center">
+            <div
+              className="h-[32rem]"
+              style={{
+                zIndex: '15',
+                backgroundSize: '100% 100%',
+                backgroundPosition: '0px 0px',
+                backgroundImage:
+                  'radial-gradient(200% 200% at 129% 22%, #073AFF00 29%, #156d86 54%)',
+                paddingTop: '220px',
+              }}
+            >
+              <div className="w-[30%] ml-14">
+                {/* conteúdo */}
+              </div>
+            </div>
+            <img
+              id="backgroundImage"
+              src=""  
+              alt="backgroundImage"
+              className="h-[32rem]"
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: '-1',
+              }}
+            />
+          </div>
+
+          <div className="h-[32rem] bg-cover bg-center">
+            <div
+              className="h-[32rem]"
+              style={{
+                zIndex: '15',
+                backgroundSize: '100% 100%',
+                backgroundPosition: '0px 0px',
+                backgroundImage:
+                  'radial-gradient(200% 200% at 129% 22%, #073AFF00 29%, #156d86 54%)',
+                paddingTop: '220px',
+              }}
+            >
+              <div className="w-[30%] ml-14">
+               {/* conteúdo */}
+              </div>
+            </div>
+            <img
+              id="backgroundImage"
+              src=""  
+              alt="backgroundImage"
+              className="h-[32rem]"
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: '-1',
+              }}
+            />
+          </div>
+
+
+          <div className="h-[32rem] bg-cover bg-center">
+            <div
+              className="h-[32rem]"
+              style={{
+                zIndex: '15',
+                backgroundSize: '100% 100%',
+                backgroundPosition: '0px 0px',
+                backgroundImage:
+                  'radial-gradient(200% 200% at 129% 22%, #073AFF00 29%, #156d86 54%)',
+                paddingTop: '220px',
+              }}
+            >
+              <div className="w-[30%] ml-14">
+              {/* conteúdo */}
+              </div>
+            </div>
+            <img
+              id="backgroundImage"
+              src="" 
+              alt="backgroundImage"
+              className="h-[32rem]"
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: '-1',
+              }}
+            />
+          </div>
+        </Carousel>
       </div>
-      <div>
-        <h3 style={contentStyle}>2</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>3</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>4</h3>
-      </div>
-    </Carousel>
+    </ConfigProvider>
   );
 }
 
-export default Carrossel;
+export default CarouselCardGenerator;
