@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from 'next/navigation';
 import { Card, Typography, Button, Modal } from 'antd';
 import { IconFileText, IconQuote, IconCopy } from '@tabler/icons-react';
@@ -663,7 +663,7 @@ export default function articleView() {
         }
     }, [])
     return (
-        <>
+        <Suspense fallback={<div>Loading...</div>}>
             {project != null ?
                 <div>
                     <div className="pl-8 mt-10 divide-[#e0e0e0] divide-y-2">
@@ -740,6 +740,6 @@ export default function articleView() {
                     <Title level={2} className='memberTypeTitle' style={{ marginTop: '10px', marginBottom: '5px' }}>Artigo não encontrado</Title>
                 </div>
             }
-        </>
+        </Suspense>
     )
 }
