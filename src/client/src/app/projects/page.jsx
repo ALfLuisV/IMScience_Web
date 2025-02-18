@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Card, Typography, Button, Divider, Carousel, ConfigProvider, Input, Select, Modal, Slider } from 'antd';
 import { IconFileText, IconQuote, IconExternalLink, IconCopy } from '@tabler/icons-react';
 import '@ant-design/v5-patch-for-react-19';
@@ -1067,122 +1067,123 @@ export default function projects() {
         }
     }, [])
     return (
-        <>
-            <ConfigProvider
-                theme={{
-                    components: {
-                        Carousel: {
-                            arrowSize: 32,
-                            dotWidth: 48,
-                            dotHeight: 8
+        <Suspense>
+            <>
+                <ConfigProvider
+                    theme={{
+                        components: {
+                            Carousel: {
+                                arrowSize: 32,
+                                dotWidth: 48,
+                                dotHeight: 8
+                            },
+                            Card: {
+                                actionsBg: '#156D86'
+                            },
                         },
-                        Card: {
-                            actionsBg: '#156D86'
+                        token: {
+                            colorPrimary: '#156D86',
                         },
-                    },
-                    token: {
-                        colorPrimary: '#156D86',
-                    },
-                }}
-            >
-                <div>
-                    <div id="carousel">
-                        <Carousel effect="fade" autoplay arrows speed={900} autoplaySpeed={4000}>
-                            {carouselCardGenerator()}
-                        </Carousel>
-                    </div>
-                    {searchParams.get('keyword') != null &&
-                        <div className="flex justify-between pr-7">
-                            <Title level={4} style={{ color: '#156D86', marginTop: '20px', marginLeft: '20px' }}>Displaying results for "{searchParams.get('keyword').replace(/_/g, ' ')}"</Title>
-                            <Title level={4} style={{ color: '#156D86', marginTop: '20px', marginLeft: '20px' }}>
-                                <a href="/projects" style={{ color: '#156D86' }}>Show All</a>
-                            </Title>
+                    }}
+                >
+                    <div>
+                        <div id="carousel">
+                            <Carousel effect="fade" autoplay arrows speed={900} autoplaySpeed={4000}>
+                                {carouselCardGenerator()}
+                            </Carousel>
                         </div>
-                    }
-                    <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '30px' }}>ARTICLES</Title>
-                    <div id={style.mainContent}>
-                        <div className='filterArea'>
-                            <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
-                            <div className='filterInputs'>
-                                <div className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Title:</Title>
-                                    <Search placeholder="type articles's Title..."
-                                        onSearch={onSearch}
-                                        enterButton
-                                        allowClear
-                                        onClear={(e) => { setAllArticles(projectBackup) }} />
-
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Abstract:</Title>
-                                    <Search placeholder="type articles's abstract..."
-                                        onSearch={onSearchAbstract}
-                                        enterButton
-                                        allowClear
-                                        onClear={(e) => { setAllArticles(projectBackup) }} />
-                                </div>
-                                <div id='slider' className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Year:</Title>
-                                    <Slider
-                                        range
-                                        min={2000}
-                                        max={new Date().getFullYear()}
-                                        onChange={onSearchSlider}
-                                        value={slideSearch}
-                                    />
-                                </div>
-                                <div id='selectDiv' className='filterDiv'>
-                                    <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member:</Title>
-                                    <Select
-                                        mode="multiple"
-                                        allowClear
-                                        style={{
-                                            width: '100%',
-                                        }}
-                                        placeholder="Select members..."
-                                        onChange={handleChange}
-                                        options={membros}
-                                        showSearch
-                                        value={selectList}
-                                        filterOption={(input, option) =>
-                                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                                        }
-                                    // onClear={() => {setAllArticles(projectBackup)}}
-                                    />
-                                </div>
-                                <div>
-                                <Button type="primary" id='filterButton' onClick={(e) => { handleFilters() }}  style={{ marginTop: '10px', width: '100%' }}>Apply Filters</Button>
-                                    <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }}  style={{ marginTop: '10px', width: '100%' }}>Clear Filters</Button>
-                                   
-                                </div>
-
-                                <div>
-
+                        {searchParams.get('keyword') != null &&
+                            <div className="flex justify-between pr-7">
+                                <Title level={4} style={{ color: '#156D86', marginTop: '20px', marginLeft: '20px' }}>Displaying results for "{searchParams.get('keyword').replace(/_/g, ' ')}"</Title>
+                                <Title level={4} style={{ color: '#156D86', marginTop: '20px', marginLeft: '20px' }}>
+                                    <a href="/projects" style={{ color: '#156D86' }}>Show All</a>
+                                </Title>
                             </div>
+                        }
+                        <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '30px' }}>ARTICLES</Title>
+                        <div id={style.mainContent}>
+                            <div className='filterArea'>
+                                <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>
+                                <div className='filterInputs'>
+                                    <div className='filterDiv'>
+                                        <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Title:</Title>
+                                        <Search placeholder="type articles's Title..."
+                                            onSearch={onSearch}
+                                            enterButton
+                                            allowClear
+                                            onClear={(e) => { setAllArticles(projectBackup) }} />
+
+                                        <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Abstract:</Title>
+                                        <Search placeholder="type articles's abstract..."
+                                            onSearch={onSearchAbstract}
+                                            enterButton
+                                            allowClear
+                                            onClear={(e) => { setAllArticles(projectBackup) }} />
+                                    </div>
+                                    <div id='slider' className='filterDiv'>
+                                        <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Year:</Title>
+                                        <Slider
+                                            range
+                                            min={2000}
+                                            max={new Date().getFullYear()}
+                                            onChange={onSearchSlider}
+                                            value={slideSearch}
+                                        />
+                                    </div>
+                                    <div id='selectDiv' className='filterDiv'>
+                                        <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member:</Title>
+                                        <Select
+                                            mode="multiple"
+                                            allowClear
+                                            style={{
+                                                width: '100%',
+                                            }}
+                                            placeholder="Select members..."
+                                            onChange={handleChange}
+                                            options={membros}
+                                            showSearch
+                                            value={selectList}
+                                            filterOption={(input, option) =>
+                                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                            }
+                                        // onClear={() => {setAllArticles(projectBackup)}}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Button type="primary" id='filterButton' onClick={(e) => { handleFilters() }} style={{ marginTop: '10px', width: '100%' }}>Apply Filters</Button>
+                                        <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ marginTop: '10px', width: '100%' }}>Clear Filters</Button>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="projects">
+                                {generateProjectGroups()}
                             </div>
                         </div>
-                        <div id="projects">
-                            {generateProjectGroups()}
-                        </div>
+                        <Modal open={isModalOpen}
+                            onOk={handleOk}
+                            onCancel={handleCancel}
+                            footer={[
+                                <Button key="back" onClick={handleCancel}>
+                                    Cancel
+                                </Button>,
+                                <Button key='copy' className="bg-customBlueGreen text-white"
+                                    onClick={(e) => { copyText(citationText) }}
+                                    disabled={enableCopyButton}
+                                >
+                                    {copyButtonText}
+                                    {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}
+                                </Button>,
+                            ]}
+                        >
+                            <ModalCitation text={citationText} />
+                        </Modal>
                     </div>
-                    <Modal open={isModalOpen}
-                        onOk={handleOk}
-                        onCancel={handleCancel}
-                        footer={[
-                            <Button key="back" onClick={handleCancel}>
-                                Cancel
-                            </Button>,
-                            <Button key='copy' className="bg-customBlueGreen text-white"
-                                onClick={(e) => { copyText(citationText) }}
-                                disabled={enableCopyButton}
-                            >
-                                {copyButtonText}
-                                {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}
-                            </Button>,
-                        ]}
-                    >
-                        <ModalCitation text={citationText} />
-                    </Modal>
-                </div>
-            </ConfigProvider>
-        </>
-    )
+                </ConfigProvider>
+            </>
+        </Suspense>)
 }
