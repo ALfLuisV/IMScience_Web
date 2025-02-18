@@ -780,6 +780,7 @@ export default function members() {
     }, [member])
     return (
         <Suspense>
+            <>
             (member.length != 0 ?
             <div>
                 <div className="flex mt-10 ml-8">
@@ -861,5 +862,6 @@ export default function members() {
                 <Title level={1}> Houve um problema na exibição do recurso</Title>
             </div>
             )
+            </>
         </Suspense>);
 }
