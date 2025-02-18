@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from 'next/navigation';
 import { Card, Typography, Button, Modal } from 'antd';
 import { IconFileText, IconQuote, IconCopy } from '@tabler/icons-react';
@@ -663,83 +663,85 @@ export default function articleView() {
         }
     }, [])
     return (
-        <>
-            {project != null ?
-                <div>
-                    <div className="pl-8 mt-10 divide-[#e0e0e0] divide-y-2">
-                        <div id="infoDivv" className="mb-8">
-                            <div id="topDiv" className="flex mb-[20px] flex-wrap items-center justify-between pr-5">
-                                <Title level={1} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>{project.label}</Title>
-                                <div>
-                                    <Button style={{ backgroundColor: '#D9D9D9', marginRight: '5px' }} onClick={showModal}>Cite article <IconQuote style={{ width: '22px', height: "26px" }} /></Button>
-                                    <Button className="bg-customBlueGreen text-white">Go to Article <IconFileText style={{ width: '22px', height: "26px" }} /></Button>
-                                </div>
+        <Suspense>
+            <>
+                {project != null ?
+                    <div>
+                        <div className="pl-8 mt-10 divide-[#e0e0e0] divide-y-2">
+                            <div id="infoDivv" className="mb-8">
+                                <div id="topDiv" className="flex mb-[20px] flex-wrap items-center justify-between pr-5">
+                                    <Title level={1} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>{project.label}</Title>
+                                    <div>
+                                        <Button style={{ backgroundColor: '#D9D9D9', marginRight: '5px' }} onClick={showModal}>Cite article <IconQuote style={{ width: '22px', height: "26px" }} /></Button>
+                                        <Button className="bg-customBlueGreen text-white">Go to Article <IconFileText style={{ width: '22px', height: "26px" }} /></Button>
+                                    </div>
 
-                                <div id="doi" className="mt-1">
-                                    <Text className="text-md text-customBlueGreen">DOI: {project.doi}</Text>
+                                    <div id="doi" className="mt-1">
+                                        <Text className="text-md text-customBlueGreen">DOI: {project.doi}</Text>
+                                    </div>
+                                </div>
+                                <div id="infoDiv" >
+                                    <div id="conferenceLocal" className="mb-3">
+                                        <Text className="text-xl"><strong className="text-customBlueGreen">Published In:</strong> {project.conferencia}</Text>
+                                    </div>
+                                    <div id="conferenceDate" className="mb-3">
+                                        <Text className="text-xl"><strong className="text-customBlueGreen">Date of Conference:</strong> {dateFormat(project.dataConferencia)}</Text>
+                                        <Text className="text-xl ml-10"><strong className="text-customBlueGreen">Conference Local:</strong> {project.local}</Text>
+                                    </div>
+                                    <div id="keywords" className="mb-3">
+                                        <Text className="text-xl"><strong className="text-customBlueGreen">Keywords:</strong> {keywordsFormater(project.keywords)}</Text>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="infoDiv" >
-                                <div id="conferenceLocal" className="mb-3">
-                                    <Text className="text-xl"><strong className="text-customBlueGreen">Published In:</strong> {project.conferencia}</Text>
-                                </div>
-                                <div id="conferenceDate" className="mb-3">
-                                    <Text className="text-xl"><strong className="text-customBlueGreen">Date of Conference:</strong> {dateFormat(project.dataConferencia)}</Text>
-                                    <Text className="text-xl ml-10"><strong className="text-customBlueGreen">Conference Local:</strong> {project.local}</Text>
-                                </div>
-                                <div id="keywords" className="mb-3">
-                                    <Text className="text-xl"><strong className="text-customBlueGreen">Keywords:</strong> {keywordsFormater(project.keywords)}</Text>
+                            <div id="abstract" className="pt-5">
+                                <Title level={3} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>Abstract:</Title>
+                                <div id="abstractt">
+                                    <Paragraph className="w-[65%] text-balance text-lg mt-1  pb-4">
+                                        {project.abstract}
+                                    </Paragraph>
                                 </div>
                             </div>
-                        </div>
-                        <div id="abstract" className="pt-5">
-                            <Title level={3} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>Abstract:</Title>
-                            <div id="abstractt">
-                                <Paragraph className="w-[65%] text-balance text-lg mt-1  pb-4">
-                                    {project.abstract}
-                                </Paragraph>
+                            <div id="demo" className="pt-5">
+                                <Title level={3} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>Demo:</Title>
+                                <div id="demoo">
+                                    <Paragraph className="w-[65%] text-balance text-lg mt-1">
+                                        Demo não disponível
+                                    </Paragraph>
+                                </div>
                             </div>
-                        </div>
-                        <div id="demo" className="pt-5">
-                            <Title level={3} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>Demo:</Title>
-                            <div id="demoo">
-                                <Paragraph className="w-[65%] text-balance text-lg mt-1">
-                                    Demo não disponível
-                                </Paragraph>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div id="participants" className="pt-5 bg-customBlueGreen">
-                        <Title level={3} className='w-[70%] pl-8' style={{ color: '#fafafa', marginBottom: "0px" }}>Authors:</Title>
-                        <div id="authors" className=" flex pl-8 pt-8 flex-wrap">
-                            {cardGenerator(project.authors)}
                         </div>
+                        <div id="participants" className="pt-5 bg-customBlueGreen">
+                            <Title level={3} className='w-[70%] pl-8' style={{ color: '#fafafa', marginBottom: "0px" }}>Authors:</Title>
+                            <div id="authors" className=" flex pl-8 pt-8 flex-wrap">
+                                {cardGenerator(project.authors)}
+                            </div>
+                        </div>
+                        <Modal open={isModalOpen}
+                            onOk={handleOk}
+                            onCancel={handleCancel}
+                            footer={[
+                                <Button key="back" onClick={handleCancel}>
+                                    Cancel
+                                </Button>,
+                                <Button key='copy' className="bg-customBlueGreen text-white"
+                                    onClick={(e) => { copyText(citationGenerator()) }}
+                                    disabled={enableCopyButton}
+                                >
+                                    {copyButtonText}
+                                    {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}
+                                </Button>,
+                            ]}
+                        >
+                            <ModalCitation text={citationGenerator()} />
+                        </Modal>
                     </div>
-                    <Modal open={isModalOpen}
-                        onOk={handleOk}
-                        onCancel={handleCancel}
-                        footer={[
-                            <Button key="back" onClick={handleCancel}>
-                                Cancel
-                            </Button>,
-                            <Button key='copy' className="bg-customBlueGreen text-white"
-                                onClick={(e) => { copyText(citationGenerator()) }}
-                                disabled={enableCopyButton}
-                            >
-                                {copyButtonText}
-                                {copyButtonText == 'Copy' && <IconCopy style={{ width: '22px', height: "26px" }} />}
-                            </Button>,
-                        ]}
-                    >
-                        <ModalCitation text={citationGenerator()} />
-                    </Modal>
-                </div>
-                :
-                <div>
-                    <Title level={2} className='memberTypeTitle' style={{ marginTop: '10px', marginBottom: '5px' }}>Artigo não encontrado</Title>
-                </div>
-            }
-        </>
+                    :
+                    <div>
+                        <Title level={2} className='memberTypeTitle' style={{ marginTop: '10px', marginBottom: '5px' }}>Artigo não encontrado</Title>
+                    </div>
+                }
+            </>
+        </Suspense>
     )
 }
