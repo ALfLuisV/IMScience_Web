@@ -881,6 +881,8 @@ export default function members() {
     }
 
     function clearFilters() {
+        let newShowAllArray = [false, false, false, false,]
+        setShowAll(newShowAllArray)
         clearCheckboxGroup()
         clearSelection()
         clearRangePicker()
@@ -1081,7 +1083,11 @@ export default function members() {
                                     onSearch={onSearch}
                                     enterButton
                                     allowClear
-                                    onClear={(e) => { cardArrayConstructor(membros) }} />
+                                    onClear={(e) => {
+                                        cardArrayConstructor(membros);
+                                        let newShowAllArray = [false, false, false, false,]
+                                        setShowAll(newShowAllArray)
+                                    }} />
                             </div>
                             <div id='checkboxGroup' className='filterDiv'>
                                 <Title level={5} style={{ color: '#156D86', marginTop: "10px" }}>Member type:</Title>
