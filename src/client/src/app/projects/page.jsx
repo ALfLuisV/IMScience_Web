@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import style from './style/projects.module.css'
 import ModalCitation from '@/components/citationBox/citation'
+import Carrossel from '@/components/carrossel/carrossel.jsx';
+
 
 const { Title, Paragraph, Text } = Typography;
 const { Search } = Input;
@@ -879,56 +881,7 @@ export default function projects() {
         setRecentArticles(arrayAux)
     }
 
-    function carouselCardGenerator() {
-        if (recentArticles != null) {
-            let cards = []
 
-            for (let step = 0; step < 5; step++) {
-                cards.push(
-                    <div key={step} className="h-[32rem] bg-cover bg-center">
-                        <div
-                            className="h-[32rem]"
-                            style={{
-                                zIndex: '15',
-                                backgroundSize: "100% 100%",
-                                backgroundPosition: "0px 0px",
-                                backgroundImage: "radial-gradient(200% 200% at 129% 22%, #073AFF00 29%, #156d86 54%)",
-                                paddingTop: '220px'
-                            }}
-                        >
-                            <div className="w-[30%] ml-14">
-                                <div className="flex" style={{ marginBottom: '4px', color: 'white', fontWeight: "400" }}>
-                                    {keywordsGenerator(recentArticles[step].keywords)}
-                                </div>
-                                <Title level={2} className="z-40" style={{ color: 'white', marginTop: '4px', marginBottom: '10px' }}>{recentArticles[step].label}</Title>
-                                <Paragraph style={{ color: 'white' }} className="text-md">{recentArticles[step].abstract}</Paragraph>
-                                <Link href={`/articleView?articleID=${recentArticles[step].value}`} passHref>
-                                    <Button style={{ color: '#156d86', fontSize: '17px' }} className="w-[200px] h-[40px] rounded-2xl">Veja o Artigo <IconFileText stroke={1.25} style={{ width: '30px', height: "34px", color: '#156d86' }} /></Button>
-                                </Link>
-                            </div>
-                            <img
-                                id='backgroundImage'
-                                src={recentArticles[step].img}
-                                alt="backgroundImage"
-                                className="h-[32rem]"
-                                style={{
-                                    position: "absolute",
-                                    top: "0",
-                                    left: "0",
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    zIndex: "-1",
-                                }}
-                            />
-                        </div>
-                    </div >
-                )
-            }
-
-            return cards
-        }
-    }
 
     function createProjectCards(array) {
         if (array.length != 0) {
@@ -1087,9 +1040,7 @@ export default function projects() {
             >
                 <div>
                     <div id="carousel">
-                        <Carousel effect="fade" autoplay arrows speed={900} autoplaySpeed={4000}>
-                            {carouselCardGenerator()}
-                        </Carousel>
+                        <Carrossel />
                     </div>
                     {searchParams.get('keyword') != null &&
                         <div className="flex justify-between pr-7">
@@ -1149,14 +1100,14 @@ export default function projects() {
                                     />
                                 </div>
                                 <div>
-                                <Button type="primary" id='filterButton' onClick={(e) => { handleFilters() }}  style={{ marginTop: '10px', width: '100%' }}>Apply Filters</Button>
-                                    <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }}  style={{ marginTop: '10px', width: '100%' }}>Clear Filters</Button>
-                                   
+                                    <Button type="primary" id='filterButton' onClick={(e) => { handleFilters() }} style={{ marginTop: '10px', width: '100%' }}>Apply Filters</Button>
+                                    <Button type="primary" danger={true} id='filterButton' onClick={(e) => { clearFilters() }} style={{ marginTop: '10px', width: '100%' }}>Clear Filters</Button>
+
                                 </div>
 
                                 <div>
 
-                            </div>
+                                </div>
                             </div>
                         </div>
                         <div id="projects">
