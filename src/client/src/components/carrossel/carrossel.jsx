@@ -39,7 +39,7 @@ function CarouselCardGenerator() {
             </div>
             <img
               id="backgroundImage"
-              src=""  
+              src={null}
               alt="backgroundImage"
               className="h-[32rem]"
               style={{
