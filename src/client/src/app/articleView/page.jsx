@@ -35,9 +35,12 @@ export default function articleView() {
             dataConferencia: "2023-11-15",
             local: "São Paulo, Brasil",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=sxKaxEqCNn4",
             keywords: ["grafos", "processamento de imagens", "teoria dos grafos"],
             abstract: "Este trabalho explora como a teoria dos grafos pode ser aplicada no processamento de imagens, abordando conceitos fundamentais e aplicações práticas. A teoria dos grafos oferece uma estrutura matemática poderosa para representar e analisar relações entre objetos, o que é particularmente útil em problemas de processamento de imagens. Neste estudo, discutimos como grafos podem ser utilizados para segmentação de imagens, detecção de bordas e reconhecimento de padrões. Além disso, apresentamos algoritmos eficientes baseados em grafos que melhoram a precisão e a velocidade do processamento de imagens. Exemplos práticos são fornecidos para ilustrar a eficácia dessas técnicas em diferentes cenários, como análise médica e reconhecimento facial. Concluímos com uma discussão sobre as futuras direções de pesquisa e as possíveis inovações que a teoria dos grafos pode trazer para o campo do processamento de imagens. A aplicação de grafos não só facilita a compreensão das estruturas internas das imagens, mas também abre novas possibilidades para o desenvolvimento de tecnologias avançadas em áreas como visão computacional e inteligência artificial. A pesquisa destaca a importância de integrar métodos de grafos em sistemas de processamento de imagens para alcançar resultados mais robustos e eficientes. Além disso, exploramos como a teoria dos grafos pode ser combinada com outras técnicas de processamento de imagens para criar soluções híbridas que aproveitam o melhor de ambos os mundos. Finalmente, discutimos os desafios e limitações atuais da aplicação de grafos no processamento de imagens e sugerimos possíveis abordagens para superá-los.",
             doi: '10.1109/ISSREW55968.2022.00071',
+            acknowledgments: "Agradecemos à Fundação de Amparo à Pesquisa do Estado de São Paulo (FAPESP) pelo suporte financeiro e à Universidade de São Paulo pela infraestrutura e recursos técnicos fornecidos durante o desenvolvimento deste trabalho.",
+
             authors: [
                 {
                     nome: "Maria Silva",
@@ -87,7 +90,11 @@ export default function articleView() {
                     id: '17',
                     entryDate: "27/05/2018",
                 }
-            ]
+            ],
+            references: [
+                "Silva, M., & Lopes, R. (2023). Aplicações da teoria dos grafos no processamento de imagens.",
+                "Castro, P., & Oliveira, T. (2023). Algoritmos baseados em grafos para segmentação de imagens.",
+            ],
         },
         {
             label: "Utilizando IA generativa na recuperação hormonal",
@@ -96,9 +103,12 @@ export default function articleView() {
             dataConferencia: "2023-09-20",
             local: "Lisboa, Portugal",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=CY0DT6djqSc",
             keywords: ["IA generativa", "recuperação hormonal", "saúde"],
             abstract: "Investigação sobre o uso de IA generativa para otimizar protocolos de recuperação hormonal em terapias personalizadas.",
             doi: '10.1109/ISSREW55968.2022.00071',
+            acknowledgments: "Gostaríamos de expressar nossa gratidão ao Instituto Europeu de Saúde Digital pelo apoio técnico e aos participantes do estudo clínico pela colaboração essencial.",
+
             authors: [
                 {
                     nome: "Ana Ribeiro",
@@ -148,6 +158,10 @@ export default function articleView() {
                     id: '18',
                     entryDate: "12/09/2021",
                 }
+            ],
+            references: [
+                "Brown, T., et al. (2020). Language models are few-shot learners. Advances in Neural Information Processing Systems.",
+                "Lee, S., & Kim, J. (2022). Aplicação de IA generativa em terapias hormonais personalizadas."
             ]
         },
         {
@@ -157,7 +171,9 @@ export default function articleView() {
             dataConferencia: "2024-02-10",
             local: "Nova York, EUA",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=r5j49V09_bQ",
             keywords: ["redes sociais", "análise de dados", "teoria dos grafos"],
+            acknowledgments: "Agradecemos à equipe do Laboratório de Redes Complexas da Universidade de Nova York pelo acesso aos dados e pelas discussões enriquecedoras que contribuíram para este trabalho.",
             abstract: "Discussão sobre a aplicação de grafos para analisar interações e padrões em redes sociais.",
             doi: '10.1109/ISSREW55968.2022.00071',
             authors: [
@@ -193,7 +209,12 @@ export default function articleView() {
                     id: '15',
                     entryDate: "11/01/2023",
                 }
+            ],
+            references: [
+                "Newman, M. E. J. (2006). Modularity and community structure in networks.",
+                "Wasserman, S., & Faust, K. (1994). Social Network Analysis."
             ]
+
         },
         {
             label: "Otimização de rotas de entrega com algoritmos de grafos",
@@ -202,7 +223,9 @@ export default function articleView() {
             dataConferencia: "2023-08-25",
             local: "Berlim, Alemanha",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=qp7wOb-KLn4",
             keywords: ["rotas de entrega", "algoritmos de grafos", "logística"],
+            acknowledgments: "Este trabalho foi financiado pelo Programa Horizon 2020 da União Europeia. Agradecemos também às empresas parceiras que forneceram dados logísticos para os experimentos.",
             abstract: "Este estudo aborda o uso de algoritmos baseados em grafos para otimizar rotas de entrega, reduzindo custos e melhorando a eficiência.",
             doi: '10.1109/ISSREW55968.2022.00071',
             authors: [
@@ -246,6 +269,10 @@ export default function articleView() {
                     id: '12',
                     entryDate: "03/12/2020",
                 }
+            ],
+            references: [
+                "Dijkstra, E. W. (1959). A note on two problems in connexion with graphs.",
+                "Golden, B., Raghavan, S., & Wasil, E. (2008). The vehicle routing problem."
             ]
         },
         {
@@ -255,6 +282,8 @@ export default function articleView() {
             dataConferencia: "2024-03-05",
             local: "Tóquio, Japão",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=pfaUxbqO8Qc",
+            acknowledgments: "Gostaríamos de agradecer ao Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) pelo financiamento e ao professor Marcelo Souza pelas valiosas orientações ao longo do projeto.",
             keywords: ["comunidades", "redes complexas", "teoria dos grafos"],
             abstract: "Este trabalho explora como a teoria dos grafos pode ser aplicada no processamento de imagens, abordando conceitos fundamentais e aplicações práticas. A teoria dos grafos oferece uma estrutura matemática poderosa para representar e analisar relações entre objetos, o que é particularmente útil em problemas de processamento de imagens. Neste estudo, discutimos como grafos podem ser utilizados para segmentação de imagens, detecção de bordas e reconhecimento de padrões. Além disso, apresentamos algoritmos eficientes baseados em grafos que melhoram a precisão e a velocidade do processamento de imagens. Exemplos práticos são fornecidos para ilustrar a eficácia dessas técnicas em diferentes cenários, como análise médica e reconhecimento facial. Concluímos com uma discussão sobre as futuras direções de pesquisa e as possíveis inovações que a teoria dos grafos pode trazer para o campo do processamento de imagens. A aplicação de grafos não só facilita a compreensão das estruturas internas das imagens, mas também abre novas possibilidades para o desenvolvimento de tecnologias avançadas em áreas como visão computacional e inteligência artificial. A pesquisa destaca a importância de integrar métodos de grafos em sistemas de processamento de imagens para alcançar resultados mais robustos e eficientes. Além disso, exploramos como a teoria dos grafos pode ser combinada com outras técnicas de processamento de imagens para criar soluções híbridas que aproveitam o melhor de ambos os mundos. Finalmente, discutimos os desafios e limitações atuais da aplicação de grafos no processamento de imagens e sugerimos possíveis abordagens para superá-los.",
             doi: '10.1109/ISSREW55968.2022.00071',
@@ -291,7 +320,12 @@ export default function articleView() {
                     id: '14',
                     entryDate: "25/07/2022",
                 }
+            ],
+            references: [
+                "Fortunato, S. (2010). Community detection in graphs.",
+                "Blondel, V. D., et al. (2008). Fast unfolding of communities in large networks."
             ]
+
         },
         {
             label: "Aplicação de grafos na bioinformática para análise de sequências genéticas",
@@ -300,6 +334,8 @@ export default function articleView() {
             dataConferencia: "2023-10-12",
             local: "Londres, Reino Unido",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=hKtWYHZz_XU",
+            acknowledgments: "Agradecemos ao Instituto Nacional de Bioinformática do Reino Unido pelo acesso aos bancos de dados genômicos e ao suporte técnico durante a pesquisa.",
             keywords: ["bioinformática", "grafos", "sequências genéticas"],
             abstract: "Exploração do uso de teoria dos grafos na análise de sequências genéticas para avanços em bioinformática.",
             doi: '10.1109/ISSREW55968.2022.00071',
@@ -321,7 +357,12 @@ export default function articleView() {
                     entryDate: "09/08/2019",
                 }
 
+            ],
+            references: [
+                "Gómez-García, M. (2018). Computational biology: a concise introduction.",
+                "Koshland, J. (2011). The genetic code: molecular mechanisms of information transfer."
             ]
+
         },
         {
             label: "Modelagem de redes de transporte público usando teoria dos grafos",
@@ -330,6 +371,8 @@ export default function articleView() {
             dataConferencia: "2023-07-30",
             local: "Paris, França",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=0e2847iaFRE",
+            acknowledgments: "Este estudo foi realizado com o apoio da Prefeitura de Paris, que forneceu dados sobre transporte público, e do Instituto Francês de Mobilidade Urbana Sustentável.",
             keywords: ["redes de transporte", "mobilidade urbana", "grafos"],
             abstract: "Modelagem e análise de redes de transporte público utilizando técnicas baseadas em grafos para melhorar a eficiência.",
             doi: '10.1109/ISSREW55968.2022.00071',
@@ -366,6 +409,10 @@ export default function articleView() {
                     id: '17',
                     entryDate: "27/05/2018",
                 }
+            ],
+            references: [
+                "Chen, Y. (2018). The architecture of complex networks: principles, algorithms, and applications.",
+                "Barabási, A.-L. (2002). Emergence of scaling in random networks."
             ]
         },
         {
@@ -375,6 +422,8 @@ export default function articleView() {
             dataConferencia: "2024-04-18",
             local: "San Francisco, EUA",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=7l76YB2rwhw",
+            acknowledgments: "Agradecemos à equipe da Conferência de Visualização de Dados por suas contribuições técnicas e à Fundação XYZ pelo financiamento deste projeto.",
             keywords: ["visualização de dados", "grafos interativos", "dados complexos"],
             abstract: "Uso de grafos interativos para representar e compreender grandes conjuntos de dados complexos.",
             doi: '10.1109/ISSREW55968.2022.00071',
@@ -427,6 +476,10 @@ export default function articleView() {
                     id: '18',
                     entryDate: "12/09/2021",
                 }
+            ],
+            references: [
+                "Watts, D. S. (1998). Collective dynamics of small-world networks.",
+                "Barabási, A.-L. (2002). Emergence of scaling in random networks."
             ]
         },
         {
@@ -436,6 +489,8 @@ export default function articleView() {
             dataConferencia: "2023-06-15",
             local: "Hong Kong, China",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=uIflMYQnp8A",
+            acknowledgments: "Gostaríamos de agradecer às plataformas parceiras por fornecerem os dados necessários para os testes, bem como à equipe técnica do Simpósio por seu suporte contínuo.",
             keywords: ["e-commerce", "recomendação de produtos", "algoritmos de grafos"],
             abstract: "Desenvolvimento de algoritmos de grafos para melhorar sistemas de recomendação em plataformas de e-commerce.",
             doi: '10.1109/ISSREW55968.2022.00071',
@@ -488,6 +543,10 @@ export default function articleView() {
                     id: '17',
                     entryDate: "27/05/2018",
                 }
+            ],
+            references: [
+                "Barabási, A.-L. (2002). Emergence of scaling in random networks.",
+                "Watts, D. S. (1998). Collective dynamics of small-world networks."
             ]
         },
         {
@@ -497,6 +556,8 @@ export default function articleView() {
             dataConferencia: "2024-05-20",
             local: "Sydney, Austrália",
             link: "https://www.google.com",
+            demo: "https://www.youtube.com/watch?v=BO4DEfI6eAs",
+            acknowledgments: "Agradecemos ao Centro Nacional de Segurança Cibernética da Austrália pelo financiamento parcial e às empresas participantes pelos dados fornecidos para análise.",
             keywords: ["segurança cibernética", "redes de computadores", "grafos"],
             abstract: "Aplicação de teoria dos grafos para identificar e mitigar vulnerabilidades em redes de computadores.",
             doi: '10.1109/ISSREW55968.2022.00071',
@@ -533,6 +594,10 @@ export default function articleView() {
                     id: '12',
                     entryDate: "03/12/2020",
                 }
+            ],
+            references: [
+                "Barabási, A.-L. (2002). Emergence of scaling in random networks.",
+                "Watts, D. S. (1998). Collective dynamics of small-world networks."
             ]
         }
     ]
@@ -701,13 +766,68 @@ export default function articleView() {
                             </div>
                         </div>
                         <div id="demo" className="pt-5">
-                            <Title level={3} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>Demo:</Title>
-                            <div id="demoo">
-                                <Paragraph className="w-[65%] text-balance text-lg mt-1">
-                                    Demo não disponível
-                                </Paragraph>
+                            <Title level={3} className="w-[70%]" style={{ color: "#156D86", marginBottom: "20px" }}>
+                                Demo:
+                            </Title>
+                            <div id="demoo" style={{ marginBottom: "30px" }}>
+                                {project.demo ? (
+                                    project.demo.includes("youtube.com") || project.demo.includes("youtu.be") ? (
+                                        <iframe
+                                            width="640"
+                                            height="360"
+                                            src={project.demo.replace("watch?v=", "embed/")}
+                                            title="YouTube video player"
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    ) : (
+                                        <video controls width="640" height="360">
+                                            <source src={project.demo} type="video/mp4" />
+                                            Seu navegador não suporta o elemento de vídeo.
+                                        </video>
+                                    )
+                                ) : (
+                                    <p>Não há demonstração disponível para este artigo.</p>
+                                )}
                             </div>
                         </div>
+
+                        <div id="acknowledgments" className="pt-5">
+                            <Title level={3} className="w-[70%]" style={{ color: "#156D86", marginBottom: "20px" }}>
+                                Acknowledgments:
+                            </Title>
+                            <div id="acknowledgmentsText" style={{ marginBottom: "30px" }}>
+                                {project.acknowledgments ? (
+                                    <Paragraph className="w-[65%] text-balance text-lg mt-1  pb-4">
+                                        {project.acknowledgments}
+                                    </Paragraph>
+                                ) : (
+                                    <p>No acknowledgments available for this article.</p>
+                                )}
+                            </div>
+                        </div>
+                        <div id="references" className="pt-5">
+                            <Title level={3} className="w-[70%]" style={{ color: "#156D86", marginBottom: "20px" }}>
+                                References:
+                            </Title>
+                            <div id="referencesList" style={{ marginBottom: "30px" }}>
+                                {project.references && project.references.length > 0 ? (
+                                    <ul>
+                                        {project.references.map((ref, index) => (
+                                            <li key={index} className="text-lg mb-2">
+                                                {ref}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p>No references available for this article.</p>
+                                )}
+                            </div>
+                        </div>
+
+                      
+
 
                     </div>
                     <div id="participants" className="pt-5 bg-customBlueGreen">
