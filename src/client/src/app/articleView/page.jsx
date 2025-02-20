@@ -664,7 +664,7 @@ export default function articleView() {
         }
     }, [])
     return (
-        <Suspense>
+        <Suspense fallback={<div>Carregando...</div>}>
             <>
                 {project != null ?
                     <div>
