@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from 'next/navigation';
 import userImage from '../../../public/user.png';
 import { Card, Typography } from 'antd';
@@ -779,6 +779,7 @@ export default function members() {
         if (member.length != 0 && graphicData.length != 0) fetGraphicValues()
     }, [member])
     return (
+        <Suspense fallback={<div>Carregando...</div>}>
         (member.length != 0 ?
             <div>
                 <div className="flex mt-10 ml-8">
@@ -859,5 +860,5 @@ export default function members() {
             : <div>
                 <Title level={1}> Houve um problema na exibição do recurso</Title>
             </div>)
-    );
+    </Suspense>);
 }
