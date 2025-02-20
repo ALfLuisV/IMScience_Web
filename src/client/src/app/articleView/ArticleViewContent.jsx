@@ -194,13 +194,65 @@ export default function ArticleViewContent({projects}) {
                                 </div>
                             </div>
                             <div id="demo" className="pt-5">
-                                <Title level={3} className='w-[70%]' style={{ color: '#156D86', marginBottom: "0px" }}>Demo:</Title>
-                                <div id="demoo">
-                                    <Paragraph className="w-[65%] text-balance text-lg mt-1">
-                                        Demo não disponível
-                                    </Paragraph>
-                                </div>
+                            <Title level={3} className="w-[70%]" style={{ color: "#156D86", marginBottom: "20px" }}>
+                                Demo:
+                            </Title>
+                            <div id="demoo" style={{ marginBottom: "30px" }}>
+                                {project.demo ? (
+                                    project.demo.includes("youtube.com") || project.demo.includes("youtu.be") ? (
+                                        <iframe
+                                            width="640"
+                                            height="360"
+                                            src={project.demo.replace("watch?v=", "embed/")}
+                                            title="YouTube video player"
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    ) : (
+                                        <video controls width="640" height="360">
+                                            <source src={project.demo} type="video/mp4" />
+                                            Seu navegador não suporta o elemento de vídeo.
+                                        </video>
+                                    )
+                                ) : (
+                                    <p>Não há demonstração disponível para este artigo.</p>
+                                )}
                             </div>
+                        </div>
+
+                        <div id="acknowledgments" className="pt-5">
+                            <Title level={3} className="w-[70%]" style={{ color: "#156D86", marginBottom: "20px" }}>
+                                Acknowledgments:
+                            </Title>
+                            <div id="acknowledgmentsText" style={{ marginBottom: "30px" }}>
+                                {project.acknowledgments ? (
+                                    <Paragraph className="w-[65%] text-balance text-lg mt-1  pb-4">
+                                        {project.acknowledgments}
+                                    </Paragraph>
+                                ) : (
+                                    <p>No acknowledgments available for this article.</p>
+                                )}
+                            </div>
+                        </div>
+                        <div id="references" className="pt-5">
+                            <Title level={3} className="w-[70%]" style={{ color: "#156D86", marginBottom: "20px" }}>
+                                References:
+                            </Title>
+                            <div id="referencesList" style={{ marginBottom: "30px" }}>
+                                {project.references && project.references.length > 0 ? (
+                                    <ul>
+                                        {project.references.map((ref, index) => (
+                                            <li key={index} className="text-lg mb-2">
+                                                {ref}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p>No references available for this article.</p>
+                                )}
+                            </div>
+                        </div>
 
                         </div>
                         <div id="participants" className="pt-5 bg-customBlueGreen">
