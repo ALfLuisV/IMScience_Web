@@ -1,5 +1,5 @@
 "use client"
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 import { useEffect, useState, Suspense } from "react";
 import { Card, Typography, Button, Divider, Carousel, ConfigProvider, Input, Select, Modal, Slider } from 'antd';
 import { IconFileText, IconQuote, IconExternalLink, IconCopy } from '@tabler/icons-react';
