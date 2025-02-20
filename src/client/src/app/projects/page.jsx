@@ -1,6 +1,6 @@
 "use client";
 import { Suspense } from "react";
-import MemberViewContent from "./MemberViewContent";
+import MemberViewContent from "./ProjectsViewContent";
 import userImage from '../../../public/user.png';
 
 const projects = [
@@ -646,7 +646,7 @@ const membros = [
     }
 ]
 
-export default function MemberViewPage() {
+export default function ProjectViewPage() {
     return (
         <Suspense fallback={<div>Carregando...</div>}>
             <MemberViewContent membros={membros} projects={projects} />
