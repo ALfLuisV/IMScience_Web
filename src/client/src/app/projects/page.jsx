@@ -1,6 +1,6 @@
 "use client"
-
-import { useEffect, useState } from "react";
+export const dynamic = 'force-dynamic';
+import { useEffect, useState, Suspense } from "react";
 import { Card, Typography, Button, Divider, Carousel, ConfigProvider, Input, Select, Modal, Slider } from 'antd';
 import { IconFileText, IconQuote, IconExternalLink, IconCopy } from '@tabler/icons-react';
 import '@ant-design/v5-patch-for-react-19';
@@ -1020,6 +1020,7 @@ export default function projects() {
         }
     }, [])
     return (
+        <Suspense fallback={<div>Carregando...</div>}>
         <>
             <ConfigProvider
                 theme={{
@@ -1135,5 +1136,5 @@ export default function projects() {
                 </div>
             </ConfigProvider>
         </>
-    )
+    </Suspense>)
 }
