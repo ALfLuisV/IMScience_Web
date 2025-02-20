@@ -1,6 +1,7 @@
 "use client";
 import { Suspense } from "react";
 import MemberViewContent from "./MemberViewContent";
+import userImage from '../../../public/user.png';
 
 const membros = [
     {

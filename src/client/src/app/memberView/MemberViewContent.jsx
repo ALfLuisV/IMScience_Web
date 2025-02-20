@@ -2,7 +2,7 @@
 // export const dynamic = 'force-dynamic';
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from 'next/navigation';
-import userImage from '../../../public/user.png';
+
 import { Card, Typography } from 'antd';
 import { IconBrandInstagram, IconBrandLinkedin, IconMail } from '@tabler/icons-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
