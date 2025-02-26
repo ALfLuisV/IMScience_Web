@@ -938,11 +938,40 @@ export default function members() {
                         </div>
                         <Title level={4} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '5px', marginBottom: '5px' }}>{e.nome}</Title>
                         <p className='roleName'>{e.role.toUpperCase()}</p>
-                        <div className='buttonDiv'>
+                        {/* <div className='buttonDiv'>
                             <a href={`/memberView?memberID=${e.id}`} rel="noopener noreferrer">
-                                <Button type="primary" className='seeMoreButton'>SEE MORE</Button>
+                                <Button type="primary" className='seeMoreButton'>See More</Button>
+                            </a>
+                        </div> */}
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: 'auto',
+                        }}>
+                            <a
+                            href={`/memberView?memberID=${e.id}`} 
+                            rel="noopener noreferrer"
+                                style={{
+                                    background: '#156D86',
+                                    color: 'white',
+                                    padding: '10px 20px',
+                                    borderRadius: '12px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    textDecoration: 'none',
+                                    fontSize: '14px',
+                                    fontWeight: 'bold',
+                                    transition: 'background-color 0.3s ease',
+                                    marginTop: '0.7rem',
+                                }}
+                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#0f4f61'}
+                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#156D86'}
+                            >
+                                <span>See More</span>
                             </a>
                         </div>
+
                     </Card>
                 )
             }
@@ -1067,7 +1096,7 @@ export default function members() {
                 }}
             >
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: '44%', paddingRight: '15px' }}>
-                    <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '20px' }}>OUR TEAM</Title>
+                    <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '20px' }}>Our Team</Title>
 
                     {nameSearch != '' &&
                         <Title level={4} style={{ color: '#156D86', textAlign: 'center' }}>Displaying results for "{nameSearch}"</Title>
@@ -1113,12 +1142,12 @@ export default function members() {
                                 <RangePicker onChange={dateHandle} value={dateList} />
                             </div>
                             <div>
-                            <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{ marginTop: '10px', width: '100%' }}>Apply Filters</Button>
+                                <Button type="primary" id='filterButton' onClick={(e) => { filterValues() }} style={{ marginTop: '10px', width: '100%' }}>Apply Filters</Button>
                                 <Button type="primary" danger id='filterButton' onClick={(e) => { clearFilters() }} style={{ marginTop: '10px', width: '100%' }}>Clear Filters</Button>
-                               
+
                             </div>
 
-                
+
                         </div>
                     </div>
                     <div className='membersArea' >
@@ -1126,7 +1155,7 @@ export default function members() {
                             <div className="flex justify-between w-[60%] ml-[40%] pr-16 items-center">
                                 <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>Professors</Title>
                                 {displayedCards[0].cards.length > 3 &&
-                                    <Button onClick={(e) => { showAllCards("Professor", 0) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '10px' }}>{showAll[0] ? 'Close' : "Show All"}</Button>}
+                                    <Button onClick={(e) => { showAllCards("Professor", 0) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '1rem', marginBottom: '1rem' }}>{showAll[0] ? 'Close' : "Show All"}</Button>}
                             </div>
                             <div className='membersCardArea'>
                                 {cardGenerator(displayedCards, 0)}
@@ -1136,7 +1165,7 @@ export default function members() {
                             <div className="flex justify-between w-[60%] ml-[40%] pr-16 items-center">
                                 <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>PhD Students</Title>
                                 {displayedCards[1].cards.length > 3 &&
-                                    <Button onClick={(e) => { showAllCards("PhD Student", 1) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '10px' }}>{showAll[1] ? 'Close' : "Show All"}</Button>}
+                                    <Button onClick={(e) => { showAllCards("PhD Student", 1) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '1rem', marginBottom: '1rem' }}>{showAll[1] ? 'Close' : "Show All"}</Button>}
                             </div>
                             <div className='membersCardArea'>
                                 {cardGenerator(displayedCards, 1)}
@@ -1146,7 +1175,7 @@ export default function members() {
                             <div className="flex justify-between w-[60%] ml-[40%] pr-16 items-center">
                                 <Title level={3} className='memberTypeTitle' style={{ color: '#156D86' }}>MSc Students</Title>
                                 {displayedCards[2].cards.length > 3 &&
-                                    <Button onClick={(e) => { showAllCards('MSc Student', 2) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '10px' }}>{showAll[2] ? 'Close' : "Show All"}</Button>}
+                                    <Button onClick={(e) => { showAllCards('MSc Student', 2) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '1rem', marginBottom: '1rem' }}>{showAll[2] ? 'Close' : "Show All"}</Button>}
                             </div>
                             <div className='membersCardArea'>
                                 {cardGenerator(displayedCards, 2)}
@@ -1157,7 +1186,7 @@ export default function members() {
                             <div className="flex justify-between w-[60%] ml-[40%] pr-16 items-center">
                                 <Title level={3} className='memberTypeTitle' style={{ color: '#156D86', marginTop: '10px' }}>Undergrad Students</Title>
                                 {displayedCards[3].cards.length > 3 &&
-                                    <Button onClick={(e) => { showAllCards("Undergrad Student", 3) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '10px', justifyContent: 'end' }}>{showAll[3] ? 'Close' : "Show All"}</Button>}
+                                    <Button onClick={(e) => { showAllCards("Undergrad Student", 3) }} style={{ backgroundColor: 'transparent', color: '#156D86', marginTop: '1rem', marginBottom: '1rem', justifyContent: 'end' }}>{showAll[3] ? 'Close' : "Show All"}</Button>}
                             </div>
                             <div className='membersCardArea'>
                                 {cardGenerator(displayedCards, 3)}

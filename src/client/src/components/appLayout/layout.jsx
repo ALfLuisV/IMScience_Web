@@ -14,8 +14,6 @@ const LayoutApp = ({ children }) => {
                 <HeaderPH/>
             </Header>
 
-          
-
             <Content>
                 {children}
             </Content>

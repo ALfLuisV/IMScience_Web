@@ -49,10 +49,20 @@
     margin-bottom:7px;
 }
 
-.seeMoreButton{
+/* .seeMoreButton{
     background-color: #156D86;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease; 
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: auto;
     width: 7rem;
-}
+} */
 
 .buttonDiv{
     display: flex;

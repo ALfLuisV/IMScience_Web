@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Carousel, Typography, Button } from "antd";
+import { Carousel, Typography, Button, ConfigProvider } from "antd";
 import Link from "next/link";
 
 const { Title, Paragraph } = Typography;
@@ -54,7 +54,7 @@ export default function CarouselOnly() {
 
   function arraySort() {
     let arrayAux = [];
-    projects.sort((a, b) => b.value - a.value); // Ordena por valor (exemplo)
+    projects.sort((a, b) => b.value - a.value);
     for (let e = 0; e < 5; e++) {
       arrayAux.push(projects[e]);
     }
@@ -139,8 +139,28 @@ export default function CarouselOnly() {
   }, []);
 
   return (
-    <Carousel effect="fade" autoplay arrows speed={900} autoplaySpeed={4000}>
-      {carouselCardGenerator()}
-    </Carousel>
+    <>
+      <ConfigProvider
+        theme={{
+          components: {
+            Carousel: {
+              arrowSize: 32,
+              dotWidth: 48,
+              dotHeight: 8
+            },
+            Card: {
+              actionsBg: '#156D86'
+            },
+          },
+          token: {
+            colorPrimary: '#156D86',
+          },
+        }}
+      >
+        <Carousel effect="fade" autoplay arrows speed={900} autoplaySpeed={4000}>
+          {carouselCardGenerator()}
+        </Carousel>
+      </ConfigProvider>
+    </>
   );
 }

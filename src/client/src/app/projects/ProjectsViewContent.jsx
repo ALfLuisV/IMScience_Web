@@ -409,7 +409,7 @@ export default function ProjectsViewContent({membros, projects}) {
                             </Title>
                         </div>
                     }
-                    <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '30px' }}>ARTICLES</Title>
+                    <Title level={2} style={{ color: '#156D86', textAlign: 'center', marginTop: '30px' }}>Articles</Title>
                     <div id={style.mainContent}>
                         <div className='filterArea'>
                             <Title level={4} className='memberTypeTitle' style={{ color: '#156D86' }}>Filters</Title>

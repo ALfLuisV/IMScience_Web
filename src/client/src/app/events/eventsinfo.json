@@ -9,7 +9,8 @@
       "descricao": "Conferência internacional dedicada a novas pesquisas e aplicações de teoria dos grafos em diversas áreas.",
       "modo": "presencial",
       "tipo": "conference",
-      "audiencia": "scientists" 
+      "audiencia": "scientists",
+      "horario": "09:00"
     },
     {
       "id": 2,
@@ -20,7 +21,8 @@
       "descricao": "Evento focado em como técnicas de aprendizado de máquina estão sendo aplicadas em grafos para resolução de problemas complexos.",
       "modo": "presencial",
       "tipo": "conference",
-      "audiencia": "industry" 
+      "audiencia": "industry",
+      "horario": "10:00"
     },
     {
       "id": 3,
@@ -31,7 +33,8 @@
       "descricao": "Workshop online sobre os últimos avanços em algoritmos de grafos para otimização e análise de redes.",
       "modo": "online",
       "tipo": "workshop",
-      "audiencia": "students" 
+      "audiencia": "students",
+      "horario": "14:00"
     },
     {
       "id": 4,
@@ -42,7 +45,8 @@
       "descricao": "Simposium que explora a conexão entre teoria dos grafos e ciência de dados, com ênfase em grandes conjuntos de dados.",
       "modo": "presencial",
       "tipo": "symposium",
-      "audiencia": "scientists" 
+      "audiencia": "scientists",
+      "horario": "09:00"
     },
     {
       "id": 5,
@@ -53,7 +57,8 @@
       "descricao": "Oficina internacional focada em técnicas de mineração de grafos e suas aplicações em diferentes áreas do conhecimento.",
       "modo": "presencial",
       "tipo": "workshop",
-      "audiencia": "industry" 
+      "audiencia": "industry",
+      "horario": "13:00"
     },
     {
       "id": 6,
@@ -64,7 +69,8 @@
       "descricao": "Evento que explora como grafos são usados para modelar fenômenos naturais e sistemas complexos na ciência.",
       "modo": "presencial",
       "tipo": "seminar",
-      "audiencia": "scientists" 
+      "audiencia": "scientists",
+      "horario": "10:00"
     },
     {
       "id": 7,
@@ -75,7 +81,8 @@
       "descricao": "Conferência internacional sobre a teoria de grafos e redes complexas em engenharia, biologia e ciência da computação.",
       "modo": "presencial",
       "tipo": "conference",
-      "audiencia": "general" 
+      "audiencia": "general",
+      "horario": "08:30"
     },
     {
       "id": 8,
@@ -86,7 +93,8 @@
       "descricao": "Workshop focado nas técnicas mais recentes de visualização e análise de grafos para grandes redes de dados.",
       "modo": "presencial",
       "tipo": "workshop",
-      "audiencia": "students" 
+      "audiencia": "students",
+      "horario": "11:00"
     },
     {
       "id": 9,
@@ -97,7 +105,8 @@
       "descricao": "Discussão sobre como otimizar algoritmos de IA e ML utilizando grafos e suas várias técnicas aplicadas.",
       "modo": "online",
       "tipo": "seminar",
-      "audiencia": "scientists" 
+      "audiencia": "scientists",
+      "horario": "15:00"
     },
     {
       "id": 10,
@@ -108,7 +117,8 @@
       "descricao": "Conferência que discute as aplicações da teoria dos grafos na biologia computacional, incluindo redes de interação entre proteínas e genomas.",
       "modo": "presencial",
       "tipo": "conference",
-      "audiencia": "scientists" 
+      "audiencia": "scientists",
+      "horario": "09:30"
     }
   ]
 }
