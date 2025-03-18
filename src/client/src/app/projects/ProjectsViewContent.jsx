@@ -247,9 +247,9 @@ export default function ProjectsViewContent({membros, projects}) {
             let cards = array.map((e, i) => (
                 <Card key={i} className="w-[30%] mr-8 mb-7"
                     cover={
-                        <img src={e.img} alt="project image"
+                        <img src={e.img}  alt="project image"
                             style={{
-                                width: '350px',
+                                width: '100%',
                                 height: '140px'
                             }}
                         />}
