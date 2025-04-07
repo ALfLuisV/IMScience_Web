@@ -1053,7 +1053,7 @@ client-only@0.0.1:
   dependencies:
     "@tabler/icons-react" "^3.26.0"
     antd "^5.22.5"
-    client "file:C:/Users/David/AppData/Local/Yarn/Cache/v6/npm-client-0.1.0-72804b32-08f8-4ac6-b507-a788d58000a5-1742297413242/node_modules/client"
+    client "file:../../../../../../AppData/Local/Yarn/Cache/v6/npm-client-0.1.0-606f659c-c55a-4d49-be2b-949332bf6d43-1739886652505/node_modules/client"
     next "^15.1.2"
     pg "^8.13.1"
     react "^19.0.0"
