@@ -10,6 +10,7 @@
     "export": "next build && next export"
   },
   "dependencies": {
+    "@ant-design/plots": "^2.3.3",
     "@tabler/icons-react": "^3.26.0",
     "antd": "^5.22.5",
     "client": "file:",

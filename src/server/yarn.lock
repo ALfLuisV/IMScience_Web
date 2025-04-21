@@ -2,8 +2,7 @@
 # yarn lockfile v1
 
 
-"server@file:":
+"server@file:.":
   version "1.0.0"
-  resolved "file:"
   dependencies:
-    server "file:"
+    server "file:C:/Users/David/AppData/Local/Yarn/Cache/v6/npm-server-1.0.0-464c5393-59a2-43d6-8954-b7db99e6bd81-1745259460981/node_modules/server"
