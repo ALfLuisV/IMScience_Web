@@ -22,6 +22,7 @@ export default function HeaderHP() {
     '9': '/tech-talks',
     '10': '/aboutus',
     '11': '/research',
+    '12' : '/painelAdmin',
   };
 
   // const handleMenuClick = (e) => {
@@ -94,6 +95,12 @@ export default function HeaderHP() {
       label: (
         <a href="/research" rel="noopener noreferrer">
           Research
+        </a>
+      )  },
+    { key: '12',
+      label: (
+        <a href="/painelAdmin" rel="noopener noreferrer">
+          Admin Panel
         </a>
       )  },
   ];
