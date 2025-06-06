@@ -99,6 +99,8 @@ export default function AdminPanel() {
                         }))}
                     />
 
+
+
                 </div>
             ) : (
                 <div>
@@ -120,12 +122,19 @@ export default function AdminPanel() {
 
 function Section({ title, onAdd, columns, data }) {
     const [showAll, setShowAll] = useState(false);
+    const [search, setSearch] = useState('');
 
-    const itemsToShow = showAll ? data : data.slice(0, 6);
+    const filteredData = data.filter(row =>
+        Object.values(row).some(value =>
+            typeof value === 'string' && value.toLowerCase().includes(search.toLowerCase())
+        )
+    );
+
+    const itemsToShow = showAll ? filteredData : filteredData.slice(0, 6);
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-sm">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-2">
                 <h2 className="text-lg font-bold">{title}</h2>
                 <button
                     onClick={onAdd}
@@ -134,6 +143,14 @@ function Section({ title, onAdd, columns, data }) {
                     Adicionar
                 </button>
             </div>
+
+            <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder={`Buscar ${title.toLowerCase()}...`}
+                className="mb-4 w-full px-3 py-1 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
 
             <table className="w-full text-sm text-left">
                 <thead>
@@ -151,10 +168,17 @@ function Section({ title, onAdd, columns, data }) {
                             ))}
                         </tr>
                     ))}
+                    {filteredData.length === 0 && (
+                        <tr>
+                            <td colSpan={columns.length} className="text-center py-4 text-gray-500">
+                                Nenhum resultado encontrado.
+                            </td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
 
-            {data.length > 6 && (
+            {filteredData.length > 6 && (
                 <div className="flex justify-center mt-4">
                     <button
                         onClick={() => setShowAll(!showAll)}

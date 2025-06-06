@@ -722,97 +722,129 @@ export default function members() {
     const [showAll, setShowAll] = useState([false, false, false, false])
 
 
-
-
     const onChange = (checkedValues) => {
-        setCheckedList(checkedValues)
-        let filtred = {
-            memberType: [],
-            projects: [],
-            dateOfEntry: [],
-        }
+        setCheckedList(checkedValues);
+        setFilter(prev => ({ ...prev, memberType: checkedValues }));
+    };
 
-        if (filter.projects.length != 0) {
-            for (const e of filter.projects) {
-                filtred.projects.push(e)
-            }
-        }
-
-        if (filter.dateOfEntry[0] != null) {
-            for (const e of filter.dateOfEntry) {
-                filtred.dateOfEntry.push(e)
-            }
-        }
-
-
-        filtred.memberType.push(...checkedValues)
-        setFilter(filtred)
+    const handleChange = (value) => {
+        setSelectList(value);
+        setFilter(prev => ({ ...prev, projects: value }));
     };
 
     const dateHandle = (value) => {
-        setDateList(value)
-        let filtred = {
-            memberType: [],
-            projects: [],
-            dateOfEntry: [],
+        setDateList(value);
+        if (value) {
+            setFilter(prev => ({
+                ...prev,
+                dateOfEntry: [value[0].$d, value[1].$d]
+            }));
+        } else {
+            setFilter(prev => ({ ...prev, dateOfEntry: [] }));
         }
-
-        if (filter.projects.length != 0) {
-            for (const e of filter.projects) {
-                filtred.projects.push(e)
-            }
-        }
-
-        if (filter.memberType.length != 0) {
-            for (const e of filter.memberType) {
-                filtred.memberType.push(e)
-            }
-        }
-
-
-        if (value != null) {
-            filtred.dateOfEntry.push(value[0].$d)
-            filtred.dateOfEntry.push(value[1].$d)
-        }
-
-
-        setFilter(filtred)
-    }
-
-    const handleChange = (value) => {
-        setSelectList([...value])
-
-        let filtred = {
-            memberType: [],
-            projects: [],
-            dateOfEntry: [],
-        }
-
-
-        if (filter.memberType.length != 0) {
-            for (const e of filter.memberType) {
-                filtred.memberType.push(e)
-            }
-        }
-
-        if (filter.dateOfEntry[0] != null) {
-            for (const e of filter.dateOfEntry) {
-                filtred.dateOfEntry.push(e)
-            }
-        }
-
-        filtred.projects = [...new Set([...value])]
-        setFilter(filtred)
     };
 
 
-    const onSearch = (value, _e, info) => {
-        setNameSearch(value)
-        let membersFiltredByName = membersArray.filter(pessoa => pessoa.nome.includes(value))
+
+    // const onChange = (checkedValues) => {
+    //     setCheckedList(checkedValues)
+    //     let filtred = {
+    //         memberType: [],
+    //         projects: [],
+    //         dateOfEntry: [],
+    //     }
+
+    //     if (filter.projects.length != 0) {
+    //         for (const e of filter.projects) {
+    //             filtred.projects.push(e)
+    //         }
+    //     }
+
+    //     if (filter.dateOfEntry[0] != null) {
+    //         for (const e of filter.dateOfEntry) {
+    //             filtred.dateOfEntry.push(e)
+    //         }
+    //     }
 
 
-        cardArrayConstructor(membersFiltredByName)
-    }
+    //     filtred.memberType.push(...checkedValues)
+    //     setFilter(filtred)
+    // };
+
+    // const dateHandle = (value) => {
+    //     setDateList(value)
+    //     let filtred = {
+    //         memberType: [],
+    //         projects: [],
+    //         dateOfEntry: [],
+    //     }
+
+    //     if (filter.projects.length != 0) {
+    //         for (const e of filter.projects) {
+    //             filtred.projects.push(e)
+    //         }
+    //     }
+
+    //     if (filter.memberType.length != 0) {
+    //         for (const e of filter.memberType) {
+    //             filtred.memberType.push(e)
+    //         }
+    //     }
+
+
+    //     if (value != null) {
+    //         filtred.dateOfEntry.push(value[0].$d)
+    //         filtred.dateOfEntry.push(value[1].$d)
+    //     }
+
+
+    //     setFilter(filtred)
+    // }
+
+    // const handleChange = (value) => {
+    //     setSelectList([...value])
+
+    //     let filtred = {
+    //         memberType: [],
+    //         projects: [],
+    //         dateOfEntry: [],
+    //     }
+
+
+    //     if (filter.memberType.length != 0) {
+    //         for (const e of filter.memberType) {
+    //             filtred.memberType.push(e)
+    //         }
+    //     }
+
+    //     if (filter.dateOfEntry[0] != null) {
+    //         for (const e of filter.dateOfEntry) {
+    //             filtred.dateOfEntry.push(e)
+    //         }
+    //     }
+
+    //     filtred.projects = [...new Set([...value])]
+    //     setFilter(filtred)
+    // };
+
+    // const onSearch = (value, _e, info) => {
+    //     setNameSearch(value)
+    //     let membersFiltredByName = membersArray.filter(pessoa => pessoa.nome.includes(value))
+
+
+    //     cardArrayConstructor(membersFiltredByName)
+    // }
+
+    const onSearch = (value) => {
+        setNameSearch(value);
+        let filtered = memberRecoveryArray.filter(pessoa =>
+            pessoa.nome.toLowerCase().includes(value.toLowerCase())
+        );
+
+        setMembersArray(filtered);
+        cardArrayConstructor(filtered);
+    };
+
 
     function filterValues() {
 
@@ -843,11 +875,15 @@ export default function members() {
                 let data = membro.entryDate.split('/')
 
 
-                let entryData = new Date(
-                    parseInt(data[2]), //ano
-                    parseInt(data[1]) - 1, //mês
-                    parseInt(data[0]) //dia
-                );
+                // let entryData = new Date(
+                //     parseInt(data[2]), //ano
+                //     parseInt(data[1]) - 1, //mês
+                //     parseInt(data[0]) //dia
+                // );
+
+
+                const [day, month, year] = membro.entryDate.split('/');
+                const entryData = new Date(`${year}-${month}-${day}T00:00:00Z`);
 
                 let auxData1 = entryData.getTime()
                 let auxData2 = filter.dateOfEntry[0].getTime()
@@ -881,13 +917,16 @@ export default function members() {
     }
 
     function clearFilters() {
-        let newShowAllArray = [false, false, false, false,]
-        setShowAll(newShowAllArray)
-        clearCheckboxGroup()
-        clearSelection()
-        clearRangePicker()
-        cardArrayConstructor(memberRecoveryArray)
+        let newShowAllArray = [false, false, false, false];
+        setShowAll(newShowAllArray);
+        clearCheckboxGroup();
+        clearSelection();
+        clearRangePicker();
+        setFilter({ memberType: [], projects: [], dateOfEntry: [] });
+        setNameSearch('');
+        cardArrayConstructor(memberRecoveryArray);
     }
+
 
 
 
@@ -950,8 +989,8 @@ export default function members() {
                             marginTop: 'auto',
                         }}>
                             <a
-                            href={`/memberView?memberID=${e.id}`} 
-                            rel="noopener noreferrer"
+                                href={`/memberView?memberID=${e.id}`}
+                                rel="noopener noreferrer"
                                 style={{
                                     background: '#156D86',
                                     color: 'white',
@@ -1112,10 +1151,12 @@ export default function members() {
                                     onSearch={onSearch}
                                     enterButton
                                     allowClear
-                                    onClear={(e) => {
-                                        cardArrayConstructor(membros);
-                                        let newShowAllArray = [false, false, false, false,]
-                                        setShowAll(newShowAllArray)
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        if (value === '') {
+                                            setNameSearch('');
+                                            cardArrayConstructor(memberRecoveryArray);
+                                        }
                                     }} />
                             </div>
                             <div id='checkboxGroup' className='filterDiv'>

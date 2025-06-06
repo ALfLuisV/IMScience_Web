@@ -10,7 +10,7 @@
         "acknowledgments": "We acknowledge the support of the IMScience Research Group and the National Institute of Health for funding this project.",
         "references": "Boykov Y, Jolly MP. Interactive Graph Cuts for Optimal Boundary & Region Segmentation. IEEE Trans. on PAMI, 2001.",
         "keywords": "Graph Theory, Image Segmentation, Medical Imaging, Pixel Connectivity, Research",
-        "demo": "https://example.com/demo-graph-segmentation"
+        "demo": "https://www.youtube.com/watch?v=VKnoyiNxflk"
       },
       {
         "id": 2,
@@ -22,7 +22,7 @@
         "acknowledgments": "The authors thank the Graph Research Lab and the IMScience Initiative for the computational resources provided.",
         "references": "Kipf TN, Welling M. Semi-Supervised Classification with Graph Convolutional Networks. ICLR, 2017.",
         "keywords": "Graph Neural Networks, Social Networks, Community Detection, Machine Learning, Graph Analysis",
-        "demo": "https://example.com/demo-social-graph"
+        "demo": "https://www.youtube.com/watch?v=VKnoyiNxflk"
       },
       {
         "id": 3,
@@ -34,7 +34,7 @@
         "acknowledgments": "Thanks to the DeepVision group for their support and fruitful discussions throughout this project.",
         "references": "Shi J, Malik J. Normalized Cuts and Image Segmentation. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2000.",
         "keywords": "Semantic Segmentation, Graph Models, Image Processing, Computer Vision, Graph Cuts",
-        "demo": "https://example.com/demo-semantic-graph"
+        "demo": "https://www.youtube.com/watch?v=VKnoyiNxflk"
       }
     ]
   }

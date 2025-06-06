@@ -106,7 +106,7 @@ function CarouselCardGenerator() {
             </div>
             <img
               id="backgroundImage"
-              src=""  
+              src=""
               alt="backgroundImage"
               className="h-[32rem]"
               style={{
@@ -134,12 +134,12 @@ function CarouselCardGenerator() {
               }}
             >
               <div className="w-[30%] ml-14">
-               {/* conteúdo */}
+                {/* conteúdo */}
               </div>
             </div>
             <img
               id="backgroundImage"
-              src=""  
+              src=""
               alt="backgroundImage"
               className="h-[32rem]"
               style={{
@@ -168,12 +168,12 @@ function CarouselCardGenerator() {
               }}
             >
               <div className="w-[30%] ml-14">
-              {/* conteúdo */}
+                {/* conteúdo */}
               </div>
             </div>
             <img
               id="backgroundImage"
-              src="" 
+              src=""
               alt="backgroundImage"
               className="h-[32rem]"
               style={{
