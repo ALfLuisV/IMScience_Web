@@ -7,7 +7,7 @@ import { IconFileText, IconQuote, IconCopy } from '@tabler/icons-react';
 import '@ant-design/v5-patch-for-react-19';
 import userImage from '../../../public/user.png'
 import { useRouter } from 'next/navigation';
-import ModalCitation from '@/components/citationBox/citation'
+import ModalCitation from '@/app/site/components/citationBox/citation'
 
 
 const { Title, Paragraph, Text } = Typography;

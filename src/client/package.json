@@ -14,6 +14,7 @@
     "@tabler/icons-react": "^3.26.0",
     "antd": "^5.22.5",
     "client": "file:",
+    "firebase": "^12.0.0",
     "next": "^15.1.2",
     "pg": "^8.13.1",
     "react": "^19.0.0",

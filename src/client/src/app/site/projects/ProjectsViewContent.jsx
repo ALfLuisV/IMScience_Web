@@ -8,8 +8,8 @@ import userImage from '../../../public/user.png'
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import style from './style/projects.module.css'
-import ModalCitation from '@/components/citationBox/citation'
-import Carrossel from '@/components/carrossel/carrossel.jsx';
+import ModalCitation from '@/app/site/components/citationBox/citation'
+import Carrossel from '@/app/site/components/carrossel/carrossel.jsx';
 
 
 const { Title, Paragraph, Text } = Typography;

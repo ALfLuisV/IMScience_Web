@@ -8,7 +8,7 @@ import userImage from '../../../public/user.png'
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import style from './style/projects.module.css'
-import ModalCitation from '@/components/citationBox/citation'
+import ModalCitation from '@/app/site/components/citationBox/citation'
 
 const { Title, Paragraph, Text } = Typography;
 const { Search } = Input;

@@ -7,7 +7,7 @@ import { IconFileText, IconQuote, IconCopy } from '@tabler/icons-react';
 import '@ant-design/v5-patch-for-react-19';
 import userImage from '../../../public/user.png'
 import { useRouter } from 'next/navigation';
-import ModalCitation from '@/components/citationBox/citation'
+import ModalCitation from '@/app/site/components/citationBox/citation'
 
 
 const { Title, Paragraph, Text } = Typography;
@@ -155,7 +155,7 @@ export default function ArticleViewContent({projects}) {
         }
     }, [])
     return (
-        // <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<div>Carregando...</div>}>
             <>
                 {project != null ?
                     <div>
@@ -286,5 +286,6 @@ export default function ArticleViewContent({projects}) {
                     </div>
                 }
             </>
+            </Suspense>
     )
 }
